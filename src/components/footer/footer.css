@@ -1,0 +1,18 @@
+.orientation{
+
+}
+
+.imagen{
+    width:  2%;
+    height: 2%;
+    padding-right: 5%;
+}
+
+.footer{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: cyan;
+}

@@ -1,0 +1,17 @@
+.image{
+    width: 8%;
+    height: 8%;
+}
+
+.header{
+ font-family: MyFont;
+ font-size: 250%;
+ font-weight: lighter;
+ text-align: center;
+ 
+}
+
+@font-face{
+    font-family: MyFont;
+    src: local(MyFont), url(./selawkl.ttf) format(ttf);
+}
