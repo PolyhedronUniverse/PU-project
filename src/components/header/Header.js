@@ -4,12 +4,21 @@ import './header.css'
 export const Header = () => {
     return (
         <div className="header">
-            P O L Y H E D R O N 
+            <p className="head1">
+            P  O  L  Y  H  E  D  R  O  N 
+            </p>
             <img
             className='image'
             src={require('../../assets/PU_Logo.png')}
             />
-            U N I V E R S E
+            <p>
+            U N  I  V  E  R  S E
+            </p>
+            <div className="button-container">
+            <button 
+            className="patreon"
+            onClick={()=>{console.log("Patreon prro");}}>PATREON</button>
+            </div>
         </div>
     )
 }

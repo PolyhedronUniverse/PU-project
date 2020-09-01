@@ -1,14 +1,43 @@
 .image{
-    width: 8%;
-    height: 8%;
+    width: 10%;
+    height: 10%;
+    padding-top: 1.5%;
+    padding-left: 8.4%;
+    padding-right: 8.4%;
+}
+
+.head1{
+    padding-left: 11%;
 }
 
 .header{
- font-family: MyFont;
- font-size: 250%;
+display: flex;
+/* sirve para que siempre se quede arriba,revisar */
+/* position: fixed;
+top: 0; */
+flex-direction: row;
+font-family: MyFont;
+ font-size: 2.6vw;
  font-weight: lighter;
- text-align: center;
- 
+ background-color: white; 
+ align-items: center ;
+}
+
+.patreon{
+    /* height: 150%; */
+    /* padding-top: 5%; */
+    background-color: black;
+    color: white;
+    border: 1px;
+    padding: 8px 20px;
+    border-radius: 5px;
+}
+
+.button-container{
+    padding-left: 7%;
+    /* padding-top: 2%; */
+    /* vertical-align: middle; */
+    padding-bottom: 1%;
 }
 
 @font-face{

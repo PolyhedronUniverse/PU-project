@@ -1,6 +1,4 @@
-.orientation{
 
-}
 
 .imagen{
     width:  2%;
@@ -11,8 +9,11 @@
 .footer{
     display: flex;
     flex: 1;
+    position: fixed;
+    bottom: 0;
     justify-content: center;
     padding-top: 1%;
     padding-bottom: 1%;
-    background-color: cyan;
+    background-color: white;
+
 }
