@@ -15,6 +15,7 @@ code {
 html, body {
    margin: 0;
    height: 100%;
+
 }
 
 #canvas{
@@ -26,3 +27,5 @@ html, body {
    height: 450px;
    display: block;
 }
+
+/* .Home{background-color: black} */

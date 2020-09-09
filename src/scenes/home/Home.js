@@ -7,7 +7,7 @@ import threeEntryPoint from '../../components/canvas/main';
 
 class ThreeContainer extends Component {
   componentDidMount() {
-    // console.log("ajas "+ this.threeRootElement);
+    console.log(this.threeRootElement);
     threeEntryPoint(this.threeRootElement);
   }
   render () {

@@ -16,4 +16,21 @@ es para guardar cualquier cosa extra como texturas, imagenes, modelos, etc.
 
 ## Para Pablo
 - Revisa el `SceneManager.js` y `stars.js` cualquier duda me dices
-- Hay que revisar la responsividad, no me gustó como se ajustan el `header` y `footer` [Revisa aquí para hacerlo sin cel](https://developer.mozilla.org/en-US/docs/Tools/Responsive_Design_Mode)
+- Hay que revisar la responsividad, no me gustó como se ajustan el `header` y `footer` [Revisa aquí para hacerlo sin cel](https://developer.mozilla.org/en-US/docs/Tools/Responsive_Design_Mode).
+- Agregué al `.gitignore` los archivos `yarn.lock`, `package-lock.json` y `package.json`
+- Ya de aqui hay que utilizar `branches`
+- **INSTALA THREE EN TU PROYECTO**
+
+![brrr](https://i.redd.it/ym5ssnmmalk51.png "brrrr")
+
+## 3 de Septiembre 2020
+### TODO
+- Probar camaras.
+
+## 4 de Sep 2020
+### TODO
+- Tamaño de los div
+- Recortar logo
+
+## Junta 5 Septiembre
+- Hover en planeta/muestra `metadata`
