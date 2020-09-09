@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Sphere from './objects/sphere.js'
 import Stars from './objects/stars.js'
+import Nebulosa from './objects/nebulosa.js'
 // import Stats from 'three/examples/jsm/libs/stats.module.js';
 import Curva from './objects/curva.js'
 
@@ -17,8 +18,7 @@ export default function SceneManager (canvas)  {
   const scene = buildScene();
   const renderer = buildRender(screenDimensions);
   const camera = buildCamera(screenDimensions);
-  // const sceneSubjects =
-  createSceneSubjects(scene, screenDimensions);
+  const sceneSubjects = createSceneSubjects(scene, screenDimensions);
   createControls();
 
   function buildScene() {// Construye la escena, color de fondo
@@ -40,18 +40,24 @@ export default function SceneManager (canvas)  {
     const aspectRatio = width/height;
     const nearPlane = 0.01;
     const farPlane = 500000;
-    const camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
-    // const camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 1, 1000 );
+    //const camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
+    const camera = new THREE.PerspectiveCamera(60, aspectRatio, 1, 1000);
+    camera.position.z = 10;
+    // camera.rotation.x = 1.16;
+    // camera.rotation.y = -0.12;
+    // camera.rotation.z = 0.27;
+    //const camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 1, 1000 );
     scene.add( camera );
-    camera.position.z = 10000;
+    //camera.position.z = 10000;
     return camera;
   }
 
   function createSceneSubjects(scene, screenDimensions) {// Aqui se agregan los diferentes objetos del canvas
     const sceneSubjects = [
       new GeneralLights(scene),
-      new Stars(50000, scene),
-      new Sphere(scene)
+      new Nebulosa(scene,renderer),
+      //new Stars(50000, scene),
+      //new Sphere(scene)
     ];
 
     return sceneSubjects;
@@ -71,6 +77,7 @@ export default function SceneManager (canvas)  {
   }
 
   function update() {
+    sceneSubjects[1].update();
     renderer.render(scene, camera);
   }
 
