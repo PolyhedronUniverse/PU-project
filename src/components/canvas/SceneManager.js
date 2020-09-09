@@ -5,6 +5,10 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Sphere from './objects/sphere.js'
 import Stars from './objects/stars.js'
 
+import Nebulosa from './objects/nebulosa.js'
+import Curva from './objects/curva.js'
+=======
+
 // HUD
 import Hud from './objects/hud.js'
 
@@ -24,7 +28,6 @@ import negy from './assets/ulukai/corona_dn.png'
 import posz from './assets/ulukai/corona_ft.png'
 import negz from './assets/ulukai/corona_bk.png'
 
-
 export default function SceneManager (canvas)  {
 
   const clock = new THREE.Clock();
@@ -37,7 +40,8 @@ export default function SceneManager (canvas)  {
   const scene = buildScene();
   const renderer = buildRender(screenDimensions);
   const camera = buildCamera(screenDimensions);
-  createSceneSubjects(scene, screenDimensions);
+
+  const sceneSubjects = createSceneSubjects(scene, screenDimensions);
   createControls();
 
 
@@ -78,6 +82,7 @@ export default function SceneManager (canvas)  {
   function createSceneSubjects(screenDimensions) {// Aqui se agregan los diferentes objetos del canvas
     const sceneSubjects = [
       new GeneralLights(scene),
+      new Nebulosa(scene,renderer),
       new Stars(2000,scene),
       new Hud(scene,camera),
       new Wonder(200000,scene),
@@ -106,6 +111,7 @@ export default function SceneManager (canvas)  {
   }
 
   function update() {
+    sceneSubjects[1].update();
     renderer.render(scene, camera);
   }
 

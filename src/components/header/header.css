@@ -27,9 +27,11 @@ font-family: MyFont;
     /* height: 150%; */
     /* padding-top: 5%; */
     background-color: black;
+    font-size: .9vw;
     color: white;
     border: 1px;
-    padding: 8px 20px;
+    width: 100%;
+    padding: 1vh 1.1vw;
     border-radius: 5px;
 }
 

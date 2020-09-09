@@ -10,9 +10,10 @@ export const Header = () => {
             <img
             className='image'
             src={require('../../assets/PU_Logo.png')}
+            // src={require('../canvas/assets/smoke.png')}
             />
             <p>
-            U N  I  V  E  R  S E
+            U  N  I  V  E  R  S  E
             </p>
             <div className="button-container">
             <button 
