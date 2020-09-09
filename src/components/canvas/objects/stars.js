@@ -8,7 +8,7 @@ export default function Stars(count,scene) {
     const r = 200000
     const theta = 2 * Math.PI * Math.random()
     const phi = Math.acos(2 * Math.random() - 1)
-    const x = r * Math.cos(theta) * Math.sin(phi) + (-2000 + Math.random() * 4000)
+    const x = r * 2 * Math.cos(theta) * Math.sin(phi) + (-2000 + Math.random() * 4000)
     const y = r * Math.sin(theta) * Math.sin(phi) + (-2000 + Math.random() * 4000)
     const z = r * Math.cos(phi) + (-1000 + Math.random() * 2000)
     positions.push(x)
