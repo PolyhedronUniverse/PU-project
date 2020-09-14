@@ -5,7 +5,7 @@ export default function Stars(count,scene) {
   const positions = [];
 
   for (let i = 0; i < count; i++) {
-    const r = 200000
+    const r = 20000
     const theta = 2 * Math.PI * Math.random()
     const phi = Math.acos(2 * Math.random() - 1)
     const x = r * 2 * Math.cos(theta) * Math.sin(phi) + (-2000 + Math.random() * 4000)

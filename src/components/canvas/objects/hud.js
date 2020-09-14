@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
 import rock from '../assets/rock/rock01.jpg'
 import test from '../assets/checkered.png'
-import smoke from '../assets/smoke-1.png'
+import smoke from '../assets/smoke.png'
 import stars from '../assets/stars.jpg'
 import stars2 from '../assets/stars2.jpg'
 import image from '../assets/image.svg'
