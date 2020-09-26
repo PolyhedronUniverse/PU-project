@@ -1,7 +1,9 @@
 import * as THREE from 'three';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 // import { FlyControls } from 'three/examples/jsm/controls/FlyControls'
+
 import Stats from 'three/examples/jsm/libs/stats.module'
+import PU from '../../assets/PU_Logo.png';
 
 // OTROS
 import Stars from './objects/others/stars.js'
@@ -30,6 +32,7 @@ import posy from './assets/skybox/5.png'
 import negy from './assets/skybox/6.png'
 import posz from './assets/skybox/2.png'
 import negz from './assets/skybox/4.png'
+import { render } from '@testing-library/react';
 
 // stars
 // import Star1 from './objects/stars/star1.js'
@@ -54,18 +57,53 @@ export default function SceneManager (canvas)  {
 
   const ratio = 1000;
 
-  const scene = buildScene();
+  let loadingManager = new THREE.LoadingManager();
+
+  const scene = buildScene(loadingManager);
   const renderer = buildRender(screenDimensions,canvas);
   const camera = buildCamera(screenDimensions);
   // let back = scene.background;
   const sceneSubjects = createSceneSubjects(screenDimensions,canvas);
   const control = createControls();
 
-  document.addEventListener('mousedown', onMouseDown, false);
+  let loadingScreen = {
+    scene: new THREE.Scene(),
+    camera: new THREE.PerspectiveCamera(75, screenDimensions.width/screenDimensions.height, 0.1, 1000),
+    loader: new THREE.TextureLoader(loadingManager),
+    geometry: new THREE.PlaneGeometry(9, 10*.75)
+  }
 
-  function buildScene() {// Construye la escena, color de fondo
+  //let LOADINGMANAGER = null;
+  let RECURSOSDESCARGADOS = false;
+
+  loadingManager.onProgress= function(item,loaded,total){
+    console.log(item,loaded,total);
+  }
+
+  loadingManager.onLoad = function(){
+    console.log('loaded all resources');
+    RECURSOSDESCARGADOS = true;
+  }
+
+  loadingScreen.camera.position.z = 5;
+  let material = new THREE.MeshBasicMaterial({
+    map: loadingScreen.loader.load(PU)
+  });
+  let meshSplash = new THREE.Mesh(loadingScreen.geometry,material);
+
+  meshSplash.position.set(0,0,0);
+  loadingScreen.camera.lookAt(meshSplash.position);
+  loadingScreen.scene.add(meshSplash);
+
+  let light = new THREE.PointLight( 0xffffff, 1, 0 );
+  light.position.set(1, 1, 100 );
+  loadingScreen.scene.add(light);
+
+  function buildScene(loadingManager) {// Construye la escena, color de fondo
     const scene = new THREE.Scene();
-    const loader = new THREE.CubeTextureLoader()
+    // scene.background = new THREE.Color(0,0,.1);
+    scene.fog = new THREE.FogExp2(0x03544e, 0.0001);
+    const loader = new THREE.CubeTextureLoader(loadingManager)
     const texture = loader.load([
       posx,negx,posy,negy,posz,negz
     ])
@@ -97,6 +135,11 @@ export default function SceneManager (canvas)  {
 
   function createSceneSubjects(screenDimensions,canvas) {// Aqui se agregan los diferentes objetos del canvas
     const sceneSubjects = [
+      // new Nebulosa(scene,new THREE.Vector3(-2000,1500,0),"red",renderer,loadingManager),
+      // new Nebulosa(scene,new THREE.Vector3(300,1400,0),"yellow",renderer,loadingManager),
+      // new Nebulosa(scene,new THREE.Vector3(2300,1400,0),"pink",renderer,loadingManager),
+      // new Nebulosa(scene,new THREE.Vector3(-1500,-600,0),"blue",renderer,loadingManager),
+      // new Nebulosa(scene,new THREE.Vector3(1300,-600,0),"orange",renderer,loadingManager),
       new Stars(2000,scene),
       new HudTest(scene,camera),
       new WonderTest(scene, new THREE.Vector3(0,0,-700)),
@@ -108,6 +151,10 @@ export default function SceneManager (canvas)  {
     ];
 
     return sceneSubjects;
+  }
+
+  function MouseArriba(){
+    console.log("Estamos encima de una nebulosa");
   }
 
   function createControls(){
@@ -171,15 +218,29 @@ export default function SceneManager (canvas)  {
     sceneSubjects[7].update()
     // sceneSubjects[8].update()
 
-    var delta = clock.getDelta();
-    control.update( delta );
 
-    xElem.textContent = camera.position.x.toFixed(3);
-    yElem.textContent = camera.position.y.toFixed(3);
-    zElem.textContent = camera.position.z.toFixed(3);
+    if(RECURSOSDESCARGADOS == false){
+      //requestAnimationFrame(update);
+      renderer.render(loadingScreen.scene,loadingScreen.camera);
+      return;
+    }else{
+      // sceneSubjects[1].update();
+      // sceneSubjects[2].update();
+      // sceneSubjects[3].update();
+      // sceneSubjects[4].update();
+      // sceneSubjects[5].update();
+      // sceneSubjects[15].update();
 
-    stats.update();
-    renderer.render(scene, camera);
+      var delta = clock.getDelta();
+      control.update( delta );
+
+      xElem.textContent = camera.position.x.toFixed(3);
+      yElem.textContent = camera.position.y.toFixed(3);
+      zElem.textContent = camera.position.z.toFixed(3);
+
+      stats.update();
+      renderer.render(scene, camera);
+    }
   }
 
   function onWindowResize() {

@@ -1,12 +1,28 @@
 import * as THREE from 'three'
+<<<<<<< HEAD:src/components/canvas/objects/nebula/nebulados.js
 import nube from '../../assets/smoke.png'
 import nube2 from '../../assets/smoke4.png'
+=======
+//import nube from '../assets/smoke.png'
+//import nube from '../assets/TextNebulosa1.png'
+//import nube from '../assets/TextNebulosa2.png'
+//import nube from '../assets/TextNebulosa3.png'
+//import nube from '../assets/TextNebulosa4.png'
+//import nube from '../assets/TextNebulosa5.png'
+//import nube from '../assets/TextNebulosa6.png'
+import nube from '../assets/TextNebulosa7.png'
+>>>>>>> master:src/components/canvas/objects/nebulosa.js
 import { Color } from 'three';
 import { Lensflare, LensflareElement } from 'three/examples/jsm/objects/Lensflare.js';
 import lensflare0 from 'three/examples/jsm/textures/lensflare/lensflare0.png'
 import lensflare3 from 'three/examples/jsm/textures/lensflare/lensflare3.png'
 
+<<<<<<< HEAD:src/components/canvas/objects/nebula/nebulados.js
 export default function NebulaDos(origen, color, scene){
+=======
+export default function Nebulosa(scene,origen,color,renderer,loadingManager){
+
+>>>>>>> master:src/components/canvas/objects/nebulosa.js
 
   //LENSFLARE
   // if(color == "red"){
@@ -32,7 +48,7 @@ export default function NebulaDos(origen, color, scene){
   //LENSFLARE - end
 
   let ambient = new THREE.AmbientLight(0x555555);
-  let loader = new THREE.TextureLoader();
+  let loader = new THREE.TextureLoader(loadingManager);
   let cloudParticles = [];
 
   let radios = [];
@@ -120,10 +136,14 @@ export default function NebulaDos(origen, color, scene){
     let c = 0
     cloudParticles.forEach(p =>{
       p.rotation.z +=rate;
+<<<<<<< HEAD:src/components/canvas/objects/nebula/nebulados.js
       // p.position.x = radios[c] * Math.cos(Math.PI*aux)
       // p.position.z = radios[c] * Math.sin(Math.PI*aux)
       aux+=rate/10
       c++
+=======
+      //p.offset.y-=0.001;
+>>>>>>> master:src/components/canvas/objects/nebulosa.js
     })
   }
 
