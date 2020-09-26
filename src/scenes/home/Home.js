@@ -10,19 +10,28 @@ class ThreeContainer extends Component {
     threeEntryPoint(this.threeRootElement);
   }
   render () {
-      return (
-        <div id="canvas"><div id="map" ref={element => this.threeRootElement = element} /> </div>
-      );
-  }
+    return (
+      <>
+      <div id="canvas"><div id="map" ref={element => this.threeRootElement = element} /> </div>
+      <div id="debug">
+        <div>x:<span id="x"></span></div>
+        <div>y:<span id="y"></span></div>
+        <div>z:<span id="z"></span></div>
+        <div>fps:<span id="fps"></span></div>
+        <div>i/o:<span id="io"></span></div>
+      </div>
+      </>
+  );
+}
 }
 
 
 export const Home = () => {
-    return (
-        <div className="Home">
-            <Header/>
-              <ThreeContainer/>
-          <Footer/>
-        </div>
-    )
+  return (
+    <div className="Home">
+      <Header/>
+      <ThreeContainer/>
+      <Footer/>
+    </div>
+  )
 }

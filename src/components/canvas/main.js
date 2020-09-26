@@ -32,6 +32,7 @@ export default (containerElement) => {
 
   function render(time) {
     requestAnimationFrame(render);
+    sceneManager.stats.begin()
     sceneManager.update();
   }
 }
