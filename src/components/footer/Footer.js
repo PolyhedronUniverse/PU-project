@@ -11,7 +11,7 @@ export const Footer = () => {
             />
             <img
             className='imagen'
-            src={require('../../assets/spotify.png')}
+            src={require('../../assets/linkedin.png')}
             //onClick={() => window.open('')}
             />
             <img

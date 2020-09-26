@@ -1,11 +1,18 @@
 import * as THREE from 'three'
-import nube from '../assets/smoke.png'
+//import nube from '../assets/smoke.png'
+//import nube from '../assets/TextNebulosa1.png'
+//import nube from '../assets/TextNebulosa2.png'
+//import nube from '../assets/TextNebulosa3.png'
+//import nube from '../assets/TextNebulosa4.png'
+//import nube from '../assets/TextNebulosa5.png'
+//import nube from '../assets/TextNebulosa6.png'
+import nube from '../assets/TextNebulosa7.png'
 import { Color } from 'three';
 import { Lensflare, LensflareElement } from 'three/examples/jsm/objects/Lensflare.js';
 import lensflare0 from 'three/examples/jsm/textures/lensflare/lensflare0.png'
 import lensflare3 from 'three/examples/jsm/textures/lensflare/lensflare3.png'
 
-export default function Nebulosa(scene,origen,color,renderer){
+export default function Nebulosa(scene,origen,color,renderer,loadingManager){
 
 
   //LENSFLARE
@@ -30,7 +37,7 @@ export default function Nebulosa(scene,origen,color,renderer){
   //LENSFLARE - end
 
   let ambient = new THREE.AmbientLight(0x555555);
-  let loader = new THREE.TextureLoader();
+  let loader = new THREE.TextureLoader(loadingManager);
   let cloudParticles = [];
   let paletteSize = 30;
   scene.add(ambient);
@@ -76,6 +83,7 @@ export default function Nebulosa(scene,origen,color,renderer){
   this.update = function(){
     cloudParticles.forEach(p =>{
       p.rotation.z +=rate;
+      //p.offset.y-=0.001;
     })
   }
 
