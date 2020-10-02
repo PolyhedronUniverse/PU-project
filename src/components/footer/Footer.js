@@ -12,12 +12,7 @@ export const Footer = () => {
             />
             <img
             className='imagen'
-<<<<<<< HEAD
-            alt='spotify'
-            src={require('../../assets/spotify.png')}
-=======
             src={require('../../assets/linkedin.png')}
->>>>>>> master
             //onClick={() => window.open('')}
             />
             <img

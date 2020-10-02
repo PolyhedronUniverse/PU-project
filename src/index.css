@@ -38,4 +38,23 @@ html, body {
   font-family: monospace;
 }
 
+#tooltip{
+  position: fixed;
+  left: 0;
+  top: 0;
+  min-width: 100px;
+  min-height: 32px;
+  text-align: center;
+  padding: 5px 12px;
+  font-family: monospace;
+  color: white;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  opacity: 0;
+  border: 1px solid black;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.25s linear;
+  border-radius: 3px;
+}
+
 /* .Home{background-color: black} */

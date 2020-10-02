@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 // import { FlyControls } from 'three/examples/jsm/controls/FlyControls'
-
+import '../../index.css'
 import Stats from 'three/examples/jsm/libs/stats.module'
 import PU from '../../assets/PU_Logo.png';
 
@@ -98,6 +98,37 @@ export default function SceneManager (canvas)  {
   let light = new THREE.PointLight( 0xffffff, 1, 0 );
   light.position.set(1, 1, 100 );
   loadingScreen.scene.add(light);
+
+
+  /////////////////TOOLTIP///////////////////
+  let tooltipEnabledObjects = [];
+
+  function getTooltipInfo(){
+    return [
+      {type: "Nebulosa",name:"Love",color: "pink",status:"positive"},
+      {type: "Nebulosa",name:"Joy",color: "yellow",status:"positive"},
+      {type: "Nebulosa",name:"Empowerment",color: "orange",status:"positive"},
+      {type: "Nebulosa",name:"Wonder",color: "Green",status:"neutral"},
+      {type: "Nebulosa",name:"Anger",color: "red",status:"negative"},
+      {type: "Nebulosa",name:"Sadness",color: "Blue",status:"negative"},
+    ]
+  }
+
+  function RaycasterInfo(){
+    const info = getTooltipInfo();
+    console.log(info);
+    const findByName = function(name) {
+      //Se busca por nombre el objeto
+      const idx = info.indexOf(el => el.name.toLowerCase() === name.toLowerCase());
+      //Si no existe no regresa nada 
+      if (idx === -1) {
+          return null;
+      }
+      const infoObject = info[idx];
+ 
+      return infoObject;
+  };
+  }
 
   function buildScene(loadingManager) {// Construye la escena, color de fondo
     const scene = new THREE.Scene();
