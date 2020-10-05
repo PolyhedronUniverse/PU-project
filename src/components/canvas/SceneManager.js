@@ -26,12 +26,20 @@ import HudTest from './objects/tests/hudTest.js'
 // import negz from './assets/ulukai/corona_lf.png'
 
 // Azul
-import posx from './assets/skybox/1.png'
-import negx from './assets/skybox/3.png'
-import posy from './assets/skybox/5.png'
-import negy from './assets/skybox/6.png'
-import posz from './assets/skybox/2.png'
-import negz from './assets/skybox/4.png'
+// import posx from './assets/skybox/1.png'
+// import negx from './assets/skybox/3.png'
+// import posy from './assets/skybox/5.png'
+// import negy from './assets/skybox/6.png'
+// import posz from './assets/skybox/2.png'
+// import negz from './assets/skybox/4.png'
+
+//Test
+import posx from './assets/skybox_test/main_skybox/main_skybox_RT.png'
+import posy from './assets/skybox_test/main_skybox/main_skybox_UP.png'
+import negx from './assets/skybox_test/main_skybox/main_skybox_LF.png'
+import negy from './assets/skybox_test/main_skybox/main_skybox_DN.png'
+import posz from './assets/skybox_test/main_skybox/main_skybox_FT.png'
+import negz from './assets/skybox_test/main_skybox/main_skybox_BK.png'
 import { render } from '@testing-library/react';
 
 // stars
