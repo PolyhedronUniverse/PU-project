@@ -1,49 +1,38 @@
 @font-face{
-    font-family: 'MyFont';
-    src: url('./selawkl.ttf') format('truetype');
-}
-
-.image{
-    width: 10%;
-    height: 10%;
-    padding-top: 1.5%;
-    padding-left: 8.4%;
-    padding-right: 8.4%;
-}
-
-.head1{
-    padding-left: 11%;
+  font-family: 'MyFont';
+  src: url('./selawkl.ttf') format('truetype');
 }
 
 .header{
-display: flex;
-/* sirve para que siempre se quede arriba,revisar */
-/* position: fixed;
-top: 0; */
-flex-direction: row;
-font-family: 'MyFont';
- font-size: 2.6vw;
- font-weight: lighter;
- background-color: white; 
- align-items: center ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'MyFont';
+  font-size: 2.5vw;
+  /* background-color: red; */
+}
+
+img.logo{
+  width: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
+  /* border: solid thin */
 }
 
 .patreon{
-    /* height: 150%; */
-    /* padding-top: 5%; */
-    background-color: black;
-    font-size: .9vw;
-    color: white;
-    border: 1px;
-    width: 100%;
-    padding: 1vh 1.1vw;
-    border-radius: 5px;
+  width: 10%;
+  border: solid thin
 }
 
-.button-container{
-    padding-left: 7%;
-    /* padding-top: 2%; */
-    /* vertical-align: middle; */
-    padding-bottom: 1%;
+img.patreon:hover{
+  background-color: black;
 }
 
+.title{
+  border: thin solid;
+}
+
+p{
+  margin-left: 7.5%;
+  margin-right: 7.5%;
+}
