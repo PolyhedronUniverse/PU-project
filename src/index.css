@@ -57,4 +57,9 @@ html, body {
   border-radius: 3px;
 }
 
+ 
+#st0{fill:#FFFFFF;}
+#st1{fill:none;stroke:#FFFFFF;stroke-width:30;stroke-miterlimit:10;}
+
+
 /* .Home{background-color: black} */

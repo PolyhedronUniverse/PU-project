@@ -20,7 +20,7 @@ class ThreeContainer extends Component {
         <div>fps:<span id="fps"></span></div>
         <div>i/o:<span id="io"></span></div>
       </div>
-      <div id="#tooltip"><span>Description</span></div>
+      <div id="tooltip"><span>Description</span></div>
       </>
   );
 }

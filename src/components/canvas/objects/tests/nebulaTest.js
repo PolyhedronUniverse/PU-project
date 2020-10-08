@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-export default function NebulaTest(scene, hue, origen, vel){
+export default function NebulaTest(scene, hue, origen, vel,raycaster){
   let timer = 0;
 
   let material = new THREE.RawShaderMaterial({
@@ -188,11 +188,14 @@ export default function NebulaTest(scene, hue, origen, vel){
   let shgeometry = new THREE.PlaneBufferGeometry(1500, 1500, 200, 200)
 
   let cloud = new THREE.Mesh(shgeometry, material);
+  let object = raycaster(hue);
+  console.log("This is the object: ", object);
 
   cloud.rotation.z = 2 * Math.PI * Math.random() - Math.PI;
   cloud.position.x = origen.x;
   cloud.position.y = origen.y;
   cloud.position.z = origen.z;
+  //cloud.userData.emotionalregion = 
   scene.add(cloud);
 
 

@@ -1,3 +1,4 @@
+import react,{useState} from 'react'
 import * as THREE from 'three';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 // import { FlyControls } from 'three/examples/jsm/controls/FlyControls'
@@ -12,6 +13,7 @@ import WonderTest from './objects/tests/wonderTest.js'
 
 // HUD
 import HudTest from './objects/tests/hudTest.js'
+import musica from './Back.ogg'
 
 // Nebulas
 
@@ -100,36 +102,51 @@ export default function SceneManager (canvas)  {
   loadingScreen.scene.add(light);
 
 
-  /////////////////TOOLTIP///////////////////
+  //////////////////////////////////////////////TOOLTIP////////////////////////////////////////////////////////
   let tooltipEnabledObjects = [];
 
-  function getTooltipInfo(){
-    return [
-      {type: "Nebulosa",name:"Love",color: "pink",status:"positive"},
-      {type: "Nebulosa",name:"Joy",color: "yellow",status:"positive"},
-      {type: "Nebulosa",name:"Empowerment",color: "orange",status:"positive"},
-      {type: "Nebulosa",name:"Wonder",color: "Green",status:"neutral"},
-      {type: "Nebulosa",name:"Anger",color: "red",status:"negative"},
-      {type: "Nebulosa",name:"Sadness",color: "Blue",status:"negative"},
-    ]
-  }
 
-  function RaycasterInfo(){
+  function RaycasterInfo(COLOR){
     const info = getTooltipInfo();
     console.log(info);
-    const findByName = function(name) {
-      //Se busca por nombre el objeto
-      const idx = info.indexOf(el => el.name.toLowerCase() === name.toLowerCase());
-      //Si no existe no regresa nada 
-      if (idx === -1) {
-          return null;
-      }
-      const infoObject = info[idx];
- 
-      return infoObject;
-  };
+    //Se busca por nombre el objeto
+    const idx = info.indexOf(el => el.color === COLOR.toString());
+    //Si no existe no regresa nada 
+    if (idx === -1) {
+        return null;
+    }
+    const infoObject = info[idx];
+
+    function getTooltipInfo(){
+      return [
+        {emotionalregion: "Love",constellation: "orion",trackname:"trackname",artist:"a",type:"id",catalogued:"releaseDate",color:"0.80"},
+        {emotionalregion: "Joy",constellation: "orion",trackname:"trackname",artist:"r",type:"id",catalogued:"releaseDate",color:"0.10"},
+        {emotionalregion: "Empowerment",constellation: "orion",trackname:"trackname",artist:"t",type:"id",catalogued:"releaseDate",color:"0.02"},
+        {emotionalregion: "Wonder",constellation: "orion",trackname:"trackname",artist:"i",type:"id",catalogued:"releaseDate",color:""},
+        {emotionalregion: "Anger",constellation: "orion",trackname:"trackname",artist:"s",type:"id",catalogued:"releaseDate",color:"0.96"},
+        {emotionalregion: "Sadness",constellation: "orion",trackname:"trackname",artist:"t",type:"id",catalogued:"releaseDate",color:"0.60"},
+      ]
+    }
+
+    return infoObject;
   }
 
+  let nebula = new RaycasterInfo();
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/******************************************************AUDIO************************************************************/
+// let listener = new THREE.AudioListener();
+// camera.add(listener);
+// let audioLoader = new THREE.AudioLoader();
+// let ambiental = new THREE.Audio( listener );
+// audioLoader.load( musica, function ( buffer ) {
+
+//   ambiental.setBuffer( buffer );
+//   ambiental.setLoop( true );
+//   ambiental.setVolume( 0.5 );
+//   ambiental.play();
+
+// } );
+/***********************************************************************************************************************/
   function buildScene(loadingManager) {// Construye la escena, color de fondo
     const scene = new THREE.Scene();
     // scene.background = new THREE.Color(0,0,.1);
@@ -174,18 +191,14 @@ export default function SceneManager (canvas)  {
       new Stars(2000,scene),
       new HudTest(scene,camera),
       new WonderTest(scene, new THREE.Vector3(0,0,-700)),
-      new NebulaTest(scene, 0.96, new THREE.Vector3(-1300,1000,700), 0.009), //Anger
-      new NebulaTest(scene, 0.60, new THREE.Vector3(-1300,-700,500), 0.001), //Sadness
-      new NebulaTest(scene, 0.10, new THREE.Vector3(800,1000,300), 0.004), //Joy
-      new NebulaTest(scene, 0.80, new THREE.Vector3(2000,500,500), 0.005), //Love
-      new NebulaTest(scene, 0.02, new THREE.Vector3(1000,-800,600), 0.006), //Empowerment
+      new NebulaTest(scene, 0.96, new THREE.Vector3(-1300,1000,700), 0.009,RaycasterInfo), //Anger
+      new NebulaTest(scene, 0.60, new THREE.Vector3(-1300,-700,500), 0.001,RaycasterInfo), //Sadness
+      new NebulaTest(scene, 0.10, new THREE.Vector3(800,1000,300), 0.004,RaycasterInfo), //Joy
+      new NebulaTest(scene, 0.80, new THREE.Vector3(2000,500,500), 0.005,RaycasterInfo), //Love
+      new NebulaTest(scene, 0.02, new THREE.Vector3(1000,-800,600), 0.006,RaycasterInfo), //Empowerment
     ];
 
     return sceneSubjects;
-  }
-
-  function MouseArriba(){
-    console.log("Estamos encima de una nebulosa");
   }
 
   function createControls(){
