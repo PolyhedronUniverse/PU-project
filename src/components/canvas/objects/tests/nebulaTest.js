@@ -1,6 +1,7 @@
 import * as THREE from "three";
 
 export default function NebulaTest(scene, hue, origen, vel,raycaster){
+
   let timer = 0;
 
   let material = new THREE.RawShaderMaterial({
@@ -65,7 +66,7 @@ export default function NebulaTest(scene, hue, origen, vel,raycaster){
       float t2 = time *.1 + cos(time * .2) * .05;
       vec2 pos = vUv * 2.0;
 
-      vec2 displacement = vec2(t, t2) + (2.0 + mousePosition * .5);
+      vec2 displacement = vec2(t, t2) + (1.0 + mousePosition * .5);
 
       float p = fbm( displacement * 2.0 + pos * 2.0, t * 1.1);
       vec2 pos2 = pos + vec2(p);
@@ -82,14 +83,13 @@ export default function NebulaTest(scene, hue, origen, vel,raycaster){
 
       float ratioElevation = pow( (1.0 - d), 5.0);
 
-      vElevation = s + .1 + ratioElevation * .2;
+      vElevation = s + .2 + ratioElevation * .2;
 
       vElevation *= 1.0 - smoothstep(0.0, 1.0, length(uv - .5));
 
-      vec3 finalPos = position;
-      finalPos.z = -30.0 + pow( s + ratioElevation, 2.0) * 20.0;
 
-      gl_Position = projectionMatrix * modelViewMatrix * vec4 ( finalPos.xy, position.z, 1.0);
+
+      gl_Position = projectionMatrix * modelViewMatrix * vec4 ( position, 1.0);
     }`,
     fragmentShader: `
     precision highp float;
@@ -97,6 +97,12 @@ export default function NebulaTest(scene, hue, origen, vel,raycaster){
     varying vec2 vUv;
     varying float vElevation;
     uniform float uHue;
+
+    uniform float a;
+    uniform float b;
+    uniform float c;
+    uniform float d;
+    uniform float e;
 
     float hue2rgb(float f1, float f2, float hue) {
       if (hue < 0.0)
@@ -151,10 +157,10 @@ export default function NebulaTest(scene, hue, origen, vel,raycaster){
 
       float saturation = vElevation * 1.1;
       float darkborders = sin(vUv.x * 3.14) * sin(vUv.y * 3.14);
-      float brightness = pow( darkborders * .3 + vElevation, 3.5);
+      float brightness = pow( darkborders * a + vElevation, 3.5);
       brightness *= .5 + smoothstep(.6, 1.0, vElevation) * .5;
 
-      brightness += highlight * .8;
+      brightness += highlight * .2;
       vec3 col = hsl2rgb(hue, saturation, brightness);
 
       if(brightness < 0.1){
@@ -174,37 +180,57 @@ export default function NebulaTest(scene, hue, origen, vel,raycaster){
     uniforms: {
       time: { type: "f", value: 1 },
       uHue: { type: "f", value: hue },
-      mousePosition: { type: "v2", value: new THREE.Vector2(0.9, 0.9) }
+      mousePosition: { type: "v2", value: new THREE.Vector2(0.9, 0.9) },
+      a: { type: "f", value: 0.3},
+      b: { type: "f", value: 3.5},
+      c: { type: "f", value: 0.5},
+      d: { type: "f", value: 0.6},
+      e: { type: "f", value: 0.5},
     },
     transparent: true,
     alphaTest: 0.1,
-    side: THREE.DoubleSide,
+    // side: THREE.DoubleSide,
   });
-
-  let material2 = material.clone();
-  material2.uniforms.time.value = 1;
-  material2.uniforms.uHue.value = 0.6;
 
   let shgeometry = new THREE.PlaneBufferGeometry(1500, 1500, 200, 200)
 
   let cloud = new THREE.Mesh(shgeometry, material);
-  let object = raycaster(hue);
-  console.log("This is the object: ", object);
+  // let object = raycaster(hue);
+  // console.log("This is the object: ", object);
 
   cloud.rotation.z = 2 * Math.PI * Math.random() - Math.PI;
   cloud.position.x = origen.x;
   cloud.position.y = origen.y;
   cloud.position.z = origen.z;
-  //cloud.userData.emotionalregion = 
+  //cloud.userData.emotionalregion =
+  cloud.callback = function(){
+    vel = -vel;
+    // const inout = document.querySelector('#io'); // To enable FOG
+    // inout.textContent = hue;
+  }
   scene.add(cloud);
 
+  // const parameters = { a: 0.3, b: 3.5, c: 0.5, d: 0.6, e: 0.5 };
 
-  this.update = function(){
+  // const gui = new GUI();
+  // gui.add( parameters, 'a', 0, 1, 0.01 ).onChange( this.update );
+  // gui.add( parameters, 'b', 0, 5, 0.01 ).onChange( this.update );
+  // gui.add( parameters, 'c', 0, 1, 0.01 ).onChange( this.update );
+  // gui.add( parameters, 'd', 0, 1, 0.01 ).onChange( this.update );
+  // gui.add( parameters, 'e', 0, 1, 0.01 ).onChange( this.update );
+
+  let update = function(){
     timer += vel;
-
 
     cloud.rotation.z += vel;
 
     cloud.material.uniforms.time.value = timer;
+    // cloud.material.uniforms.a.value = parameters.a;
+    // cloud.material.uniforms.b.value = parameters.b;
+    // cloud.material.uniforms.c.value = parameters.c;
+    // cloud.material.uniforms.d.value = parameters.d;
+    // cloud.material.uniforms.e.value = parameters.e;
   }
+
+  return {cloud, update};
 }
