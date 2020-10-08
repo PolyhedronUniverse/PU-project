@@ -78,7 +78,7 @@ export default function Hud(scene,camera){
   //
   mesh.position.z=camera.position.z-1
   // mesh.position.x=-.5
-  // scene.add(mesh)
+  scene.add(mesh)
 
 
   var geo = new THREE.RingBufferGeometry( .45, .55, 32, 2, Math.PI*.06, Math.PI*1.88 );

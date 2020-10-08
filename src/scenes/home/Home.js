@@ -1,9 +1,6 @@
 import React, {Component} from 'react'
 import { Footer } from '../../components/footer/Footer'
 import { Header } from '../../components/header/Header'
-import { Mobile } from '../../components/mobile/Mobile'
-import { Debug } from '../../components/debug/Debug'
-import { Gui } from '../../components/gui/Gui'
 import '../../index.css'
 import threeEntryPoint from '../../components/canvas/main';
 // import Hud from '../../components/canvas/hud'
@@ -14,9 +11,19 @@ class ThreeContainer extends Component {
   }
   render () {
     return (
-      <div id="canvas" ref={element => this.threeRootElement = element} />
-    );
-  }
+      <>
+      <div id="canvas"><div id="map" ref={element => this.threeRootElement = element} /> </div>
+      <div id="debug">
+        <div>x:<span id="x"></span></div>
+        <div>y:<span id="y"></span></div>
+        <div>z:<span id="z"></span></div>
+        <div>fps:<span id="fps"></span></div>
+        <div>i/o:<span id="io"></span></div>
+      </div>
+      <div id="tooltip"><span>Description</span></div>
+      </>
+  );
+}
 }
 
 
@@ -25,8 +32,6 @@ export const Home = () => {
     <div className="Home">
       <Header/>
       <ThreeContainer/>
-      <Gui/>
-      <Mobile/>
       <Footer/>
     </div>
   )
