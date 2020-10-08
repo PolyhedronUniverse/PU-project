@@ -1,31 +1,33 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  monospace;
 }
 
 html, body {
-   margin: 0;
-   height: 100%;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
 
+.Home{
+  height: 100%;
+  width: 100%;
 }
 
 #canvas{
   position: relative !important;
-}
-
-#map {
-   width: 100%;
-   height: 600px;
-   display: block;
+  width: 100%;
+  height: 480px;
+  /* display: block; */
 }
 
 #debug {
@@ -33,33 +35,20 @@ html, body {
   left: 1em;
   top: 10em;
   padding: 1em;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.5);
   color: white;
   font-family: monospace;
 }
 
-#tooltip{
-  position: fixed;
-  left: 0;
-  top: 0;
-  min-width: 100px;
-  min-height: 32px;
-  text-align: center;
-  padding: 5px 12px;
-  font-family: monospace;
-  color: white;
-  background: rgba(0,0,0,0.5);
-  display: none;
-  opacity: 0;
-  border: 1px solid black;
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
-  transition: opacity 0.25s linear;
-  border-radius: 3px;
+
+@media only screen and (min-width: 600px) {
+    .mobile {
+        display: none;
+    }
 }
 
- 
-#st0{fill:#FFFFFF;}
-#st1{fill:none;stroke:#FFFFFF;stroke-width:30;stroke-miterlimit:10;}
-
-
-/* .Home{background-color: black} */
+@media only screen and (max-width: 600px) {
+    canvas {
+        display: none;
+    }
+}
