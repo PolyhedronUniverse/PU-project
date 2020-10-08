@@ -255,3 +255,71 @@ let render_fs, render_vs, simulation_fs, simulation_vs;
     }`;
   }
 ```
+
+
+## September 25
+- Footer errors
+
+## TODO September 28
+- [ ] Test Ken's Skyboxes & background.
+- [ ] Check the shaders on `threejs/test.html`.
+- [ ] Particle system for wonder or a shader?.
+- [ ] Adapt Pablo's splash screen with the nebulas.
+
+### Explosion shader analysis
+
+**Vertex** Shader
+1. uv assigned to vUv
+2. Noise generated varying with time
+3. float displacement which is gonna deform the original shape
+4. Assign new positions
+
+**Fragment** Shader
+1. Random offset generated
+2. get color of the gradient using the offset and the noise
+3. New color assigned
+
+### Fog/Nebula Shader analysis
+
+**Vertex** Shader
+1. Assign uv's
+2. changes the vElevation (varying) for the fragmentShader
+3. Assigns position
+
+
+**Fragment** Shader
+1. computes a hue
+2.
+
+
+
+## Nebulas positions & skyboxes edges.
+- **Anger**
+  - x: -1300, y: 1000, z: 700
+  - speed: 0.009
+- **Sadness**
+  - x: -1300, y: -700, z: 500
+  - speed: 0.001
+- **Joy**
+  - x: -800, y: 1000, z: 300
+  - speed: 0.004
+- **Love**
+  - x: 2000, y: 500, z: 500
+  - speed: 0.005
+- **Empowerment**
+  - x: 1000, y: -800, z: 600
+  - speed: 0.006
+
+## Wonder Particle
+
+- **Position** - to describe where the particle is
+- **Velocity** - to describe where the particle is headed and how fast
+- **Age** - the number of seconds the particle has been alive
+- **Life** - the number of seconds the particle should stay alive
+
+## 3 octubre
+- Mobile devices restrict
+- linkedin redirect
+- remove coords, stats, controls,
+- mute
+- clicks in & out
