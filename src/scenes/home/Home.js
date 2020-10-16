@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, useState,useEffect} from 'react'
 import { Footer } from '../../components/footer/Footer'
 import { Header } from '../../components/header/Header'
 import { Mobile } from '../../components/mobile/Mobile'
@@ -21,13 +21,52 @@ class ThreeContainer extends Component {
 
 
 export const Home = () => {
-  return (
-    <div className="Home">
+
+  function useWindowSize(){
+    const [windowSize,setWindowSize]= useState({
+      width: undefined,
+      height: undefined
+    });
+
+    useEffect(()=> {
+      function handleResize(){
+        setWindowSize({
+          width: window.innerWidth,
+          height:window.innerHeight,
+        });
+      }
+
+      window.addEventListener("resize",handleResize);
+
+      handleResize();
+
+      return () => window.removeEventListener("resize",handleResize);
+    },[]);
+
+    return windowSize;
+  }
+
+  const size = useWindowSize();
+  const ancho = size.width;
+
+  console.log("height: "+ size.height + " width: "+ size.width);
+
+  if (ancho <= 600) {
+    return(
+      <div className="Home">
       <Header/>
-      <ThreeContainer/>
-      <Gui/>
       <Mobile/>
       <Footer/>
     </div>
-  )
+    )
+  }else{
+    return(
+      <div className="Home">
+      <Header/>
+      <ThreeContainer/>
+      <Gui/>
+      <Footer/>
+    </div>
+    )
+  }
 }

@@ -7,3 +7,29 @@
   color: white;
   font-family: monospace;
 }
+
+#pause{
+  /* position: absolute;
+  align-items: flex-end; */
+  position: absolute;
+  left: 110em;
+  top: 10em;
+  padding: 1em;
+  background: rgba(0, 0, 0, 0);
+  color: white;
+  font-family: monospace;
+  height: 60px;
+  width: 60px;
+  border-width: 0px;
+}
+
+#pausa{
+  color: rgb(86,101, 115);
+  height: 100%;
+  width: 100%;
+}
+#play{
+  color:rgb(86,101, 115);;
+  height: 100%;
+  width: 100%;
+}

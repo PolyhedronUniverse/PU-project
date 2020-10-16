@@ -59,11 +59,7 @@ html, body {
   border-radius: 3px;
 }
 
-
-#st0{fill:#FFFFFF;}
-#st1{fill:none;stroke:#FFFFFF;stroke-width:30;stroke-miterlimit:10;}
-
-@media only screen and (min-width: 600px) {
+/* @media only screen and (min-width: 600px) {
     .mobile {
         display: none;
     }
@@ -73,6 +69,6 @@ html, body {
     canvas {
         display: none;
     }
-}
+} */
 
 /* .Home{background-color: black} */

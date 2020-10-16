@@ -1,11 +1,13 @@
 import * as THREE from 'three';
 import white from '../../assets/hudtext.jpg'
+import comp from '../../assets/comprimida.jpg'
+import nocomp from '../../assets/NoComprimida.jpg'
 // import black from '../../assets/hudtext1.jpg'
 // import rock from '../../assets/rock/rock01.jpg'
 
 export default function HudTest(scene,camera){
 
-  const texture = new THREE.TextureLoader().load(white);
+  const texture = new THREE.TextureLoader().load(nocomp);
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
   // texture.repeat.set( 4, 4 );
