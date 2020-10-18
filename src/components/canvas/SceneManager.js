@@ -16,6 +16,8 @@ import Text from './objects/others/text.js'
 import TubeTest from './objects/tests/tubeTest.js'
 import Count from './objects/others/count.js'
 
+import Sonido from './objects/tests/sonidoTest'
+
 // Skyboxes
 import posx from './assets/skybox_test/main_skybox/main_skybox_RT.png'
 import posy from './assets/skybox_test/main_skybox/main_skybox_UP.png'
@@ -134,7 +136,8 @@ export default function SceneManager ()  {
       new MoveTest(scene, camera, nebulas, document.getElementsByTagName("canvas")[0]),
       new WonderTest(scene, new THREE.Vector3(0,0,-700)),
       new TubeTest(scene),
-      new Count()
+      new Count(),
+      new Sonido(camera),
     ];
 
     return {others, nebulas};
@@ -251,6 +254,7 @@ export default function SceneManager ()  {
       // document.querySelector('#xt').textContent = controls.target.x
       // document.querySelector('#yt').textContent = controls.target.y
       // document.querySelector('#zt').textContent = controls.target.z
+
 
       renderer.render(scene, camera);
     }

@@ -43,6 +43,7 @@ export default function MoveTest(scene, camera, nebulas, canvas){
       y: (event.clientY - rect.top ) * canvas.height / rect.height,
     }
 
+
     mouse.x = (pos.x / canvas.width ) *  2 - 1;
     mouse.y = (pos.y / canvas.height) * -2 + 1;
 
@@ -69,6 +70,7 @@ export default function MoveTest(scene, camera, nebulas, canvas){
         camera.position.set(0,0,-7000)
         // camera.position.z = -7000;
         obj[0].callback(1);
+
       }
     }
   }

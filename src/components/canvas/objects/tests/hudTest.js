@@ -5,6 +5,7 @@ import hudtexture from '../../assets/1024hud.jpg'
 export default function HudTest(scene,camera){
 
   const texture = new THREE.TextureLoader().load(hudtexture);
+
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
   texture.repeat.set( 1, 1 );
