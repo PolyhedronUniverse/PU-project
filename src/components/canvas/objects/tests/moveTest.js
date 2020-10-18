@@ -3,9 +3,11 @@ import inAudio from '../../assets/sounds/in.mp3'
 import outAudio from '../../assets/sounds/out.mp3'
 
 export default function MoveTest(scene, camera, nebulas, canvas){
-  document.addEventListener("keydown", onDocumentKeyDown, false);
 
   let keyCode;
+
+  let raycaster = new THREE.Raycaster();
+  let mouse = new THREE.Vector2();
 
   let listener = new THREE.AudioListener();
   camera.add( listener );
@@ -18,23 +20,12 @@ export default function MoveTest(scene, camera, nebulas, canvas){
     obj[i] = nebulas[i].cloud;
   }
 
+  let audioLoader = new THREE.AudioLoader();
+
   function onDocumentKeyDown(event) {
     keyCode = event.which;
-
-    var audioLoader = new THREE.AudioLoader();
-
-    // if(keyCode === 71){
-    //   // Place camera on x axis
-    //   // controls.target.set(0,0,-55000);
-    //   // camera.position.set(0,0,-54000)
-    //   // audioLoader.load( inAudio, function( buffer ) {
-    //   //   sound.setBuffer( buffer );
-    //   //   sound.play();
-    //   // });
-    // }else
     if(keyCode === 13){
-      // controls.target.set(0,0,0);
-      camera.position.set(0,0,3500)
+      onDocumentMouseDown(event)
       audioLoader.load( outAudio, function( buffer ) {
         sound.setBuffer( buffer );
         sound.play();
@@ -42,85 +33,48 @@ export default function MoveTest(scene, camera, nebulas, canvas){
     }
   }
 
-  let raycaster = new THREE.Raycaster();
-  let mouse = new THREE.Vector2();
-
   function onDocumentMouseDown(event) {
     event.preventDefault();
+
     const rect = canvas.getBoundingClientRect();
-    let audioLoader = new THREE.AudioLoader();
-    //console.log(rect)
 
     const pos = {
       x: (event.clientX - rect.left) * canvas.width  / rect.width,
       y: (event.clientY - rect.top ) * canvas.height / rect.height,
     }
-    //console.log(pos)
+
 
     mouse.x = (pos.x / canvas.width ) *  2 - 1;
     mouse.y = (pos.y / canvas.height) * -2 + 1;
 
-    if(mouse.y > -1.0 && mouse.y < 1.0)
-    {
-      raycaster.setFromCamera(mouse, camera);
+    raycaster.setFromCamera(mouse, camera);
 
-      let intersects = raycaster.intersectObjects(obj);
-      //console.log(obj)
-      if (intersects.length > 0) {
-        intersects[0].object.callback();
-        camera.position.set(0,0,-54000)
-        audioLoader.load( inAudio, function( buffer ) {
-          sound.setBuffer( buffer );
-          sound.play();
-        });
+    let intersects = raycaster.intersectObjects(obj);
+
+    if(event.which === 1) {
+      if(mouse.y > -1.0 && mouse.y < 1.0) {
+        if (intersects.length > 0) {
+          intersects[0].object.callback(-1);
+          // camera.lookAt(intersects[0].object.position.x, intersects[0].object.position.y, -55000);
+          // camera.object.setOrientation(  );
+          document.querySelector('#io').textContent = intersects[0].object.name;
+          audioLoader.load( inAudio, function( buffer ) {
+            sound.setBuffer( buffer );
+            sound.play();
+          });
+          // camera.position.z = 0
+        }
+      }
+    }else if(event.which === 13) {
+      if(camera.position.z < 3500) {
+        camera.position.set(0,0,-7000)
+        // camera.position.z = -7000;
+        obj[0].callback(1);
+
       }
     }
   }
 
-  function onDocumentMouseMove(event) {
-    event.preventDefault();
-    const rect = canvas.getBoundingClientRect();
-
-    const pos = {
-      x: (event.clientX - rect.left) * canvas.width  / rect.width,
-      y: (event.clientY - rect.top ) * canvas.height / rect.height,
-    }
-
-    // if(event.clientY > window.innerHeight * 0.2 && event.clientY < window.innerHeight * 0.9)
-    // {
-    mouse.x = (pos.x / canvas.width ) *  2 - 1;
-    mouse.y = (pos.y / canvas.height) * -2 + 1;
-
-
-    // const xElem = document.querySelector('#x');
-    // const yElem = document.querySelector('#y');
-    //
-    // xElem.textContent = mouse.x;
-    // yElem.textContent = mouse.y;
-
-  }
-
+  document.addEventListener("keydown", onDocumentKeyDown, false);
   document.addEventListener('mousedown', onDocumentMouseDown, false);
-  document.addEventListener('mousemove', onDocumentMouseMove, false);
-
-  // this.update = function(){
-  //   raycaster.setFromCamera( mouse, camera );
-  //   let intersects = raycaster.intersectObjects( scene.children );
-  //
-  //   if ( intersects.length > 0 ) {
-  //     if ( INTERSECTED != intersects[ 0 ].object ) {
-  //       INTERSECTED = intersects[ 0 ].object;
-  //
-  //       if(INTERSECTED.type == "Mesh"){
-  //         camera.position.set(INTERSECTED.position.x,INTERSECTED.position.y,500)
-  //         console.log(INTERSECTED.position.x)
-  //       }
-  //     }
-  //     // INTERSECTED = null;
-  //   } else {
-  //
-  //     if ( INTERSECTED ) console.log("adios")
-  //     INTERSECTED = null;
-  //   }
-  // }
 }

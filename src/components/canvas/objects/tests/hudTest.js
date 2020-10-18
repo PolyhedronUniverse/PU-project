@@ -1,23 +1,25 @@
 import * as THREE from 'three';
-import white from '../../assets/hudtext.jpg'
-import comp from '../../assets/comprimida.jpg'
-import nocomp from '../../assets/NoComprimida.jpg'
-// import black from '../../assets/hudtext1.jpg'
+import hudtexture from '../../assets/1024hud.jpg'
 // import rock from '../../assets/rock/rock01.jpg'
 
 export default function HudTest(scene,camera){
 
-  const texture = new THREE.TextureLoader().load(nocomp);
+  const texture = new THREE.TextureLoader().load(hudtexture);
+
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
-  // texture.repeat.set( 4, 4 );
+  texture.repeat.set( 1, 1 );
   const shape = new THREE.Shape();
 
-  shape.moveTo(-1.5, 1.5);
-  shape.lineTo(1.5, 1.5);
-  shape.lineTo(1.5, -1.5);
-  shape.lineTo(-1.5,-1.5)
+  // shape.moveTo(-1.5, 1.5 * 0.544);
+  // shape.lineTo( 1.5, 1.5 * 0.544);
+  // shape.lineTo( 1.5, -1.5 * 0.544);
+  // shape.lineTo(-1.5, -1.5 * 0.544)
 
+  shape.moveTo(-1.5, 1.5 * 0.5);
+  shape.lineTo( 1.5, 1.5 * 0.5);
+  shape.lineTo( 1.5, -1.5 * 0.5);
+  shape.lineTo(-1.5, -1.5 * 0.5)
 
   //Holes
   var hole1 = new THREE.Path();
@@ -42,8 +44,10 @@ export default function HudTest(scene,camera){
   const material = new THREE.MeshBasicMaterial( { map: texture} );
   const geometry = new THREE.ShapeGeometry( shape );
   const mesh = new THREE.Mesh(geometry, material);
-  mesh.position.z=camera.position.z-1
+  mesh.position.z=camera.position.z-0.97
   scene.add(mesh)
 
+
+  // scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,1.0888,2,2), new THREE.MeshBasicMaterial({map: texture,})))
 
 }

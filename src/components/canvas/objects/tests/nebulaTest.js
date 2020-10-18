@@ -1,8 +1,17 @@
 import * as THREE from "three";
 
-export default function NebulaTest(scene, hue, origen, vel,raycaster){
+import left from '../../assets/skybox_test/green_nebula_skybox/green_nebula_skybox_RT.png'
+import up from '../../assets/skybox_test/green_nebula_skybox/green_nebula_skybox_UP.png'
+import right from '../../assets/skybox_test/green_nebula_skybox/green_nebula_skybox_LF.png'
+import down from '../../assets/skybox_test/green_nebula_skybox/green_nebula_skybox_DN.png'
+import front from '../../assets/skybox_test/green_nebula_skybox/green_nebula_skybox_FT.png'
+import back from '../../assets/skybox_test/green_nebula_skybox/green_nebula_skybox_BK.png'
+
+
+export default function NebulaTest(scene, name, hue, origen, vel,raycaster){
 
   let timer = 0;
+  let moveNebula = 0;
 
   let material = new THREE.RawShaderMaterial({
     vertexShader: `
@@ -203,12 +212,33 @@ export default function NebulaTest(scene, hue, origen, vel,raycaster){
   cloud.position.y = origen.y;
   cloud.position.z = origen.z;
   //cloud.userData.emotionalregion =
-  cloud.callback = function(){
-    vel = -vel;
+  cloud.callback = function(dir){
+    // vel = -vel;
+
+    moveNebula = dir;
+
     // const inout = document.querySelector('#io'); // To enable FOG
     // inout.textContent = hue;
   }
+  cloud.name = name;
   scene.add(cloud);
+
+  const loader = new THREE.TextureLoader();
+  const materials = [
+    new THREE.MeshBasicMaterial({map: loader.load(left), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(right), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(up), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(down), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(front), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(back), side: THREE.BackSide}),
+  ];
+
+  const m = new THREE.MeshBasicMaterial({side: THREE.BackSide})
+  m.color.setHSL(hue, 1.0, 0.5)
+  const g = new THREE.BoxBufferGeometry(3500/2, 3500/2, 3500/2)
+  const box =  new THREE.Mesh(g, materials);
+  box.position.set(0, 0, -8000)
+  scene.add(box);
 
   // const parameters = { a: 0.3, b: 3.5, c: 0.5, d: 0.6, e: 0.5 };
 
@@ -219,18 +249,25 @@ export default function NebulaTest(scene, hue, origen, vel,raycaster){
   // gui.add( parameters, 'd', 0, 1, 0.01 ).onChange( this.update );
   // gui.add( parameters, 'e', 0, 1, 0.01 ).onChange( this.update );
 
-  let update = function(){
+  let update = function(vis){
     timer += vel;
 
     cloud.rotation.z += vel;
 
     cloud.material.uniforms.time.value = timer;
+
+    // mesh.rotation.y += vel/10;
+
+    box.visible = vis
+
     // cloud.material.uniforms.a.value = parameters.a;
     // cloud.material.uniforms.b.value = parameters.b;
     // cloud.material.uniforms.c.value = parameters.c;
     // cloud.material.uniforms.d.value = parameters.d;
     // cloud.material.uniforms.e.value = parameters.e;
+
+    return moveNebula;
   }
 
-  return {cloud, update};
+  return {update, cloud, box};
 }

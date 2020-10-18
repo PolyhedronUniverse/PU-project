@@ -2,20 +2,10 @@ import SceneManager from './SceneManager';
 
 export default (containerElement) => {
 
-  const canvas = createCanvas(document, containerElement);
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
-  const sceneManager = new SceneManager(canvas);
+  const sceneManager = new SceneManager();
 
   bindEventListeners();
   render();
-
-  function createCanvas(document, containerElement) {
-    const canvas = document.createElement('canvas');
-    // canvas.parentElement.setAttribute("id","canvas")
-    containerElement.appendChild(canvas);
-    return canvas;
-  }
 
   function bindEventListeners() {
     window.onresize = resizeCanvas;
@@ -23,10 +13,6 @@ export default (containerElement) => {
   }
 
   function resizeCanvas() {
-    canvas.style.width = '100%';
-    canvas.style.height= '100%';
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
     sceneManager.onWindowResize();
   }
 
