@@ -49,13 +49,13 @@ export default function MoveTest(scene, camera, nebulas, canvas){
     event.preventDefault();
     const rect = canvas.getBoundingClientRect();
     let audioLoader = new THREE.AudioLoader();
-    console.log(rect)
+    //console.log(rect)
 
     const pos = {
       x: (event.clientX - rect.left) * canvas.width  / rect.width,
       y: (event.clientY - rect.top ) * canvas.height / rect.height,
     }
-    console.log(pos)
+    //console.log(pos)
 
     mouse.x = (pos.x / canvas.width ) *  2 - 1;
     mouse.y = (pos.y / canvas.height) * -2 + 1;
@@ -65,7 +65,7 @@ export default function MoveTest(scene, camera, nebulas, canvas){
       raycaster.setFromCamera(mouse, camera);
 
       let intersects = raycaster.intersectObjects(obj);
-      console.log(obj)
+      //console.log(obj)
       if (intersects.length > 0) {
         intersects[0].object.callback();
         camera.position.set(0,0,-54000)

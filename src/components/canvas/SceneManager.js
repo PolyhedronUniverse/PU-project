@@ -16,7 +16,7 @@ import HudTest from './objects/tests/hudTest.js'
 import StarsTest from './objects/tests/starsTest.js'
 import MoveTest from './objects/tests/moveTest.js'
 import RandomCubes from './objects/others/randomCubes.js'
-import musica from './assets/sounds/Back.ogg'
+import Sonido from './objects/tests/sonidoTest'
 
 // Skyboxes
 //Ken's
@@ -81,52 +81,6 @@ export default function SceneManager (canvas)  {
   light.position.set(1, 1, 100 );
   loadingScreen.scene.add(light);
 
-  //////////////////////////////////////////////TOOLTIP////////////////////////////////////////////////////////
-  let tooltipEnabledObjects = [];
-
-
-  function RaycasterInfo(COLOR){
-    const info = getTooltipInfo();
-    console.log(info);
-    //Se busca por nombre el objeto
-    const idx = info.indexOf(el => el.color === COLOR.toString());
-    //Si no existe no regresa nada
-    if (idx === -1) {
-        return null;
-    }
-    const infoObject = info[idx];
-
-    function getTooltipInfo(){
-      return [
-        {emotionalregion: "Love",constellation: "orion",trackname:"trackname",artist:"a",type:"id",catalogued:"releaseDate",color:"0.80"},
-        {emotionalregion: "Joy",constellation: "orion",trackname:"trackname",artist:"r",type:"id",catalogued:"releaseDate",color:"0.10"},
-        {emotionalregion: "Empowerment",constellation: "orion",trackname:"trackname",artist:"t",type:"id",catalogued:"releaseDate",color:"0.02"},
-        {emotionalregion: "Wonder",constellation: "orion",trackname:"trackname",artist:"i",type:"id",catalogued:"releaseDate",color:""},
-        {emotionalregion: "Anger",constellation: "orion",trackname:"trackname",artist:"s",type:"id",catalogued:"releaseDate",color:"0.96"},
-        {emotionalregion: "Sadness",constellation: "orion",trackname:"trackname",artist:"t",type:"id",catalogued:"releaseDate",color:"0.60"},
-      ]
-    }
-
-    return infoObject;
-  }
-
-  let nebula = new RaycasterInfo();
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/******************************************************AUDIO************************************************************/
-let listener = new THREE.AudioListener();
-camera.add(listener);
-let audioLoader = new THREE.AudioLoader();
-let ambiental = new THREE.Audio( listener );
-audioLoader.load( musica, function ( buffer ) {
-
-  ambiental.setBuffer( buffer );
-  ambiental.setLoop( true );
-  ambiental.setVolume( 0.5 );
-  ambiental.play();
-
-} );
-/***********************************************************************************************************************/
-
   function buildScene(loadingManager) {// Construye la escena, color de fondo
     const scene = new THREE.Scene();
     const loader = new THREE.CubeTextureLoader(loadingManager)
@@ -175,6 +129,7 @@ audioLoader.load( musica, function ( buffer ) {
       // new Hud(scene, camera),
       new MoveTest(scene, camera, nebulas, canvas),
       new WonderTest(scene, new THREE.Vector3(0,0,-700)),
+      new Sonido(camera),
 
     ];
 
@@ -211,6 +166,7 @@ audioLoader.load( musica, function ( buffer ) {
         sceneSubjects.nebulas[i].update();
       }
       sceneSubjects.others[2].update();
+      sceneSubjects.others[5].update();
       // sceneSubjects.test[0].update();
 
       // console.log(sceneSubjects.nebulas[0])
@@ -223,6 +179,7 @@ audioLoader.load( musica, function ( buffer ) {
       // zElem.textContent = camera.position.z.toFixed(3);
       // inout.textContent = "hola";
       // stats.update();
+
       renderer.render(scene, camera);
     }
   }

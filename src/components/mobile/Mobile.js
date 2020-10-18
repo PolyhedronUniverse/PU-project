@@ -4,7 +4,7 @@ import './mobile.css';
 export const Mobile = () => {
     return (
         <div className="mobile">
-            <img src={require('../../assets/404.jpg')}/>
+            <img className="gif" src={require('../../assets/PU_Message.gif')}/>
         </div>
     )
 }

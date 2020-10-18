@@ -1,3 +1,5 @@
+const { Gui } = require("./components/gui/Gui");
+
 class RayysWebColors {
     constructor() {
         //obtiene los colores de la funcion getColors()
@@ -28,7 +30,6 @@ class RayysWebColors {
             return threeColor;
         };
     }
-
     getColors() {
         return [
             { name: "Pink", hex: 0xFFC0CB, rgb: {r:255, g:192, b:203} },
