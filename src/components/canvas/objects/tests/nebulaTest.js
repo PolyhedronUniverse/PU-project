@@ -236,7 +236,7 @@ export default function NebulaTest(scene, name, hue, origen, vel,raycaster){
   const m = new THREE.MeshBasicMaterial({side: THREE.BackSide})
   m.color.setHSL(hue, 1.0, 0.5)
   const g = new THREE.BoxBufferGeometry(3500/2, 3500/2, 3500/2)
-  const box =  new THREE.Mesh(g, materials);
+  let box =  new THREE.Mesh(g, m);
   box.position.set(0, 0, -8000)
   scene.add(box);
 
@@ -249,7 +249,7 @@ export default function NebulaTest(scene, name, hue, origen, vel,raycaster){
   // gui.add( parameters, 'd', 0, 1, 0.01 ).onChange( this.update );
   // gui.add( parameters, 'e', 0, 1, 0.01 ).onChange( this.update );
 
-  let update = function(vis){
+  let update = function(){
     timer += vel;
 
     cloud.rotation.z += vel;
@@ -258,7 +258,8 @@ export default function NebulaTest(scene, name, hue, origen, vel,raycaster){
 
     // mesh.rotation.y += vel/10;
 
-    box.visible = vis
+    // box.visible = vis
+    // box.position.x = origen.x;
 
     // cloud.material.uniforms.a.value = parameters.a;
     // cloud.material.uniforms.b.value = parameters.b;
