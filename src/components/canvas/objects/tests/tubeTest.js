@@ -14,7 +14,7 @@ import warp from '../../assets/warp3.jpg'
 export default function TubeTest(scene){
   let loader = new THREE.TextureLoader()
 
-  let innerGeom = new THREE.CylinderBufferGeometry( 50, 5, 800, 32, 32, true );
+  let innerGeom = new THREE.CylinderBufferGeometry( 50, 5, 400, 32, 32, true );
   let innerMat = new THREE.MeshBasicMaterial( {map: loader.load(warp), side: THREE.BackSide, transparent: true, opacity: 0.0, alphaTest: 0.1 } );
   innerMat.map.wrapS = THREE.MirroredRepeatWrapping;
   innerMat.map.wrapT = THREE.MirroredRepeatWrapping;
@@ -22,7 +22,7 @@ export default function TubeTest(scene){
   // innerMat.map.rotation = THREE.MathUtils.degToRad(45);
   let innerCylinder = new THREE.Mesh( innerGeom, innerMat );
   // innerCylinder.position.set(0,0,-7000)
-  innerCylinder.position.set(0,0,-7000)
+  innerCylinder.position.set(0,0,-6900)
   innerCylinder.rotation.set(0.5*Math.PI,0,0)
   scene.add(innerCylinder)
 
@@ -53,7 +53,7 @@ export default function TubeTest(scene){
   // lensflare.addElement( new LensflareElement( textureFlare2, 60, 0.6, light.color ) );
 
   light.add( lensflare );
-  scene.add(light)
+  scene.add( light )
 
   // const m = new THREE.MeshBasicMaterial({side: THREE.BackSide})
   // m.color.setHSL(hue, 1.0, 0.5)
@@ -62,23 +62,23 @@ export default function TubeTest(scene){
   // box.position.set(0, 0, -8000)
   // scene.add(box);
 
-  this.update = function(posz, color){
+  this.update = function(posz, box){
     // cylinder.material.texture.
 
-    if(posz < -6499){
+    if(posz < -6650){
       if( !light.visible ){
         light.visible = true;
       innerCylinder.visible = true;
       outerCylinder.visible = true;
+      box.visible = true
     }
-      // box.visible = true
       innerCylinder.material.opacity = (-posz - 6300) / 1000 ;
       outerCylinder.material.opacity = (-posz - 6500) / 1000 ;
     }else{
       light.visible = false;
       innerCylinder.visible = false;
       outerCylinder.visible = false;
-      // box.visible = false;
+      box.visible = false;
     }
 
 

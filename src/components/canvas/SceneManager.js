@@ -106,7 +106,7 @@ export default function SceneManager ()  {
     return renderer;
   }
 
-  function buildCamera() {// Llama y ajusta la cámara
+  function buildCamera() {// Llama y ajusta la camera
     const fieldOfView = 50;
     const aspectRatio = window.innerWidth/(window.innerHeight - offtop - offbottom );
     const nearPlane = 0.1;
@@ -120,22 +120,22 @@ export default function SceneManager ()  {
   function createSceneSubjects() {// Aqui se agregan los diferentes objetos del canvas
     const nebulas = [
       new NebulaTest(scene, "anger", 0.96, new THREE.Vector3(-1300,1000,700), 0.009), //Anger
-      new NebulaTest(scene, "sadness", 0.60, new THREE.Vector3(-1300,-700,500), 0.001), //Sadness
-      new NebulaTest(scene, "joy", 0.10, new THREE.Vector3(800,-800,300), 0.004), //Joy
-      new NebulaTest(scene, "love", 0.80, new THREE.Vector3(2000,500,500), 0.005), //Love
-      new NebulaTest(scene, "empower", 0.02, new THREE.Vector3(1000,1000,600), 0.006), //Empowerment
+      // new NebulaTest(scene, "sadness", 0.60, new THREE.Vector3(-1300,-700,500), 0.001), //Sadness
+      // new NebulaTest(scene, "joy", 0.10, new THREE.Vector3(800,-800,300), 0.004), //Joy
+      // new NebulaTest(scene, "love", 0.80, new THREE.Vector3(2000,500,500), 0.005), //Love
+      // new NebulaTest(scene, "empower", 0.02, new THREE.Vector3(1000,1000,600), 0.006), //Empowerment
+      new WonderTest(scene, new THREE.Vector3(0,0,-700)),
     ];
 
     const others = [
       new StarsTest(scene),
       new Text(renderer.domElement),
+      new TubeTest(scene),
       // new Stars(20000,scene),
       new HudTest(scene,camera),
       // new Sphere(scene, new THREE.Vector3(0,0,-55000)),
       // new Hud(scene, camera),
       new MoveTest(scene, camera, nebulas, document.getElementsByTagName("canvas")[0]),
-      new WonderTest(scene, new THREE.Vector3(0,0,-700)),
-      new TubeTest(scene),
       new Count(),
       new Sonido(camera),
     ];
@@ -150,8 +150,8 @@ export default function SceneManager ()  {
     // controls.enabled = false;
     // controls.maxDistance = camera.position.z*1;
     document.querySelector('#cont').textContent = "orbit";
-
-    return controls;
+    const type = "orbit"
+    return {controls,type};
   }
 
   function myFlyControls(){
@@ -164,7 +164,9 @@ export default function SceneManager ()  {
     controls.dragToLook = false;
     console.log("fly")
     document.querySelector('#cont').textContent = "fly";
-    return controls;
+    console.log(controls)
+    const type = "fly";
+    return {controls, type};
   }
 
   function update(){
@@ -178,67 +180,54 @@ export default function SceneManager ()  {
 
       for(let i = 0; i < sceneSubjects.nebulas.length; i++){
 
-        if(camera.position.z < -7000 )
-          dir = sceneSubjects.nebulas[i].update(true); // Get direction assigned by the callback
-        else{
-          dir = sceneSubjects.nebulas[i].update(false); // Get direction assigned by the callback
-        }
+        dir = sceneSubjects.nebulas[i].update(); // Get direction assigned by the callback
 
-        if( (camera.position.z <= -53000 || camera.position.z >= 3500) && dir === 0 ){
+        if( (camera.position.z <= -7100 || camera.position.z >= 3500) && dir === 0 ){
 
           //#### DEBUG ####
-          // document.querySelector('#move').textContent = "NO MOVEMENT";
-          // document.querySelector('#dir').textContent = dir;
+          document.querySelector('#move').textContent = "NO MOVEMENT";
+          document.querySelector('#dir').textContent = dir;
           //#### DEBUG ####
 
-          sceneSubjects.others[5].update(false); // Hide the wormhole
+          // sceneSubjects.others[2].update(camera.position.z, 0x00ff00);
 
-          if(camera.position.z <= -53000 && dir !== 0){
-            control.dispose();
-            control = null;
-            control = myOrbitControls()
-            camera.position.z = -53000;
+
+          if(camera.position.z <= -7100){
+            if(control.type == 'fly'){
+              control.controls.dispose();
+              control = null;
+              control = myOrbitControls()
+              camera.position.z = -7100;
+            }
           }
           sceneSubjects.nebulas[i].cloud.callback(0);
         }else if( dir !== 0 ){
+
           // DEBUG
-          // document.querySelector('#move').textContent = "MOVEMENT";
-          // document.querySelector('#dir').textContent = dir;
+          document.querySelector('#move').textContent = "MOVEMENT";
+          document.querySelector('#dir').textContent = dir;
           //
+
           if(dir === -1 && camera.position.z >= 3500 ){
             // camera.position.z += dir*50;
             // console.log(control)
             camera.position.z -= 0.1;
             control = myFlyControls();
           }
-
-          // if(camera.position.z < -6000 && dir === -1){
-          //   camera.position.z = -53000
-          //   control = myOrbitControls();
-          //   control.target.set(0,0, -55000)
-          //   console.log(control)
-          // }else if(dir === 1){
-          //   camera.position.x = 0;
-          //   camera.position.y = 0;
-          // }
         }
+
+        sceneSubjects.others[2].update(camera.position.z, sceneSubjects.nebulas[i].box);
+
       }
       var delta = clock.getDelta();
 
-      if(control){
-        control.update(delta)
+      if(control && control.type === 'fly'){
+        control.controls.update(delta)
       }
 
-      // if(camera.position.z < 3500 && camera.position.z > 3200){
-      //   sceneSubjects.others[5].update(true, 0x00ff00);
-      // }else{
-      //   sceneSubjects.others[5].update(false, 0x00ff00);
-      // }
-
-      sceneSubjects.others[5].update(camera.position.z, 0x00ff00);
 
       if(camera.position.z < -6500) {
-        control.movementSpeed = 40
+        control.movementSpeed = 150
       };
 
 
@@ -247,9 +236,9 @@ export default function SceneManager ()  {
       // sceneSubjects.others[5].update(false);
 
 
-      // document.querySelector('#x').textContent = camera.position.x
-      // document.querySelector('#y').textContent = camera.position.y
-      // document.querySelector('#z').textContent = camera.position.z
+      document.querySelector('#x').textContent = camera.position.x
+      document.querySelector('#y').textContent = camera.position.y
+      document.querySelector('#z').textContent = camera.position.z
 
       // document.querySelector('#xt').textContent = controls.target.x
       // document.querySelector('#yt').textContent = controls.target.y
