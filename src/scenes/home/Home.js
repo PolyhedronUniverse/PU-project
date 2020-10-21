@@ -4,9 +4,10 @@ import { Header } from '../../components/header/Header'
 import { Mobile } from '../../components/mobile/Mobile'
 import { Debug } from '../../components/debug/Debug'
 import { Count } from '../../components/countdown/countdown'
-// import { Gui } from '../../components/gui/Gui'
+import { Gui } from '../../components/gui/Gui'
 import '../../index.css'
 import threeEntryPoint from '../../components/canvas/main';
+import MenuContainer from '../../components/slidingmenu/MenuContainer' 
 // import Hud from '../../components/canvas/hud'
 
 class ThreeContainer extends Component {
@@ -19,18 +20,17 @@ class ThreeContainer extends Component {
     );
   }
 }
-
-class Image extends Component {
-  render(){
-    return (
-      <div id="canvas"></div>
-    )
-  }
-}
+// class Image extends Component {
+//   render(){
+//     return (
+//       <div id="canvas"></div>
+//     )
+//   }
+// }
 
 
 export const Home = () => {
-
+  const [visible,setVisible]=useState(false);
 
   function useWindowSize(){
     const [windowSize,setWindowSize]= useState({
@@ -75,7 +75,10 @@ export const Home = () => {
       <Header/>
       <ThreeContainer/>
       <Gui/>
-      <Footer/>
+      {/* <Debug/> */}
+      <Count/>
+      <Footer visible={visible} setVisible={setVisible}/>
+      <MenuContainer visible={visible}/>
     </div>
     )
   }
