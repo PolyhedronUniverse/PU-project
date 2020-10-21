@@ -187,8 +187,8 @@ export default function SceneManager ()  {
         if( (camera.position.z <= -53000 || camera.position.z >= 3500) && dir === 0 ){
 
           //#### DEBUG ####
-          document.querySelector('#move').textContent = "NO MOVEMENT";
-          document.querySelector('#dir').textContent = dir;
+          // document.querySelector('#move').textContent = "NO MOVEMENT";
+          // document.querySelector('#dir').textContent = dir;
           //#### DEBUG ####
 
           sceneSubjects.others[5].update(false); // Hide the wormhole
@@ -202,8 +202,8 @@ export default function SceneManager ()  {
           sceneSubjects.nebulas[i].cloud.callback(0);
         }else if( dir !== 0 ){
           // DEBUG
-          document.querySelector('#move').textContent = "MOVEMENT";
-          document.querySelector('#dir').textContent = dir;
+          // document.querySelector('#move').textContent = "MOVEMENT";
+          // document.querySelector('#dir').textContent = dir;
           //
           if(dir === -1 && camera.position.z >= 3500 ){
             // camera.position.z += dir*50;
@@ -247,9 +247,9 @@ export default function SceneManager ()  {
       // sceneSubjects.others[5].update(false);
 
 
-      document.querySelector('#x').textContent = camera.position.x
-      document.querySelector('#y').textContent = camera.position.y
-      document.querySelector('#z').textContent = camera.position.z
+      // document.querySelector('#x').textContent = camera.position.x
+      // document.querySelector('#y').textContent = camera.position.y
+      // document.querySelector('#z').textContent = camera.position.z
 
       // document.querySelector('#xt').textContent = controls.target.x
       // document.querySelector('#yt').textContent = controls.target.y

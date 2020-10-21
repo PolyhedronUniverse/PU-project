@@ -1,7 +1,8 @@
-import React from 'react'
+import React,{useState} from 'react'
 import './footer.css'
 
-export const Footer = () => {
+export const Footer = (props) => {
+  const {visible,setVisible}= props;
   return (
     <div className="footer" id="footer">
       <div>
@@ -21,7 +22,7 @@ export const Footer = () => {
             src={require('../../assets/linkedin_w.png')}
             onMouseOver = {e => (e.currentTarget.src = require('../../assets/linkedin_b.png'))}
             onMouseOut = {e => (e.currentTarget.src = require('../../assets/linkedin_w.png'))}
-            onClik = {e => (window.open('#', '_blank'))}
+            onClick = {e => (window.open('#', '_blank'))}
             />
       </div>
       <div>
@@ -61,7 +62,7 @@ export const Footer = () => {
             src={require('../../assets/spotify_w.png')}
             onMouseOver = {e => (e.currentTarget.src = require('../../assets/spotify_b.png'))}
             onMouseOut = {e => (e.currentTarget.src = require('../../assets/spotify_w.png'))}
-            onClick={() => window.open('#')}
+            onClick={() => setVisible(!visible)}
             />
       </div>
     </div>
