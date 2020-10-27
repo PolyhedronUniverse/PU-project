@@ -1,4 +1,5 @@
 #labels{
+
   position: absolute;  /* let us position ourself inside the container */
   left: 0;             /* make our position the top left of the container */
   top: 0;
@@ -6,6 +7,7 @@
 }
 
 #labels>div {
+
   position: absolute;  /* let us position them inside the container */
   left: 0;             /* make their default position the top left of the container */
   top: 0;
@@ -31,3 +33,4 @@
 #n-name{
   text-transform: uppercase;
 }
+

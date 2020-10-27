@@ -193,6 +193,7 @@ export default function SceneManager ()  {
         // console.log(i +" "+ dir)
         box = sceneSubjects.nebulas[i].box;
 
+
         if( (camera.position.z <= -7100 || camera.position.z >= 3500) ){ //If its either on hud or in nebula
           if( document.querySelector('#debug') ){
             //#### DEBUG ####
@@ -257,6 +258,7 @@ export default function SceneManager ()  {
               // console.log(box.name)
               // break;
             }
+
           }
         }
         box = null;
@@ -303,6 +305,7 @@ export default function SceneManager ()  {
         document.querySelector('#y').textContent = camera.position.y
         document.querySelector('#z').textContent = camera.position.z
       }
+
 
       renderer.render(scene, camera);
     }

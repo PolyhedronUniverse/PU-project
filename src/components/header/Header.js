@@ -14,9 +14,14 @@ export const Header = () => {
         />
       <p>U  N  I  V  E  R  S  E</p>
 
-      <button className='patreon'>
-        P A T R E O N
-      </button>
+      <img
+          className='patreonButton'
+          alt='patreon'
+          src = {require('../../assets/Patreon_w_160.png')}
+          onMouseOver = {e => (e.currentTarget.src = require('../../assets/Patreon_b_160.png'))}
+          onMouseOut = {e => (e.currentTarget.src = require('../../assets/Patreon_w_160.png'))}
+          onClick={() => window.open(' https://www.youtube.com/channel/UCniBFi3JxA4f0f3rOF-GiRQ', '_blank')}
+        />
 
     </div>
   )

@@ -16,10 +16,67 @@ export default function MenuContainer(props){
     return (
       <div id="flyoutMenu"
            className={visibility}>
-        <h2><a href="#">Polyhedron</a></h2>
-        <h2><a href="#">Universe</a></h2>
-        <h2><a href="#">Team</a></h2>
-        <h2><a href="#">Ahuevito</a></h2>
+        <p className="titleArtist">P U {'\xa0'} A R T I S T S</p>
+        <div className="cell">
+          <img
+            className='short'
+            alt='youtube'
+            src = {require('../../assets/Artist_UI_Icons_Light/artist_lop-y_w.png')}
+            onMouseOver = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_lop-y_b.png'))}
+            onMouseOut = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_lop-y_w.png'))}
+            onClick={() => window.open(' https://www.youtube.com/channel/UCniBFi3JxA4f0f3rOF-GiRQ', '_blank')}
+          />
+          <img
+            className='short'
+            alt='youtube'
+            src = {require('../../assets/Artist_UI_Icons_Light/artist_ehy-x_w.png')}
+            onMouseOver = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_ehy-x_b.png'))}
+            onMouseOut = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_ehy-x_w.png'))}
+            onClick={() => window.open(' https://www.youtube.com/channel/UCniBFi3JxA4f0f3rOF-GiRQ', '_blank')}
+          />
+          <img
+            className='short'
+            alt='youtube'
+            src = {require('../../assets/Artist_UI_Icons_Light/artist_nord-z_w.png')}
+            onMouseOver = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_nord-z_b.png'))}
+            onMouseOut = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_nord-z_w.png'))}
+            onClick={() => window.open(' https://www.youtube.com/channel/UCniBFi3JxA4f0f3rOF-GiRQ', '_blank')}
+          />
+        </div>
+        {/* <div className="cell">
+        </div> */}
+        <div className="cell">
+        <img
+            className='short'
+            alt='youtube'
+            src = {require('../../assets/Artist_UI_Icons_Light/artist_pol-y_w.png')}
+            onMouseOver = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_pol-y_b.png'))}
+            onMouseOut = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_pol-y_w.png'))}
+            onClick={() => window.open(' https://www.youtube.com/channel/UCniBFi3JxA4f0f3rOF-GiRQ', '_blank')}
+          />
+          <img
+            className='short'
+            alt='youtube'
+            src = {require('../../assets/Artist_UI_Icons_Light/artist_yhe-x_w.png')}
+            onMouseOver = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_yhe-x_b.png'))}
+            onMouseOut = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_yhe-x_w.png'))}
+            onClick={() => window.open(' https://www.youtube.com/channel/UCniBFi3JxA4f0f3rOF-GiRQ', '_blank')}
+          />
+          <img
+            className='short'
+            alt='youtube'
+            src = {require('../../assets/Artist_UI_Icons_Light/artist_dron-z_w.png')}
+            onMouseOver = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_dron-z_b.png'))}
+            onMouseOut = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_dron-z_w.png'))}
+            onClick={() => window.open(' https://www.youtube.com/channel/UCniBFi3JxA4f0f3rOF-GiRQ', '_blank')}
+          />
+        </div>
+        {/* <div className="cell">
+        </div> */}
+        {/* <div className="cell">
+        </div> */}
+        {/* <div className="cell">
+        </div> */}
       </div>
     )
 }

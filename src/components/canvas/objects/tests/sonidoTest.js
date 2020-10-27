@@ -38,8 +38,4 @@ audioLoader.load( musica, function ( buffer ) {
 } );
 
 ambientalMusic.addEventListener("click", onclick, false);
-
-this.update = function(){
-
-}
 }

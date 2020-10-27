@@ -21,13 +21,9 @@
   /* border: solid thin */
 }
 
-.patreon{
-  font-family: 'MyFont';
-  color: black;
-  width: max-content;
-  border: solid thin;
-  border-radius: 5px;
-  background: #f7f6fb;
+.patreonButton{
+  width: 7%;
+  margin-top: 0.3%;
 }
 
 .patreon:hover{

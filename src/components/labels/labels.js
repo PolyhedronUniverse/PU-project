@@ -10,6 +10,7 @@ export const Labels = () => {
         <div id = "star">
           <span id="s-name"></span>
         </div>
+
       </div>
     )
 }

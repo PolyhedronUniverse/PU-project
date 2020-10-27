@@ -8,8 +8,10 @@ import { Gui } from '../../components/gui/Gui'
 import { Labels } from '../../components/labels/labels'
 import '../../index.css'
 import threeEntryPoint from '../../components/canvas/main';
-import MenuContainer from '../../components/slidingmenu/MenuContainer'
-// import Hud from '../../components/canvas/hud'
+
+import MenuContainer from '../../components/slidingmenu/MenuContainer' 
+import {Labels} from '../../components/labels/labels'
+import {MusicCel} from '../../components/musicCel/MusicCel'
 
 class ThreeContainer extends Component {
   componentDidMount() {
@@ -19,17 +21,11 @@ class ThreeContainer extends Component {
     return (
       <div id="canvas" ref={element => this.three = element}>
         <Labels/>
+
       </div>
     );
   }
 }
-// class Image extends Component {
-//   render(){
-//     return (
-//       <div id="canvas"></div>
-//     )
-//   }
-// }
 
 
 export const Home = () => {
@@ -69,7 +65,11 @@ export const Home = () => {
       <div className="Home">
       <Header/>
       <Mobile/>
-      <Footer/>
+      <Debug/>
+      <Count/>
+      <MusicCel/>
+      <Footer visible={visible} setVisible={setVisible}/>
+      <MenuContainer visible={visible}/>
     </div>
     )
   }else{
@@ -77,9 +77,9 @@ export const Home = () => {
       <div className="Home">
       <Header/>
       <ThreeContainer/>
-      <Gui/>
       <Debug/>
       <Count/>
+      <Gui/>
       <Footer visible={visible} setVisible={setVisible}/>
       <MenuContainer visible={visible}/>
     </div>
