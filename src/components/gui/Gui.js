@@ -1,6 +1,5 @@
 import React from 'react'
 import './gui.css'
-import imagen from "../../assets/pause.png"
 import {AiFillPauseCircle,AiFillPlayCircle} from 'react-icons/ai'
 
 import {Musica} from '../canvas/SceneManager'
