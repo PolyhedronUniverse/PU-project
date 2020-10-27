@@ -185,8 +185,8 @@ export default function SceneManager ()  {
         if( (camera.position.z <= -7100 || camera.position.z >= 3500) && dir === 0 ){
 
           //#### DEBUG ####
-          document.querySelector('#move').textContent = "NO MOVEMENT";
-          document.querySelector('#dir').textContent = dir;
+          // document.querySelector('#move').textContent = "NO MOVEMENT";
+          // document.querySelector('#dir').textContent = dir;
           //#### DEBUG ####
 
           // sceneSubjects.others[2].update(camera.position.z, 0x00ff00);
@@ -204,8 +204,8 @@ export default function SceneManager ()  {
         }else if( dir !== 0 ){
 
           // DEBUG
-          document.querySelector('#move').textContent = "MOVEMENT";
-          document.querySelector('#dir').textContent = dir;
+          // document.querySelector('#move').textContent = "MOVEMENT";
+          // document.querySelector('#dir').textContent = dir;
           //
 
           if(dir === -1 && camera.position.z >= 3500 ){
@@ -236,9 +236,9 @@ export default function SceneManager ()  {
       // sceneSubjects.others[5].update(false);
 
 
-      document.querySelector('#x').textContent = camera.position.x
-      document.querySelector('#y').textContent = camera.position.y
-      document.querySelector('#z').textContent = camera.position.z
+      // document.querySelector('#x').textContent = camera.position.x
+      // document.querySelector('#y').textContent = camera.position.y
+      // document.querySelector('#z').textContent = camera.position.z
 
       // document.querySelector('#xt').textContent = controls.target.x
       // document.querySelector('#yt').textContent = controls.target.y

@@ -1,0 +1,25 @@
+#musicaCel{
+    /* position: absolute;
+    align-items: flex-end; */
+    position: absolute;
+    left: 0;
+    top: 75vh;
+    padding: 1em;
+    background: rgba(0, 0, 0, 0);
+    color: white;
+    font-family: monospace;
+    height: 60px;
+    width: 60px;
+    border-width: 0px;
+  }
+  
+  #pausaCel{
+    color: rgb(255,255, 255);
+    height: 100%;
+    width: 100%;
+  }
+  #playCel{
+    color:rgb(255,255, 255);
+    height: 100%;
+    width: 100%;
+  }
