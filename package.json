@@ -1,7 +1,7 @@
 {
   "name": "polyhedron_universe",
   "version": "0.1.0",
-  "engines":{
+  "engines": {
     "node": "12.x",
     "npm": "6.x"
   },
@@ -17,7 +17,7 @@
     "react-icons": "^3.11.0",
     "react-scripts": "3.4.3",
     "three": "^0.120.1"
-  }, 
+  },
   "scripts": {
     "dev": "react-scripts start",
     "start": "serve -s build",
