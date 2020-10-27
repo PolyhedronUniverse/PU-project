@@ -14,7 +14,7 @@ export default function MoveTest(scene, camera, nebulas, canvas){
   let sound = new THREE.Audio( listener );
   scene.add(sound)
 
-  const labelContainerElem = document.querySelector('#nebulas');
+  const nebulaName = document.querySelector('#nebula');
 
   let obj = [nebulas.length];
 
@@ -25,7 +25,7 @@ export default function MoveTest(scene, camera, nebulas, canvas){
     obj[i] = nebulas[i].cloud;
     const elem = document.createElement('div');
     elem.textContent = obj[i].name;
-    labelContainerElem.appendChild(elem);
+    nebulaName.appendChild(elem);
     elem.style.display = 'none';
     elem.id = obj[i].id;
     elem.className = 'lable';
@@ -37,18 +37,25 @@ export default function MoveTest(scene, camera, nebulas, canvas){
   // console.log(obj)
   let audioLoader = new THREE.AudioLoader();
 
-  function onDocumentKeyDown(event) {
+  function back(event) {
+    event.preventDefault()
+
     keyCode = event.which;
-    if(keyCode === 13){
-      onDocumentMouseDown(event)
+
+    if(camera.position.z < 3500) {
+      camera.position.set(0,0,-7000)
+
       audioLoader.load( outAudio, function( buffer ) {
         sound.setBuffer( buffer );
         sound.play();
       });
+      obj[0].callback(1);
+      console.log(camera.position)
     }
   }
 
   function onDocumentMouseDown(event) {
+    console.log("F")
     event.preventDefault();
 
     const rect = canvas.getBoundingClientRect();
@@ -66,12 +73,11 @@ export default function MoveTest(scene, camera, nebulas, canvas){
     let intersects = raycaster.intersectObjects(obj);
 
     if(event.which === 1) {
-      if(mouse.y > -1.0 && mouse.y < 1.0) {
+      if(mouse.y > -1.0 && mouse.y < 1.0 && Math.abs(mouse.x) < 0.7) {
         if (intersects.length > 0) {
           intersects[0].object.callback(-1);
           // camera.lookAt(intersects[0].object.position.x, intersects[0].object.position.y, -55000);
           // camera.object.setOrientation(  );
-          document.querySelector('#io').textContent = intersects[0].object.name;
           audioLoader.load( inAudio, function( buffer ) {
             sound.setBuffer( buffer );
             sound.play();
@@ -79,17 +85,18 @@ export default function MoveTest(scene, camera, nebulas, canvas){
           // camera.position.z = 0
         }
       }
-    }else if(event.which === 13) {
-      if(camera.position.z < 3500) {
-        camera.position.set(0,0,-7000)
-        // camera.position.z = -7000;
-        obj[0].callback(1);
-
-      }
     }
+    // else if(event.which === 0) {
+    //   if(camera.position.z < 3500) {
+    //     camera.position.set(0,0,-7000)
+    //     // camera.position.z = -7000;
+    //     obj[0].callback(1);
+    //
+    //   }
+    // }
   }
 
-  function onDocumentMouseOver(event) {
+  function onDocumentMouseMove(event) {
 
     event.preventDefault();
 
@@ -103,62 +110,48 @@ export default function MoveTest(scene, camera, nebulas, canvas){
     mouse.x = (pos.x / canvas.width ) *  2 - 1;
     mouse.y = (pos.y / canvas.height) * -2 + 1;
 
+    if( document.querySelector('#debug') ){
+      document.querySelector('#xt').textContent = mouse.x
+      document.querySelector('#yt').textContent = mouse.y
+    }
+
     raycaster.setFromCamera(mouse, camera);
 
     let intersects = raycaster.intersectObjects(obj);
 
-    if(mouse.y > -1.0 && mouse.y < 1.0) {
+    if(mouse.y > -1.0 && mouse.y < 1.0 && camera.position.z > 0) {
       if (intersects.length > 0) {
-        // console.log(intersects[0].object.id)
-        // intersects[0].object.callback(-1);
-        // camera.lookAt(intersects[0].object.position.x, intersects[0].object.position.y, -55000);
-        // camera.object.setOrientation(  );
         document.querySelector('#hover').textContent = intersects[0].object.name +" "+ intersects[0].object.id;
         document.getElementById("canvas").style.cursor = "pointer";
+        document.getElementById("n-name").textContent = intersects[0].object.name;
+        document.getElementById('labels').style.left=(event.clientX-rect.left)+"px";
+        document.getElementById('labels').style.top=(event.clientY-rect.top+50)+"px";
         // camera.position.z = 0
-
-        switch(intersects[0].object.id){
-          case ids[0]:  document.getElementById(ids[0]).style.display = ''
-                        document.getElementById(ids[0]).style.left=(event.clientX-rect.left)+"px";
-                        document.getElementById(ids[0]).style.top=(event.clientY-rect.top-30)+"px";
-                        break;
-          case ids[1]:  document.getElementById(ids[1]).style.display = ''
-                        document.getElementById(ids[1]).style.left=(event.clientX-rect.left)+"px";
-                        document.getElementById(ids[1]).style.top=(event.clientY-rect.top-30)+"px";
-                        break;
-          case ids[2]:  document.getElementById(ids[2]).style.display = ''
-                        break;
-          case ids[3]:  document.getElementById(ids[3]).style.display = ''
-                        break;
-          case ids[4]:  document.getElementById(ids[4]).style.display = ''
-                        document.getElementById(ids[4]).style.left=(event.clientX-rect.left)+"px";
-                        document.getElementById(ids[4]).style.top=(event.clientY-rect.top-30)+"px";
-                        break;
-          case ids[5]:  document.getElementById(ids[5]).style.display = ''
-                        document.getElementById(ids[5]).style.left=(event.clientX-rect.left)+"px";
-                        document.getElementById(ids[5]).style.top=(event.clientY-rect.top-30)+"px";
-                        break;
-          default:
-                        break;
-        }
-
+        document.getElementById('labels').style.display = ''
       }else{
-        document.querySelector('#hover').textContent = "none";
-        document.getElementById("canvas").style.cursor = "default";
-        // if(document.getElementsByClassName('lable')[0].style.display == '')
-        const lab = document.getElementsByClassName('lable');
-        // console.log(lab)
-        for(let i = 0; i< lab.length; i++){
-          lab[i].style.display = "none"
+        if(document.querySelector('#debug'))
+        {
+          document.querySelector('#hover').textContent = "none";
+          document.getElementById("canvas").style.cursor = "default";
         }
+        document.getElementById('labels').style.display = 'none'
       }
     }else{
-      document.querySelector('#hover').textContent = "out";
+      if(document.querySelector('#debug'))
+      {document.querySelector('#hover').textContent = "out";}
+
+      document.getElementById('labels').style.display = 'none'
     }
 
   }
 
-  document.addEventListener("keydown", onDocumentKeyDown, false);
+  this.update = function( ) {
+    obj.forEach((item, i) => {
+      item.callback(0)
+    });
+  }
+
+  document.getElementById("back").addEventListener("click", back, false);
   document.addEventListener('mousedown', onDocumentMouseDown, false);
-  document.addEventListener('mousemove', onDocumentMouseOver, false);
+  document.addEventListener('mousemove', onDocumentMouseMove, false);
 }

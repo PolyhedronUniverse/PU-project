@@ -5,8 +5,10 @@ import { Mobile } from '../../components/mobile/Mobile'
 import { Debug } from '../../components/debug/Debug'
 import { Count } from '../../components/countdown/countdown'
 import { Gui } from '../../components/gui/Gui'
+import { Labels } from '../../components/labels/labels'
 import '../../index.css'
 import threeEntryPoint from '../../components/canvas/main';
+
 import MenuContainer from '../../components/slidingmenu/MenuContainer' 
 import {Labels} from '../../components/labels/labels'
 import {MusicCel} from '../../components/musicCel/MusicCel'
@@ -17,8 +19,9 @@ class ThreeContainer extends Component {
   }
   render () {
     return (
-      <div id="canvas" ref={element => this.three = element} >
-      <Labels/>
+      <div id="canvas" ref={element => this.three = element}>
+        <Labels/>
+
       </div>
     );
   }

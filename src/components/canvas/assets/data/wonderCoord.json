@@ -1,0 +1,47 @@
+[
+  {
+    "#": 1,
+    "emotional region": "wonder",
+    "constellation": "pyxis",
+    "name": "test",
+    "artist": "Nord-Z (ft. Ehy-X & Lop-Y)",
+    "elements": "Music+Animation",
+    "star id": "PY+W+01",
+    "pu id": "NZ09+001",
+    "status": "In progress",
+    "release date": "abr-21",
+    "x": 100,
+    "y": 0,
+    "z": 0
+  },
+  {
+    "#": 2,
+    "emotional region": "wonder",
+    "constellation": "pyxis",
+    "name": "test2",
+    "artist": "Ehy-X (ft. Nord-Z & Pol-Y)",
+    "elements": "Music+Poertry+Dance",
+    "star id": "PY+W+02",
+    "pu id": "EX10+001",
+    "status": "inactive",
+    "release date": "ene-22",
+    "x": 0,
+    "y": 100,
+    "z": 0
+  },
+  {
+    "#": 3,
+    "emotional region": "wonder",
+    "constellation": "pyxis",
+    "name": "test3",
+    "artist": "Yhe-X (ft. Nord-Z & Pol-Y)",
+    "elements": "Music+Dance",
+    "star id": "PY+W+03",
+    "pu id": "YX10+001",
+    "status": "inactive",
+    "release date": "nov-22",
+    "x": 0,
+    "y": 0,
+    "z": 100
+  }
+]

@@ -18,7 +18,6 @@ export const Debug = () => {
       <div>dir:<span id="dir"></span></div>
       <div>control:<span id="cont"></span></div>
       <div>hover:<span id="hover"></span></div>
-
     </div>
   )
 }

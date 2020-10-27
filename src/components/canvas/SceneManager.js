@@ -15,6 +15,7 @@ import MoveTest from './objects/tests/moveTest.js'
 import Text from './objects/others/text.js'
 import TubeTest from './objects/tests/tubeTest.js'
 import Count from './objects/others/count.js'
+import IconsTest from './objects/tests/iconsTest.js'
 
 import Sonido from './objects/tests/sonidoTest'
 
@@ -26,7 +27,14 @@ import negy from './assets/skybox_test/main_skybox/main_skybox_DN.png'
 import posz from './assets/skybox_test/main_skybox/main_skybox_FT.png'
 import negz from './assets/skybox_test/main_skybox/main_skybox_BK.png'
 
-
+// import posx from './assets/mm/right.png'
+// import negx from './assets/mm/left.png'
+//
+// import negz from './assets/mm/top.png'
+// import posz from './assets/mm/bottom.png'
+//
+// import posy from './assets/mm/front.png'
+// import negy from './assets/mm/back.png'
 
 export default function SceneManager ()  {
 
@@ -49,8 +57,7 @@ export default function SceneManager ()  {
   const scene = buildScene();
   scene.add(camera)
   const renderer = buildRender();
-  // control = myOrbitControls();
-  // const controls = createControls();
+  control = myOrbitControls();
 
   const sceneSubjects = createSceneSubjects();
 
@@ -120,10 +127,10 @@ export default function SceneManager ()  {
   function createSceneSubjects() {// Aqui se agregan los diferentes objetos del canvas
     const nebulas = [
       new NebulaTest(scene, "anger", 0.96, new THREE.Vector3(-1300,1000,700), 0.009), //Anger
-      // new NebulaTest(scene, "sadness", 0.60, new THREE.Vector3(-1300,-700,500), 0.001), //Sadness
-      // new NebulaTest(scene, "joy", 0.10, new THREE.Vector3(800,-800,300), 0.004), //Joy
-      // new NebulaTest(scene, "love", 0.80, new THREE.Vector3(2000,500,500), 0.005), //Love
-      // new NebulaTest(scene, "empower", 0.02, new THREE.Vector3(1000,1000,600), 0.006), //Empowerment
+      new NebulaTest(scene, "sadness", 0.60, new THREE.Vector3(-1300,-700,500), 0.001), //Sadness
+      new NebulaTest(scene, "joy", 0.10, new THREE.Vector3(800,-800,300), 0.004), //Joy
+      new NebulaTest(scene, "love", 0.80, new THREE.Vector3(2000,500,500), 0.005), //Love
+      new NebulaTest(scene, "empower", 0.02, new THREE.Vector3(1000,1000,600), 0.006), //Empowerment
       new WonderTest(scene, new THREE.Vector3(0,0,-700)),
     ];
 
@@ -131,13 +138,14 @@ export default function SceneManager ()  {
       new StarsTest(scene),
       new Text(renderer.domElement),
       new TubeTest(scene),
+      new MoveTest(scene, camera, nebulas, document.getElementsByTagName("canvas")[0]),
       // new Stars(20000,scene),
       new HudTest(scene,camera),
       // new Sphere(scene, new THREE.Vector3(0,0,-55000)),
       // new Hud(scene, camera),
-      new MoveTest(scene, camera, nebulas, document.getElementsByTagName("canvas")[0]),
       new Count(),
       new Sonido(camera),
+      new IconsTest(scene)
     ];
 
     return {others, nebulas};
@@ -148,9 +156,10 @@ export default function SceneManager ()  {
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 0, -8000);
     // controls.enabled = false;
-    // controls.maxDistance = camera.position.z*1;
-    document.querySelector('#cont').textContent = "orbit";
-    const type = "orbit"
+    // controls.maxDistance = 1000;
+    // document.querySelector('#cont').textContent = "orbit";
+    controls.saveState();
+    const type = 'orbit'
     return {controls,type};
   }
 
@@ -158,91 +167,144 @@ export default function SceneManager ()  {
     //Fly Controls
     const controls = new FlyControls( camera, renderer.domElement );
     controls.domElement = renderer.domElement;
-    controls.movementSpeed = 1500;
+    controls.movementSpeed = 0;
     controls.rollSpeed = 0;
     controls.autoForward = true;
     controls.dragToLook = false;
-    console.log("fly")
-    document.querySelector('#cont').textContent = "fly";
-    console.log(controls)
-    const type = "fly";
+    // document.querySelector('#cont').textContent = "fly";
+    // console.log(controls)
+    const type = 'fly';
     return {controls, type};
   }
 
   function update(){
     if(!RECURSOSDESCARGADOS){
-      //requestAnimationFrame(update);
       renderer.render(loadingScreen.scene,loadingScreen.camera);
       return;
     }else{
 
       let dir;
+      let box = null;
 
       for(let i = 0; i < sceneSubjects.nebulas.length; i++){
 
-        dir = sceneSubjects.nebulas[i].update(); // Get direction assigned by the callback
 
-        if( (camera.position.z <= -7100 || camera.position.z >= 3500) && dir === 0 ){
-
-          //#### DEBUG ####
-          // document.querySelector('#move').textContent = "NO MOVEMENT";
-          // document.querySelector('#dir').textContent = dir;
-          //#### DEBUG ####
-
-          // sceneSubjects.others[2].update(camera.position.z, 0x00ff00);
+        dir = sceneSubjects.nebulas[i].update(camera.position); // Get direction assigned by the callback
+        // console.log(i +" "+ dir)
+        box = sceneSubjects.nebulas[i].box;
 
 
-          if(camera.position.z <= -7100){
-            if(control.type == 'fly'){
+        if( (camera.position.z <= -7100 || camera.position.z >= 3500) ){ //If its either on hud or in nebula
+          if( document.querySelector('#debug') ){
+            //#### DEBUG ####
+            document.querySelector('#move').textContent = "NO MOVEMENT";
+            document.querySelector('#dir').textContent = dir;
+            //#### DEBUG ####
+          }
+
+          if( camera.position.z <= -7100 && dir === -1){ // Activate OrbitControls once inside nebula
+            if(control && control.type === 'fly') {
               control.controls.dispose();
               control = null;
               control = myOrbitControls()
-              camera.position.z = -7100;
+              camera.position.z = -7500;
+              sceneSubjects.others[3].update();
             }
-          }
-          sceneSubjects.nebulas[i].cloud.callback(0);
-        }else if( dir !== 0 ){
-
-          // DEBUG
-          // document.querySelector('#move').textContent = "MOVEMENT";
-          // document.querySelector('#dir').textContent = dir;
-          //
-
-          if(dir === -1 && camera.position.z >= 3500 ){
-            // camera.position.z += dir*50;
-            // console.log(control)
-            camera.position.z -= 0.1;
-            control = myFlyControls();
+          }else if(camera.position.z > 3490 && dir === 1){
+            if(control){
+              control.controls.dispose();
+              control = null;
+              camera.position.z = 3500;
+              sceneSubjects.others[3].update();
+            }
           }
         }
 
-        sceneSubjects.others[2].update(camera.position.z, sceneSubjects.nebulas[i].box);
+        if( dir !== 0 ) { // If its moving
+          if( document.querySelector('#debug') ) {
+            // DEBUG
+            document.querySelector('#move').textContent = "MOVEMENT";
+            document.querySelector('#dir').textContent = dir;
+            //
+          }
 
-      }
+          if( dir === -1) { // If going inside nebula
+            if(camera.position.z >= 3500 ) { //If its just beginin
+              if(!control){
+                control = myFlyControls();
+                control.controls.movementSpeed = 1500;
+              }
+              break;
+            }else if( camera.position.z < -7000 ){ // if not and its closer activate the nebula and break
+              // document.querySelector('#io').textContent = box.name;
+              box.visible = true;
+              break;
+            }
+            // console.log("ayo")}
+          }else if( dir === 1 ){ //If its going outside
+            if(control && control.type === 'orbit'){ //Activate fly on reverse
+              camera.position.z = -7500
+              control.controls.reset()
+              control.controls.dispose()
+              control = null;
+              control = myFlyControls();
+              control.controls.movementSpeed = -1500;
+              console.log("que")
+            }
+            if(camera.position.z > -7000){
+              sceneSubjects.nebulas.forEach((item, i) => {
+                item.box.visible = false
+              });
+              // console.log(box.name)
+              // break;
+            }
+
+          }
+        }
+        box = null;
+
+
+      }// END FOR
+
       var delta = clock.getDelta();
 
-      if(control && control.type === 'fly'){
-        control.controls.update(delta)
+      if(control){
+        if(control.type === 'fly'){
+          control.controls.update(delta);
+
+          if(camera.position.z < -6500 && dir === -1) {
+            control.controls.movementSpeed = 150
+          };
+          if( document.querySelector('#debug') ){
+            document.querySelector('#cont').textContent = "fly";
+            document.querySelector('#back').style.display = 'none';
+          }
+        }else if(control.type === 'orbit') {
+          control.controls.update()
+          if( document.querySelector('#debug') ){
+            document.querySelector('#cont').textContent = "orbit";
+            document.querySelector('#back').style.display = 'initial';
+          }
+        }
+      }else{
+        if( document.querySelector('#debug') ){
+          document.querySelector('#cont').textContent = "none";
+          document.querySelector('#back').style.display = 'none';
+        }
       }
-
-
-      if(camera.position.z < -6500) {
-        control.movementSpeed = 150
-      };
 
 
       sceneSubjects.others[0].update();
       sceneSubjects.others[1].update();
+      sceneSubjects.others[2].update(camera.position.z)
       // sceneSubjects.others[5].update(false);
 
-
-      // document.querySelector('#x').textContent = camera.position.x
-      // document.querySelector('#y').textContent = camera.position.y
-      // document.querySelector('#z').textContent = camera.position.z
-
-      // document.querySelector('#xt').textContent = controls.target.x
-      // document.querySelector('#yt').textContent = controls.target.y
-      // document.querySelector('#zt').textContent = controls.target.z
+      if(document.querySelector('#debug'))
+      {
+        document.querySelector('#x').textContent = camera.position.x
+        document.querySelector('#y').textContent = camera.position.y
+        document.querySelector('#z').textContent = camera.position.z
+      }
 
 
       renderer.render(scene, camera);
