@@ -75,7 +75,6 @@ export const Home = () => {
       <div className="Home">
       <Header/>
       <ThreeContainer/>
-      <Debug/>
       <Count/>
       <Gui/>
       <Footer visible={visible} setVisible={setVisible}/>
