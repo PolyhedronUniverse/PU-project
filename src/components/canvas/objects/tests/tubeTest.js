@@ -62,25 +62,22 @@ export default function TubeTest(scene){
   // box.position.set(0, 0, -8000)
   // scene.add(box);
 
-  this.update = function(posz, box){
+  this.update = function(posz){
     // cylinder.material.texture.
-
+    // console.log(posz)
     if(posz < -6650){
       if( !light.visible ){
         light.visible = true;
-      innerCylinder.visible = true;
-      outerCylinder.visible = true;
-      box.visible = true
-    }
+        innerCylinder.visible = true;
+        outerCylinder.visible = true;
+      }
       innerCylinder.material.opacity = (-posz - 6300) / 1000 ;
       outerCylinder.material.opacity = (-posz - 6500) / 1000 ;
-    }else{
+    }else if(posz > -6650){
       light.visible = false;
       innerCylinder.visible = false;
       outerCylinder.visible = false;
-      box.visible = false;
     }
-
 
     innerCylinder.material.map.offset.y -= 0.005
     outerCylinder.material.map.offset.y -= 0.01

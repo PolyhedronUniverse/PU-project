@@ -1,12 +1,12 @@
 import * as THREE from  'three'
 import spark from '../../assets/spark1.png'
 
-import left from '../../assets/skybox_test/green_nebula_skybox/green_nebula_skybox_RT.png'
-import up from '../../assets/skybox_test/green_nebula_skybox/green_nebula_skybox_UP.png'
-import right from '../../assets/skybox_test/green_nebula_skybox/green_nebula_skybox_LF.png'
-import down from '../../assets/skybox_test/green_nebula_skybox/green_nebula_skybox_DN.png'
-import front from '../../assets/skybox_test/green_nebula_skybox/green_nebula_skybox_FT.png'
-import back from '../../assets/skybox_test/green_nebula_skybox/green_nebula_skybox_BK.png'
+import left from '../../assets/skybox_test/wonder/green_nebula_skybox_RT.png'
+import up from '../../assets/skybox_test/wonder/green_nebula_skybox_UP.png'
+import right from '../../assets/skybox_test/wonder/green_nebula_skybox_LF.png'
+import down from '../../assets/skybox_test/wonder/green_nebula_skybox_DN.png'
+import front from '../../assets/skybox_test/wonder/green_nebula_skybox_FT.png'
+import back from '../../assets/skybox_test/wonder/green_nebula_skybox_BK.png'
 
 export default function WonderTest(scene, origen){
 
@@ -167,7 +167,7 @@ export default function WonderTest(scene, origen){
   points6.position.z = origen.z;
   // points.position.y = 400 * Math.random() - 400;
   scene.add( points6 );
-  points6.name = "wonder"
+  points6.name = "Wonder"
 
   // console.log(geometry1.getAttribute('position'));
   // let a = geometry1.getAttribute('position')
@@ -183,9 +183,9 @@ export default function WonderTest(scene, origen){
   // scene.add(cloud)
   // console.log(cloud)
 
-  const geometry = new THREE.BoxBufferGeometry(3500,3500,3500);
+  const geometry = new THREE.BoxBufferGeometry(3500/2,3500/2,3500/2);
 
-  const loader = new THREE.TextureLoader();
+  const loader = new THREE.TextureLoader()
   const materials = [
     new THREE.MeshBasicMaterial({map: loader.load(left), side: THREE.BackSide}),
     new THREE.MeshBasicMaterial({map: loader.load(right), side: THREE.BackSide}),
@@ -194,14 +194,21 @@ export default function WonderTest(scene, origen){
     new THREE.MeshBasicMaterial({map: loader.load(front), side: THREE.BackSide}),
     new THREE.MeshBasicMaterial({map: loader.load(back), side: THREE.BackSide}),
   ];
+  // const wo = loader.load([left, right, up, down, front, back])
+  // const materials = new THREE.MeshBasicMaterial({
+  //   map: wo,
+  //   side: THREE.BackSide
+  // })
 
   let box =  new THREE.Mesh(geometry, materials);
   box.position.set(0,0,-8000);
+  box.name="wonder"
+  box.visible = false;
   scene.add(box)
 
   let moveNebula = 0;
   const g = new THREE.TorusKnotBufferGeometry(2000, 200, 100, 10, 1, 1)
-  const m = new THREE.MeshBasicMaterial({color: "green", wireframe: false, transparent:true, opacity: 0.1})
+  const m = new THREE.MeshBasicMaterial({color: "green", wireframe: false, transparent:true, opacity: 0.0})
   const cloud = new THREE.Mesh(g,m)
   cloud.position.z = origen.z * 5
   cloud.rotation.x = Math.PI * 0.5
@@ -210,6 +217,7 @@ export default function WonderTest(scene, origen){
   cloud.name = "wonder"
   cloud.callback = function(dir){
     moveNebula = dir;
+    // document.querySelector('#io').textContent = "callback";
   }
   // mg.rotation.y = 0.1
   scene.add(cloud)

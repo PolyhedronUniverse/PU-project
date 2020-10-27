@@ -1,11 +1,26 @@
 import * as THREE from "three";
+import SbTextures from './texturesTest.js'
 
-import left from '../../assets/skybox_test/green_nebula_skybox/green_nebula_skybox_RT.png'
-import up from '../../assets/skybox_test/green_nebula_skybox/green_nebula_skybox_UP.png'
-import right from '../../assets/skybox_test/green_nebula_skybox/green_nebula_skybox_LF.png'
-import down from '../../assets/skybox_test/green_nebula_skybox/green_nebula_skybox_DN.png'
-import front from '../../assets/skybox_test/green_nebula_skybox/green_nebula_skybox_FT.png'
-import back from '../../assets/skybox_test/green_nebula_skybox/green_nebula_skybox_BK.png'
+import sleft from '../../assets/skybox_test/sadness/blue_nebula_RT.png'
+import sup from '../../assets/skybox_test/sadness/blue_nebula_UP.png'
+import sright from '../../assets/skybox_test/sadness/blue_nebula_LF.png'
+import sdown from '../../assets/skybox_test/sadness/blue_nebula_DN.png'
+import sfront from '../../assets/skybox_test/sadness/blue_nebula_FT.png'
+import sback from '../../assets/skybox_test/sadness/blue_nebula_BK.png'
+
+import aleft from '../../assets/skybox_test/anger/red_nebula_RT.png'
+import aup from '../../assets/skybox_test/anger/red_nebula_UP.png'
+import aright from '../../assets/skybox_test/anger/red_nebula_LF.png'
+import adown from '../../assets/skybox_test/anger/red_nebula_DN.png'
+import afront from '../../assets/skybox_test/anger/red_nebula_FT.png'
+import aback from '../../assets/skybox_test/anger/red_nebula_BK.png'
+
+import lleft from '../../assets/skybox_test/love/pink_nebula_RT.png'
+import lup from '../../assets/skybox_test/love/pink_nebula_UP.png'
+import lright from '../../assets/skybox_test/love/pink_nebula_LF.png'
+import ldown from '../../assets/skybox_test/love/pink_nebula_DN.png'
+import lfront from '../../assets/skybox_test/love/pink_nebula_FT.png'
+import lback from '../../assets/skybox_test/love/pink_nebula_BK.png'
 
 
 export default function NebulaTest(scene, name, hue, origen, vel,raycaster){
@@ -201,7 +216,7 @@ export default function NebulaTest(scene, name, hue, origen, vel,raycaster){
     // side: THREE.DoubleSide,
   });
 
-  let shgeometry = new THREE.PlaneBufferGeometry(1500, 1500, 200, 200)
+  let shgeometry = new THREE.PlaneBufferGeometry(1500, 1500, 150, 150)
 
   let cloud = new THREE.Mesh(shgeometry, material);
   // let object = raycaster(hue);
@@ -223,21 +238,49 @@ export default function NebulaTest(scene, name, hue, origen, vel,raycaster){
   cloud.name = name;
   scene.add(cloud);
 
+  // const textures = new SbTextures();
   const loader = new THREE.TextureLoader();
-  const materials = [
-    new THREE.MeshBasicMaterial({map: loader.load(left), side: THREE.BackSide}),
-    new THREE.MeshBasicMaterial({map: loader.load(right), side: THREE.BackSide}),
-    new THREE.MeshBasicMaterial({map: loader.load(up), side: THREE.BackSide}),
-    new THREE.MeshBasicMaterial({map: loader.load(down), side: THREE.BackSide}),
-    new THREE.MeshBasicMaterial({map: loader.load(front), side: THREE.BackSide}),
-    new THREE.MeshBasicMaterial({map: loader.load(back), side: THREE.BackSide}),
-  ];
+  let texture;
+  switch(name){
+    case 'anger': texture = [
+        new THREE.MeshBasicMaterial({map: loader.load(aleft), side: THREE.BackSide}),
+        new THREE.MeshBasicMaterial({map: loader.load(aright), side: THREE.BackSide}),
+        new THREE.MeshBasicMaterial({map: loader.load(aup), side: THREE.BackSide}),
+        new THREE.MeshBasicMaterial({map: loader.load(adown), side: THREE.BackSide}),
+        new THREE.MeshBasicMaterial({map: loader.load(afront), side: THREE.BackSide}),
+        new THREE.MeshBasicMaterial({map: loader.load(aback), side: THREE.BackSide}),
+      ];
+      break;
+    case 'sadness': texture = [
+      new THREE.MeshBasicMaterial({map: loader.load(sleft), side: THREE.BackSide}),
+      new THREE.MeshBasicMaterial({map: loader.load(sright), side: THREE.BackSide}),
+      new THREE.MeshBasicMaterial({map: loader.load(sup), side: THREE.BackSide}),
+      new THREE.MeshBasicMaterial({map: loader.load(sdown), side: THREE.BackSide}),
+      new THREE.MeshBasicMaterial({map: loader.load(sfront), side: THREE.BackSide}),
+      new THREE.MeshBasicMaterial({map: loader.load(sback), side: THREE.BackSide}),
+    ];
+      break;
+    case 'love': texture = [
+      new THREE.MeshBasicMaterial({map: loader.load(lleft), side: THREE.BackSide}),
+      new THREE.MeshBasicMaterial({map: loader.load(lright), side: THREE.BackSide}),
+      new THREE.MeshBasicMaterial({map: loader.load(lup), side: THREE.BackSide}),
+      new THREE.MeshBasicMaterial({map: loader.load(ldown), side: THREE.BackSide}),
+      new THREE.MeshBasicMaterial({map: loader.load(lfront), side: THREE.BackSide}),
+      new THREE.MeshBasicMaterial({map: loader.load(lback), side: THREE.BackSide}),
+    ];
+      break;
+    case 'joy': texture = new THREE.MeshBasicMaterial({color: 'yellow', side: THREE.BackSide});
+      break;
+    case 'empower': texture = new THREE.MeshBasicMaterial({color: 'orange', side: THREE.BackSide})
+      break;
+    default: break;
+  }
 
-  const m = new THREE.MeshBasicMaterial({side: THREE.BackSide})
-  m.color.setHSL(hue, 1.0, 0.5)
   const g = new THREE.BoxBufferGeometry(3500/2, 3500/2, 3500/2)
-  let box =  new THREE.Mesh(g, m);
+  let box =  new THREE.Mesh(g, texture);
   box.position.set(0, 0, -8000)
+  box.name = name;
+  box.visible = false;
   scene.add(box);
 
   // const parameters = { a: 0.3, b: 3.5, c: 0.5, d: 0.6, e: 0.5 };
@@ -249,12 +292,14 @@ export default function NebulaTest(scene, name, hue, origen, vel,raycaster){
   // gui.add( parameters, 'd', 0, 1, 0.01 ).onChange( this.update );
   // gui.add( parameters, 'e', 0, 1, 0.01 ).onChange( this.update );
 
-  let update = function(){
+  let update = function(cam){
     timer += vel;
 
     cloud.rotation.z += vel;
 
     cloud.material.uniforms.time.value = timer;
+
+    cloud.lookAt(cam)
 
     // mesh.rotation.y += vel/10;
 

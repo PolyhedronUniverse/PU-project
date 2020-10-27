@@ -5,9 +5,10 @@ import { Mobile } from '../../components/mobile/Mobile'
 import { Debug } from '../../components/debug/Debug'
 import { Count } from '../../components/countdown/countdown'
 import { Gui } from '../../components/gui/Gui'
+import { Labels } from '../../components/labels/labels'
 import '../../index.css'
 import threeEntryPoint from '../../components/canvas/main';
-import MenuContainer from '../../components/slidingmenu/MenuContainer' 
+import MenuContainer from '../../components/slidingmenu/MenuContainer'
 // import Hud from '../../components/canvas/hud'
 
 class ThreeContainer extends Component {
@@ -16,7 +17,9 @@ class ThreeContainer extends Component {
   }
   render () {
     return (
-      <div id="canvas" ref={element => this.three = element} />
+      <div id="canvas" ref={element => this.three = element}>
+        <Labels/>
+      </div>
     );
   }
 }
@@ -75,7 +78,7 @@ export const Home = () => {
       <Header/>
       <ThreeContainer/>
       <Gui/>
-      {/* <Debug/> */}
+      <Debug/>
       <Count/>
       <Footer visible={visible} setVisible={setVisible}/>
       <MenuContainer visible={visible}/>
