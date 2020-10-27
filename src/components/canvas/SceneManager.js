@@ -57,7 +57,7 @@ export default function SceneManager ()  {
   const scene = buildScene();
   scene.add(camera)
   const renderer = buildRender();
-  control = myOrbitControls();
+  // control = myOrbitControls();
 
   const sceneSubjects = createSceneSubjects();
 
@@ -130,7 +130,7 @@ export default function SceneManager ()  {
       new NebulaTest(scene, "sadness", 0.60, new THREE.Vector3(-1300,-700,500), 0.001), //Sadness
       new NebulaTest(scene, "joy", 0.10, new THREE.Vector3(800,-800,300), 0.004), //Joy
       new NebulaTest(scene, "love", 0.80, new THREE.Vector3(2000,500,500), 0.005), //Love
-      new NebulaTest(scene, "empower", 0.02, new THREE.Vector3(1000,1000,600), 0.006), //Empowerment
+      new NebulaTest(scene, "empowerment", 0.02, new THREE.Vector3(1000,1000,600), 0.006), //Empowerment
       new WonderTest(scene, new THREE.Vector3(0,0,-700)),
     ];
 

@@ -21,6 +21,7 @@
   height: 60px;
   width: 60px;
   border-width: 0px;
+  cursor: pointer;
 }
 
 #pausa{

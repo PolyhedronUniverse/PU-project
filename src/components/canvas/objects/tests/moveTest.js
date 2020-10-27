@@ -139,8 +139,10 @@ export default function MoveTest(scene, camera, nebulas, canvas){
     }else{
       if(document.querySelector('#debug'))
       {document.querySelector('#hover').textContent = "out";}
-
-      document.getElementById('labels').style.display = 'none'
+     
+      if(document.querySelector('#labels')){
+        document.getElementById('labels').style.display = 'none'
+      }
     }
 
   }

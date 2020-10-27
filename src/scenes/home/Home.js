@@ -5,7 +5,6 @@ import { Mobile } from '../../components/mobile/Mobile'
 import { Debug } from '../../components/debug/Debug'
 import { Count } from '../../components/countdown/countdown'
 import { Gui } from '../../components/gui/Gui'
-import { Labels } from '../../components/labels/labels'
 import '../../index.css'
 import threeEntryPoint from '../../components/canvas/main';
 
@@ -65,7 +64,6 @@ export const Home = () => {
       <div className="Home">
       <Header/>
       <Mobile/>
-      <Debug/>
       <Count/>
       <MusicCel/>
       <Footer visible={visible} setVisible={setVisible}/>
