@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React from 'react'
 import '../slidingmenu/slidingmenu.css'
 
 export default function MenuContainer(props){

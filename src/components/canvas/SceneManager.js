@@ -44,7 +44,7 @@ export default function SceneManager ()  {
   let offtop = document.getElementById("header").clientHeight;
   let offbottom = document.getElementById("footer").clientHeight;
 
-  let LOADINGMANAGER = null;
+  // let LOADINGMANAGER = null;
   let RECURSOSDESCARGADOS = false;
 
   let control;

@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { Lensflare, LensflareElement } from 'three/examples/jsm/objects/Lensflare.js';
 import lensflare0 from '../../assets/lensflare/lensflare0.png'
-import lensflare2 from '../../assets/lensflare/lensflare2.png'
+// import lensflare2 from '../../assets/lensflare/lensflare2.png'
 import lensflare3 from '../../assets/lensflare/lensflare3.png'
 // import milky from '../../assets/Panning_Scene_Assets/Textures/milky_walpha.png';
 // import nebulat from '../../assets/Panning_Scene_Assets/Textures/nebulat_walpha.png';
@@ -44,7 +44,7 @@ export default function TubeTest(scene){
   // light.decay = 2
   let textureFlare0 = loader.load(lensflare0);
   let textureFlare1 = loader.load(lensflare3);
-  let textureFlare2 = loader.load(lensflare3);
+  // let textureFlare2 = loader.load(lensflare3);
 
   let lensflare = new Lensflare();
 

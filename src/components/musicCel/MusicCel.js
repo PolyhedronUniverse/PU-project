@@ -4,9 +4,10 @@ import {AiFillPauseCircle,AiFillPlayCircle} from 'react-icons/ai'
 import './musicCel.css'
 
 export const MusicCel = () => {
-    let audio = new Audio(musica);
+
 
     useEffect(()=>{
+        let audio = new Audio(musica);
         const pauseMusica = document.querySelector('#pausaCel');
         const playMusica =document.querySelector('#playCel');
         const sonidoCel= document.querySelector('#musicaCel');

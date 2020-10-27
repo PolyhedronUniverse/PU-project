@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import SbTextures from './texturesTest.js'
+// import SbTextures from './texturesTest.js'
 
 import sleft from '../../assets/skybox_test/sadness/blue_nebula_RT.png'
 import sup from '../../assets/skybox_test/sadness/blue_nebula_UP.png'

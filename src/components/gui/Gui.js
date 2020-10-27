@@ -2,8 +2,6 @@ import React from 'react'
 import './gui.css'
 import {AiFillPauseCircle,AiFillPlayCircle} from 'react-icons/ai'
 
-import {Musica} from '../canvas/SceneManager'
-
 export const Gui = () => {
   return (
     <div id="user">

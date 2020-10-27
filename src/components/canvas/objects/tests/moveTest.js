@@ -1,34 +1,33 @@
-import * as THREE from 'three';
-import inAudio from '../../assets/sounds/in.mp3'
-import outAudio from '../../assets/sounds/out.mp3'
+import * as THREE from "three";
+import inAudio from "../../assets/sounds/in.mp3";
+import outAudio from "../../assets/sounds/out.mp3";
 
-export default function MoveTest(scene, camera, nebulas, canvas){
-
-  let keyCode;
+export default function MoveTest(scene, camera, nebulas, canvas) {
+  // let keyCode;
 
   let raycaster = new THREE.Raycaster();
   let mouse = new THREE.Vector2();
 
   let listener = new THREE.AudioListener();
-  camera.add( listener );
-  let sound = new THREE.Audio( listener );
-  scene.add(sound)
+  camera.add(listener);
+  let sound = new THREE.Audio(listener);
+  scene.add(sound);
 
-  const nebulaName = document.querySelector('#nebula');
+  const nebulaName = document.querySelector("#nebula");
 
   let obj = [nebulas.length];
 
-  const tempV = new THREE.Vector3();
-  let ids = [nebulas.length]
+  // const tempV = new THREE.Vector3();
+  let ids = [nebulas.length];
 
-  for(let i = 0; i < nebulas.length; i++){
+  for (let i = 0; i < nebulas.length; i++) {
     obj[i] = nebulas[i].cloud;
-    const elem = document.createElement('div');
+    const elem = document.createElement("div");
     elem.textContent = obj[i].name;
     nebulaName.appendChild(elem);
-    elem.style.display = 'none';
+    elem.style.display = "none";
     elem.id = obj[i].id;
-    elem.className = 'lable';
+    elem.className = "lable";
     ids[i] = obj[i].id;
   }
 
@@ -38,48 +37,48 @@ export default function MoveTest(scene, camera, nebulas, canvas){
   let audioLoader = new THREE.AudioLoader();
 
   function back(event) {
-    event.preventDefault()
+    event.preventDefault();
 
-    keyCode = event.which;
+    // keyCode = event.which;
 
-    if(camera.position.z < 3500) {
-      camera.position.set(0,0,-7000)
+    if (camera.position.z < 3500) {
+      camera.position.set(0, 0, -7000);
 
-      audioLoader.load( outAudio, function( buffer ) {
-        sound.setBuffer( buffer );
+      audioLoader.load(outAudio, function (buffer) {
+        sound.setBuffer(buffer);
         sound.play();
       });
       obj[0].callback(1);
-      console.log(camera.position)
+      console.log(camera.position);
     }
   }
 
   function onDocumentMouseDown(event) {
-    console.log("F")
+    console.log("F");
     event.preventDefault();
 
     const rect = canvas.getBoundingClientRect();
 
     const pos = {
-      x: (event.clientX - rect.left) * canvas.width  / rect.width,
-      y: (event.clientY - rect.top ) * canvas.height / rect.height,
-    }
+      x: ((event.clientX - rect.left) * canvas.width) / rect.width,
+      y: ((event.clientY - rect.top) * canvas.height) / rect.height,
+    };
 
-    mouse.x = (pos.x / canvas.width ) *  2 - 1;
+    mouse.x = (pos.x / canvas.width) * 2 - 1;
     mouse.y = (pos.y / canvas.height) * -2 + 1;
 
     raycaster.setFromCamera(mouse, camera);
 
     let intersects = raycaster.intersectObjects(obj);
 
-    if(event.which === 1) {
-      if(mouse.y > -1.0 && mouse.y < 1.0 && Math.abs(mouse.x) < 0.7) {
+    if (event.which === 1) {
+      if (mouse.y > -1.0 && mouse.y < 1.0 && Math.abs(mouse.x) < 0.7) {
         if (intersects.length > 0) {
           intersects[0].object.callback(-1);
           // camera.lookAt(intersects[0].object.position.x, intersects[0].object.position.y, -55000);
           // camera.object.setOrientation(  );
-          audioLoader.load( inAudio, function( buffer ) {
-            sound.setBuffer( buffer );
+          audioLoader.load(inAudio, function (buffer) {
+            sound.setBuffer(buffer);
             sound.play();
           });
           // camera.position.z = 0
@@ -97,63 +96,67 @@ export default function MoveTest(scene, camera, nebulas, canvas){
   }
 
   function onDocumentMouseMove(event) {
-
     event.preventDefault();
 
     const rect = canvas.getBoundingClientRect();
 
     const pos = {
-      x: (event.clientX - rect.left) * canvas.width  / rect.width,
-      y: (event.clientY - rect.top ) * canvas.height / rect.height,
-    }
+      x: ((event.clientX - rect.left) * canvas.width) / rect.width,
+      y: ((event.clientY - rect.top) * canvas.height) / rect.height,
+    };
 
-    mouse.x = (pos.x / canvas.width ) *  2 - 1;
+    mouse.x = (pos.x / canvas.width) * 2 - 1;
     mouse.y = (pos.y / canvas.height) * -2 + 1;
 
-    if( document.querySelector('#debug') ){
-      document.querySelector('#xt').textContent = mouse.x
-      document.querySelector('#yt').textContent = mouse.y
+    if (document.querySelector("#debug")) {
+      document.querySelector("#xt").textContent = mouse.x;
+      document.querySelector("#yt").textContent = mouse.y;
     }
 
     raycaster.setFromCamera(mouse, camera);
 
     let intersects = raycaster.intersectObjects(obj);
 
-    if(mouse.y > -1.0 && mouse.y < 1.0 && camera.position.z > 0) {
+    if (mouse.y > -1.0 && mouse.y < 1.0 && camera.position.z > 0) {
       if (intersects.length > 0) {
-        document.querySelector('#hover').textContent = intersects[0].object.name +" "+ intersects[0].object.id;
         document.getElementById("canvas").style.cursor = "pointer";
-        document.getElementById("n-name").textContent = intersects[0].object.name;
-        document.getElementById('labels').style.left=(event.clientX-rect.left)+"px";
-        document.getElementById('labels').style.top=(event.clientY-rect.top+50)+"px";
-        // camera.position.z = 0
-        document.getElementById('labels').style.display = ''
-      }else{
-        if(document.querySelector('#debug'))
-        {
-          document.querySelector('#hover').textContent = "none";
-          document.getElementById("canvas").style.cursor = "default";
+        document.getElementById("n-name").textContent =
+          intersects[0].object.name;
+        document.getElementById("labels").style.left =
+          event.clientX - rect.left + "px";
+        document.getElementById("labels").style.top =
+          event.clientY - rect.top + "px";
+        if (document.querySelector("#debug")) {
+          document.querySelector("#hover").textContent =
+            intersects[0].object.name + " " + intersects[0].object.id;
         }
-        document.getElementById('labels').style.display = 'none'
+        // camera.position.z = 0
+        document.getElementById("labels").style.display = "";
+      } else {
+        if (document.querySelector("#debug")) {
+          document.querySelector("#hover").textContent = "none";
+        }
+        document.getElementById("labels").style.display = "none";
+        document.getElementById("canvas").style.cursor = "default";
       }
-    }else{
-      if(document.querySelector('#debug'))
-      {document.querySelector('#hover').textContent = "out";}
-     
-      if(document.querySelector('#labels')){
-        document.getElementById('labels').style.display = 'none'
+    } else {
+      if (document.querySelector("#debug")) {
+        document.querySelector("#hover").textContent = "out";
+      }
+
+      if (document.querySelector("#labels")) {
+        document.getElementById("labels").style.display = "none";
       }
     }
-
   }
 
-  this.update = function( ) {
+  this.update = function () {
     obj.forEach((item, i) => {
-      item.callback(0)
+      item.callback(0);
     });
-  }
+  };
 
   document.getElementById("back").addEventListener("click", back, false);
-  document.addEventListener('mousedown', onDocumentMouseDown, false);
-  document.addEventListener('mousemove', onDocumentMouseMove, false);
+  document.addEventListener("mousedown", onDocumentMouseDown, false);
+  document.addEventListener("mousemove", onDocumentMouseMove, false);
 }
