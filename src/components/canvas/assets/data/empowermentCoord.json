@@ -1,0 +1,34 @@
+[
+  {
+    "id": 4,
+    "region": "Empowerment",
+    "constStars": "Caelum",
+    "name": "testEmpowerment1",
+    "artist": "Nord-Z",
+    "feature": "Yhe-X & Lop-Y",
+    "elements": "Music+Comic",
+    "starID": "CA+E+01",
+    "puID": "NZ12+001",
+    "status": "inactive",
+    "release": "feb-22",
+    "x": 100,
+    "y": 0,
+    "z": 0
+  },
+  {
+    "id": 5,
+    "region": "Empowerment",
+    "constStars": "Caelum",
+    "name": "testEmpowerment2",
+    "artist": "Dron-Z",
+    "feature": "Yhe-X",
+    "elements": "Music+Painting",
+    "starID": "CA+E+02",
+    "puID": "DZ11+001",
+    "status": "inactive",
+    "release": "Oct-22",
+    "x": 100,
+    "y": 0,
+    "z": 0
+  }
+]
