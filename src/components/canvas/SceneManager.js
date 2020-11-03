@@ -127,7 +127,8 @@ export default function SceneManager ()  {
     controls.target.set(0, 0, -8000);
     controls.maxDistance = 1000;
     controls.saveState();
-    controls.update()
+    controls.update();
+    controls.enablePan = false;
     const type = 'orbit'
     return {controls,type};
   }

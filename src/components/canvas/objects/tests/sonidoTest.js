@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import musica from '../../assets/sounds/PU-home.ogg'
+import musica from '../../assets/sounds/pu-home.ogg'
 
 export default function Sonido(camera,loadingManager){
 let listener = new THREE.AudioListener();
