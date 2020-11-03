@@ -18,6 +18,8 @@ export const Debug = () => {
       <div>dir:<span id="dir"></span></div>
       <div>control:<span id="cont"></span></div>
       <div>hover:<span id="hover"></span></div>
+      <div>search:<span id="search"></span></div>
+      <div>query:<span id="query"></span></div>
     </div>
   )
 }

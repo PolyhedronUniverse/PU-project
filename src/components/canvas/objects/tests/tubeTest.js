@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { Lensflare, LensflareElement } from 'three/examples/jsm/objects/Lensflare.js';
 import lensflare0 from '../../assets/lensflare/lensflare0.png'
-// import lensflare2 from '../../assets/lensflare/lensflare2.png'
+import lensflare2 from '../../assets/lensflare/lensflare2.png'
 import lensflare3 from '../../assets/lensflare/lensflare3.png'
 // import milky from '../../assets/Panning_Scene_Assets/Textures/milky_walpha.png';
 // import nebulat from '../../assets/Panning_Scene_Assets/Textures/nebulat_walpha.png';
@@ -11,8 +11,9 @@ import lensflare3 from '../../assets/lensflare/lensflare3.png'
 // import uvtest from '../../assets/Panning_Scene_Assets/Textures/UVTest.jpg'
 import warp from '../../assets/warp3.jpg'
 
-export default function TubeTest(scene){
-  let loader = new THREE.TextureLoader()
+export default function TubeTest(scene,loadingManager){
+  
+  let loader = new THREE.TextureLoader(loadingManager)
 
   let innerGeom = new THREE.CylinderBufferGeometry( 50, 5, 400, 32, 32, true );
   let innerMat = new THREE.MeshBasicMaterial( {map: loader.load(warp), side: THREE.BackSide, transparent: true, opacity: 0.0, alphaTest: 0.1 } );
@@ -44,7 +45,7 @@ export default function TubeTest(scene){
   // light.decay = 2
   let textureFlare0 = loader.load(lensflare0);
   let textureFlare1 = loader.load(lensflare3);
-  // let textureFlare2 = loader.load(lensflare3);
+  let textureFlare2 = loader.load(lensflare3);
 
   let lensflare = new Lensflare();
 

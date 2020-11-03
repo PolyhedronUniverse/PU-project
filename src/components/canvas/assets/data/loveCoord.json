@@ -1,0 +1,50 @@
+[
+  {
+    "id": 10,
+    "region": "Love",
+    "constellation": "Telescopium",
+    "name": "testLove1",
+    "artist": "Ehy-X",
+    "feature": "Lop-Y & Dron-Z",
+    "elements": "Music+Fashion Design",
+    "starID": "TE+L+01",
+    "puID": "EX04+001",
+    "status": "inactive",
+    "release": "apr-22",
+    "x": 100,
+    "y": 0,
+    "z": 0
+  },
+  {
+    "id": 11,
+    "region": "Love",
+    "constellation": "Telescopium",
+    "name": "testLove2",
+    "artist": "Nord-Z",
+    "feature": "Ehy-X",
+    "elements": "Music+Virtual Reality",
+    "starID": "TE+L+02",
+    "puID": "NZ08+001",
+    "status": "inactive",
+    "release": "aug-22",
+    "x": 0,
+    "y": 100,
+    "z": 0
+  },
+  {
+    "id": 12,
+    "region": "Love",
+    "constellation": "Telescopium",
+    "name": "testLove3",
+    "artist": "Lop-Y",
+    "feature": "Ehy-X & Dron-Z",
+    "elements": "Music+AR+Manga",
+    "starID": "TE+L+03",
+    "puID": "LY04+001",
+    "status": "in-progress",
+    "release": "Nov 7, 2021",
+    "x": 0,
+    "y": 0,
+    "z": 100
+  }
+]

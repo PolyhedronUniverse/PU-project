@@ -1,5 +1,12 @@
 import * as THREE from 'three';
 
+import wleft from '../../assets/skybox_test/wonder/green_nebula_skybox_RT.png'
+import wup from '../../assets/skybox_test/wonder/green_nebula_skybox_UP.png'
+import wright from '../../assets/skybox_test/wonder/green_nebula_skybox_LF.png'
+import wdown from '../../assets/skybox_test/wonder/green_nebula_skybox_DN.png'
+import wfront from '../../assets/skybox_test/wonder/green_nebula_skybox_FT.png'
+import wback from '../../assets/skybox_test/wonder/green_nebula_skybox_BK.png'
+
 import sleft from '../../assets/skybox_test/sadness/blue_nebula_RT.png'
 import sup from '../../assets/skybox_test/sadness/blue_nebula_UP.png'
 import sright from '../../assets/skybox_test/sadness/blue_nebula_LF.png'
@@ -21,11 +28,34 @@ import ldown from '../../assets/skybox_test/love/pink_nebula_DN.png'
 import lfront from '../../assets/skybox_test/love/pink_nebula_FT.png'
 import lback from '../../assets/skybox_test/love/pink_nebula_BK.png'
 
-export default function SbTextures(){
+import jleft from '../../assets/skybox_test/joy/yellow_nebula_RT.png'
+import jup from '../../assets/skybox_test/joy/yellow_nebula_UP.png'
+import jright from '../../assets/skybox_test/joy/yellow_nebula_LF.png'
+import jdown from '../../assets/skybox_test/joy/yellow_nebula_DN.png'
+import jfront from '../../assets/skybox_test/joy/yellow_nebula_FT.png'
+import jback from '../../assets/skybox_test/joy/yellow_nebula_BK.png'
 
-  let anger, sadness, love, joy, empowerment;
+import eleft from '../../assets/skybox_test/empowerment/orange_nebula_RT.png'
+import eup from '../../assets/skybox_test/empowerment/orange_nebula_UP.png'
+import eright from '../../assets/skybox_test/empowerment/orange_nebula_LF.png'
+import edown from '../../assets/skybox_test/empowerment/orange_nebula_DN.png'
+import efront from '../../assets/skybox_test/empowerment/orange_nebula_FT.png'
+import eback from '../../assets/skybox_test/empowerment/orange_nebula_BK.png'
 
-  let loader = new THREE.TextureLoader();
+export default function SbTextures(loadingManager){
+
+  let anger, sadness, love, joy, empowerment, wonder;
+
+  let loader = new THREE.TextureLoader(loadingManager);
+
+  wonder = [
+    new THREE.MeshBasicMaterial({map: loader.load(wleft), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(wright), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(wup), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(wdown), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(wfront), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(wback), side: THREE.BackSide}),
+  ]
 
   sadness = [
     new THREE.MeshBasicMaterial({map: loader.load(sleft), side: THREE.BackSide}),
@@ -53,8 +83,25 @@ export default function SbTextures(){
     new THREE.MeshBasicMaterial({map: loader.load(lback), side: THREE.BackSide}),
   ];
 
-  joy = new THREE.MeshBasicMaterial({color: 'yellow', side: THREE.BackSide});
-  empowerment = new THREE.MeshBasicMaterial({color: 'orange', side: THREE.BackSide})
+  joy = [
+    new THREE.MeshBasicMaterial({map: loader.load(jleft), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(jright), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(jup), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(jdown), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(jfront), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(jback), side: THREE.BackSide}),
+  ];
 
-  return {anger, sadness, love, joy, empowerment};
+  empowerment = [
+    new THREE.MeshBasicMaterial({map: loader.load(eleft), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(eright), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(eup), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(edown), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(efront), side: THREE.BackSide}),
+    new THREE.MeshBasicMaterial({map: loader.load(eback), side: THREE.BackSide}),
+  ];
+
+  console.log("texturesTest");
+
+  return {anger, sadness, love, joy, empowerment, wonder};
 }

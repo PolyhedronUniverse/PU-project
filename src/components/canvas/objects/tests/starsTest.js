@@ -1,7 +1,7 @@
 import * as THREE from  'three'
 import spark from '../../assets/spark1.png'
 
-export default function StarsTest(scene){
+export default function StarsTest(scene, loadingManager){
 
   function random() { return Math.random() * 2 - .5 }
 
@@ -50,7 +50,7 @@ export default function StarsTest(scene){
 
   }
 
-  const texture = new THREE.TextureLoader().load(spark);
+  const texture = new THREE.TextureLoader(loadingManager).load(spark);
 
 
   const vs =

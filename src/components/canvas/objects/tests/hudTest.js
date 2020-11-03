@@ -1,10 +1,9 @@
 import * as THREE from 'three';
 import hudtexture from '../../assets/1024hud.jpg'
-// import rock from '../../assets/rock/rock01.jpg'
 
-export default function HudTest(scene,camera){
+export default function HudTest(scene,camera,loadingManager){
 
-  const texture = new THREE.TextureLoader().load(hudtexture);
+  const texture = new THREE.TextureLoader(loadingManager).load(hudtexture);
 
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;

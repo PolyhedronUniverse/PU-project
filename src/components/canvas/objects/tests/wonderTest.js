@@ -1,14 +1,8 @@
 import * as THREE from  'three'
 import spark from '../../assets/spark1.png'
 
-import left from '../../assets/skybox_test/wonder/green_nebula_skybox_RT.png'
-import up from '../../assets/skybox_test/wonder/green_nebula_skybox_UP.png'
-import right from '../../assets/skybox_test/wonder/green_nebula_skybox_LF.png'
-import down from '../../assets/skybox_test/wonder/green_nebula_skybox_DN.png'
-import front from '../../assets/skybox_test/wonder/green_nebula_skybox_FT.png'
-import back from '../../assets/skybox_test/wonder/green_nebula_skybox_BK.png'
 
-export default function WonderTest(scene, origen){
+export default function WonderTest(scene, origen, loadingManager){
 
   function random() { return Math.random() * 2 - 1 }
   function createGeometry( amount, step, dir ) {
@@ -59,7 +53,7 @@ export default function WonderTest(scene, origen){
 
   }
 
-  const texture = new THREE.TextureLoader().load(spark);
+  const texture = new THREE.TextureLoader(loadingManager).load(spark);
 
   // Puntos 1
   let geometry1 = createGeometry( 15000, 5, true );
@@ -76,7 +70,7 @@ export default function WonderTest(scene, origen){
   points1.position.z = origen.z;
   // points.position.y = 400 * Math.random() - 400;
   scene.add( points1 );
-  points1.name = "wonder";
+  // points1.name = "wonder";
 
   // Puntos 2
   let geometry2 = createGeometry( 15000, 5, false );
@@ -94,7 +88,7 @@ export default function WonderTest(scene, origen){
   points2.position.z = origen.z;
   // points.position.y = 400 * Math.random() - 400;
   scene.add( points2 );
-  points2.name = "wonder"
+  // points2.name = "wonder"
 
   // Puntos 3
   let geometry3 = createGeometry( 20000, 8, true );
@@ -112,7 +106,7 @@ export default function WonderTest(scene, origen){
   points3.position.z = origen.z;
   // points.position.y = 400 * Math.random() - 400;
   scene.add( points3 );
-  points3.name = "wonder"
+  // points3.name = "wonder"
 
   // Puntos 4
   let geometry4 = createGeometry( 20000, 8,false );
@@ -131,7 +125,7 @@ export default function WonderTest(scene, origen){
   points4.position.z = origen.z;
   // points.position.y = 400 * Math.random() - 400;
   scene.add( points4 );
-  points4.name = "wonder"
+  // points4.name = "wonder"
 
   // Puntos 5
   let geometry5 = createGeometry( 20000, 0.4, true );
@@ -149,7 +143,7 @@ export default function WonderTest(scene, origen){
   points5.position.z = origen.z;
   // points.position.y = 400 * Math.random() - 400;
   scene.add( points5 );
-  points5.name = "wonder"
+  // points5.name = "wonder"
 
   // Puntos 6
   let geometry6 = createGeometry( 20000, 0.4,false );
@@ -167,7 +161,7 @@ export default function WonderTest(scene, origen){
   points6.position.z = origen.z;
   // points.position.y = 400 * Math.random() - 400;
   scene.add( points6 );
-  points6.name = "Wonder"
+  // points6.name = "Wonder"
 
   // console.log(geometry1.getAttribute('position'));
   // let a = geometry1.getAttribute('position')
@@ -183,28 +177,28 @@ export default function WonderTest(scene, origen){
   // scene.add(cloud)
   // console.log(cloud)
 
-  const geometry = new THREE.BoxBufferGeometry(3500/2,3500/2,3500/2);
-
-  const loader = new THREE.TextureLoader()
-  const materials = [
-    new THREE.MeshBasicMaterial({map: loader.load(left), side: THREE.BackSide}),
-    new THREE.MeshBasicMaterial({map: loader.load(right), side: THREE.BackSide}),
-    new THREE.MeshBasicMaterial({map: loader.load(up), side: THREE.BackSide}),
-    new THREE.MeshBasicMaterial({map: loader.load(down), side: THREE.BackSide}),
-    new THREE.MeshBasicMaterial({map: loader.load(front), side: THREE.BackSide}),
-    new THREE.MeshBasicMaterial({map: loader.load(back), side: THREE.BackSide}),
-  ];
+  // const geometry = new THREE.BoxBufferGeometry(3500/2,3500/2,3500/2);
+  //
+  // const loader = new THREE.TextureLoader()
+  // const materials = [
+  //   new THREE.MeshBasicMaterial({map: loader.load(left), side: THREE.BackSide}),
+  //   new THREE.MeshBasicMaterial({map: loader.load(right), side: THREE.BackSide}),
+  //   new THREE.MeshBasicMaterial({map: loader.load(up), side: THREE.BackSide}),
+  //   new THREE.MeshBasicMaterial({map: loader.load(down), side: THREE.BackSide}),
+  //   new THREE.MeshBasicMaterial({map: loader.load(front), side: THREE.BackSide}),
+  //   new THREE.MeshBasicMaterial({map: loader.load(back), side: THREE.BackSide}),
+  // ];
   // const wo = loader.load([left, right, up, down, front, back])
   // const materials = new THREE.MeshBasicMaterial({
   //   map: wo,
   //   side: THREE.BackSide
   // })
 
-  let box =  new THREE.Mesh(geometry, materials);
-  box.position.set(0,0,-8000);
-  box.name="wonder"
-  box.visible = false;
-  scene.add(box)
+  // let box =  new THREE.Mesh(geometry, materials);
+  // box.position.set(0,0,-8000);
+  // box.name="wonder"
+  // box.visible = false;
+  // scene.add(box)
 
   let moveNebula = 0;
   const g = new THREE.TorusKnotBufferGeometry(2000, 200, 100, 10, 1, 1)
@@ -215,13 +209,10 @@ export default function WonderTest(scene, origen){
   cloud.rotation.y = -Math.PI
   cloud.rotation.z = -Math.PI * 0.5
   cloud.name = "wonder"
-  cloud.callback = function(dir){
-    moveNebula = dir;
-    // document.querySelector('#io').textContent = "callback";
-  }
+
   // mg.rotation.y = 0.1
   scene.add(cloud)
-
+  cloud.visible = false;
   let update = function(){
 
     // box.visible = vis
@@ -267,5 +258,5 @@ export default function WonderTest(scene, origen){
 
   }
 
-  return {cloud, update, box}
+  return {cloud, update}
 }

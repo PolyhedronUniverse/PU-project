@@ -2,13 +2,13 @@ import React, {Component, useState,useEffect} from 'react'
 import { Footer } from '../../components/footer/Footer'
 import { Header } from '../../components/header/Header'
 import { Mobile } from '../../components/mobile/Mobile'
-// import { Debug } from '../../components/debug/Debug'
+import { Debug } from '../../components/debug/Debug'
 import { Count } from '../../components/countdown/countdown'
 import { Gui } from '../../components/gui/Gui'
 import '../../index.css'
 import threeEntryPoint from '../../components/canvas/main';
 
-import MenuContainer from '../../components/slidingmenu/MenuContainer' 
+import MenuContainer from '../../components/slidingmenu/MenuContainer'
 import {Labels} from '../../components/labels/labels'
 import {MusicCel} from '../../components/musicCel/MusicCel'
 

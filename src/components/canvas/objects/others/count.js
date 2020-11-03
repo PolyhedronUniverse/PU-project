@@ -1,9 +1,9 @@
 export default function Count(){
   // Set the date we're counting down to
-  var countDownDate = new Date("Nov 7, 2020 20:30:00").getTime();
+  var countDownDate = new Date("Nov 6, 2020 23:59:59").getTime();
 
   // Update the count down every 1 second
-  var x = setInterval(function() {
+  setInterval(function() {
 
     // Get today's date and time
     var now = new Date().getTime();
