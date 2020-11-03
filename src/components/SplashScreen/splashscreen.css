@@ -1,4 +1,4 @@
-div{
+.pagina{
     background-color: black;
     display: flex;
     flex: 1;
@@ -9,12 +9,42 @@ div{
     flex-direction: column;
 }
 
-img{
+.centro{
     width: 20%;
     height: 20%;
 }
 
-p{
+.carga{
     color: white;
     font-size: x-large;
 }
+
+.welcome{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0, 0.5);
+}
+
+/* #musicaWelcome{
+    position: absolute;
+    left: 0;
+    top: 75vh;
+    padding: 1em;
+    background: rgba(0, 0, 0, 0);
+    color: white;
+    font-family: monospace;
+    height: 60px;
+    width: 60px;
+    border-width: 0px;
+} */
+  
+  /* #pausaWelcome{
+    color: rgb(255,255, 255);
+    height: 100%;
+    width: 100%;
+  }
+  #playWelcome{
+    color:rgb(255,255, 255);
+    height: 100%;
+    width: 100%;
+  } */

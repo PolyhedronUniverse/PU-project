@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react'
-import musica from '../../assets/SonidosMusica/Back.ogg'
+import musica from '../../assets/SonidosMusica/pu-home.ogg'
 import {AiFillPauseCircle,AiFillPlayCircle} from 'react-icons/ai'
 import './musicCel.css'
 

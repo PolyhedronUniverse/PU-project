@@ -11,6 +11,7 @@ import threeEntryPoint from '../../components/canvas/main';
 import MenuContainer from '../../components/slidingmenu/MenuContainer' 
 import {Labels} from '../../components/labels/labels'
 import {MusicCel} from '../../components/musicCel/MusicCel'
+//import Welcome from '../../components/SplashScreen/Welcome'
 
 class ThreeContainer extends Component {
   componentDidMount() {
@@ -20,7 +21,6 @@ class ThreeContainer extends Component {
     return (
       <div id="canvas" ref={element => this.three = element}>
         <Labels/>
-
       </div>
     );
   }
@@ -77,6 +77,7 @@ export const Home = () => {
       <ThreeContainer/>
       <Count/>
       <Gui/>
+      {/* <Welcome/> */}
       <Footer visible={visible} setVisible={setVisible}/>
       <MenuContainer visible={visible}/>
     </div>

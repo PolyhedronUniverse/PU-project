@@ -28,6 +28,26 @@ export const Footer = (props) => {
       <div>
           <img
             className='shortcut'
+            alt='tiktok'
+            src={require('../../assets/Tiktok_w.png')}
+            onMouseOver = {e => (e.currentTarget.src = require('../../assets/Tiktok_b.png'))}
+            onMouseOut = {e => (e.currentTarget.src = require('../../assets/Tiktok_w.png'))}
+            onClick = {e => (window.open('#', '_blank'))}
+            />
+      </div>
+      <div>
+          <img
+            className='shortcut'
+            alt='twitch'
+            src={require('../../assets/Twitch_w.png')}
+            onMouseOver = {e => (e.currentTarget.src = require('../../assets/Twitch_b.png'))}
+            onMouseOut = {e => (e.currentTarget.src = require('../../assets/Twitch_w.png'))}
+            onClick = {e => (window.open('#', '_blank'))}
+            />
+      </div>
+      <div>
+          <img
+            className='shortcut'
             alt='instagram'
             src={require('../../assets/instagram_w.png')}
             onMouseOver = {e => (e.currentTarget.src = require('../../assets/instagram_b.png'))}

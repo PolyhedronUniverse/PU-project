@@ -1,6 +1,6 @@
 
 import * as THREE from 'three'
-import musica from '../../assets/sounds/Back.ogg'
+import musica from '../../assets/sounds/pu-home.ogg'
 
 
 export default function Sonido(camera){
@@ -10,6 +10,7 @@ let audioLoader = new THREE.AudioLoader();
 let ambiental = new THREE.Audio( listener );
 
 const ambientalMusic = document.querySelector('#pause');
+//const welcomeMusic = document.querySelector('#musicaWelcome');
 const pauseMusic = document.querySelector('#pausa');
 const playMusic = document.querySelector('#play');
 
@@ -37,5 +38,6 @@ audioLoader.load( musica, function ( buffer ) {
   
 } );
 
-ambientalMusic.addEventListener("click", onclick, false);
+ambientalMusic.addEventListener("click", onclick , false);
+//welcomeMusic.addEventListener("click", onclick ,false);
 }

@@ -8,7 +8,7 @@ export const SplashScreen = () => {
             classname="centro"
             src={require('../../assets/PU_Logo.png')}
             />
-            <p>Cargando ...</p>
+            <p className="carga">Cargando ...</p>
         </div>
     )
 }
