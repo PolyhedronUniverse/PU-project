@@ -77,7 +77,7 @@ export const Home = () => {
       <ThreeContainer/>
       <Count/>
       <Gui/>
-      {/* <Welcome/> */}
+      {/* <Welcome overlay={overlay} setOverlay={setOverlay}/> */}
       <Footer visible={visible} setVisible={setVisible}/>
       <MenuContainer visible={visible}/>
     </div>
