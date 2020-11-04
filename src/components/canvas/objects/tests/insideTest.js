@@ -44,7 +44,10 @@ export default function InsideTest(scene, camera, dom, canvas,loadingManager){
       }
       break;
       case 'joy':
-      if(box.material !== textures.joy)box.material = textures.joy;
+      if(box.material !== textures.joy){
+        box.material = textures.joy;
+        icons.joy.visible = true;
+      }
       break;
       case 'sadness':
       if(box.material !== textures.sadness){
@@ -53,10 +56,16 @@ export default function InsideTest(scene, camera, dom, canvas,loadingManager){
       }
       break;
       case 'love':
-      if(box.material !== textures.love)box.material = textures.love;
+      if(box.material !== textures.love){
+        box.material = textures.love;
+        icons.love.visible = true;
+      }
       break;
       case 'empowerment':
-      if(box.material !== textures.empowerment)box.material = textures.empowerment;
+      if(box.material !== textures.empowerment){
+        box.material = textures.empowerment;
+        icons.empowerment.visible = true;
+      }
       break;
       default: box.material = material; if(camera.position.z > -7000) icons.update();
       break;

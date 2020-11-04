@@ -48,3 +48,7 @@
   width: 60px;
   border-width: 0px;
 }
+
+#back:hover{
+  cursor: pointer;
+}

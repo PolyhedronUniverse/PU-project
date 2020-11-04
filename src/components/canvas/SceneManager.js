@@ -36,18 +36,18 @@ export default function SceneManager ()  {
   let loadingManager = new THREE.LoadingManager();
 
   {
-    loadingManager.onStart = function ( url, itemsLoaded, itemsTotal ) {
-      console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
-    };
+    // loadingManager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+    //   console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+    // };
 
     loadingManager.onLoad = function ( ) {
       console.log( 'Loading complete!');
       RECURSOSDESCARGADOS = true
     };
 
-    loadingManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
-      console.log( 'Loaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
-    };
+    // loadingManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+    //   console.log( 'Loaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+    // };
 
     loadingManager.onError = function ( url ) {
       console.log( 'There was an error loading ' + url );
@@ -127,8 +127,8 @@ export default function SceneManager ()  {
     controls.target.set(0, 0, -8000);
     controls.maxDistance = 1000;
     controls.saveState();
-    controls.update();
-    controls.enablePan = false;
+    controls.update()
+    controls.eneablePan = false;
     const type = 'orbit'
     return {controls,type};
   }
@@ -188,7 +188,7 @@ export default function SceneManager ()  {
           control.controls.update(delta);
 
           if(camera.position.z < -6500 && query.location !== 'home') {
-            if(control.controls.movementSpeed > 1000 ) control.controls.movementSpeed = 150
+            if(control.controls.movementSpeed > 1000 ) control.controls.movementSpeed = 75;
             if(camera.position.z < -7100){
               control.controls.dispose();
               control = null;

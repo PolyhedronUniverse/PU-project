@@ -2,7 +2,7 @@ import React, {Component, useState,useEffect} from 'react'
 import { Footer } from '../../components/footer/Footer'
 import { Header } from '../../components/header/Header'
 import { Mobile } from '../../components/mobile/Mobile'
-import { Debug } from '../../components/debug/Debug'
+// import { Debug } from '../../components/debug/Debug'
 import { Count } from '../../components/countdown/countdown'
 import { Gui } from '../../components/gui/Gui'
 import '../../index.css'
@@ -57,7 +57,7 @@ export const Home = () => {
   const size = useWindowSize();
   const ancho = size.width;
 
-  console.log("height: "+ size.height + " width: "+ size.width);
+  // console.log("height: "+ size.height + " width: "+ size.width);
 
   if (ancho <= 600) {
     return(

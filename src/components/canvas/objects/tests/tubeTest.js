@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { Lensflare, LensflareElement } from 'three/examples/jsm/objects/Lensflare.js';
 import lensflare0 from '../../assets/lensflare/lensflare0.png'
-import lensflare2 from '../../assets/lensflare/lensflare2.png'
+// import lensflare2 from '../../assets/lensflare/lensflare2.png'
 import lensflare3 from '../../assets/lensflare/lensflare3.png'
 // import milky from '../../assets/Panning_Scene_Assets/Textures/milky_walpha.png';
 // import nebulat from '../../assets/Panning_Scene_Assets/Textures/nebulat_walpha.png';
@@ -9,10 +9,12 @@ import lensflare3 from '../../assets/lensflare/lensflare3.png'
 // import tec from '../../assets/Panning_Scene_Assets/Textures/Technical_Texturetest_walpha.png';
 // import tec2 from '../../assets/Panning_Scene_Assets/Textures/Technical_Texturetest_walpha_2.png';
 // import uvtest from '../../assets/Panning_Scene_Assets/Textures/UVTest.jpg'
+import wormhole1 from '../../assets/scene_textures/wormhole_textures/wonder_wormhole_diffuse.png'
+import wormhole2 from '../../assets/scene_textures/wormhole_textures/wormhole_opacity.png'
 import warp from '../../assets/warp3.jpg'
 
 export default function TubeTest(scene,loadingManager){
-  
+
   let loader = new THREE.TextureLoader(loadingManager)
 
   let innerGeom = new THREE.CylinderBufferGeometry( 50, 5, 400, 32, 32, true );
@@ -45,7 +47,7 @@ export default function TubeTest(scene,loadingManager){
   // light.decay = 2
   let textureFlare0 = loader.load(lensflare0);
   let textureFlare1 = loader.load(lensflare3);
-  let textureFlare2 = loader.load(lensflare3);
+  // let textureFlare2 = loader.load(lensflare3);
 
   let lensflare = new Lensflare();
 
@@ -54,7 +56,17 @@ export default function TubeTest(scene,loadingManager){
   // lensflare.addElement( new LensflareElement( textureFlare2, 60, 0.6, light.color ) );
 
   light.add( lensflare );
+  // light.add( lensflare2 )
   scene.add( light )
+
+  let m = new THREE.MeshBasicMaterial({alphaMap: loader.load(wormhole2), map: loader.load(wormhole1), transparent: true})
+
+  let g = new THREE.PlaneBufferGeometry(200,200,10,10);
+
+  const mesh = new THREE.Mesh(g, m);
+  mesh.position.set(0, 0 , -6700 );
+
+  scene.add(mesh)
 
   // const m = new THREE.MeshBasicMaterial({side: THREE.BackSide})
   // m.color.setHSL(hue, 1.0, 0.5)
@@ -64,6 +76,10 @@ export default function TubeTest(scene,loadingManager){
   // scene.add(box);
 
   this.update = function(posz){
+    // mesh.rotation.x += 0.1
+    // mesh.rotation.y += 0.5
+    mesh.rotation.z += 0.1
+
     // cylinder.material.texture.
     // console.log(posz)
     if(posz < -6650){

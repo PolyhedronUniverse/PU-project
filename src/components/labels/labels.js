@@ -15,6 +15,10 @@ export const Labels = () => {
         <div>Constelation: <span id="m-const"></span></div>
         <div>Artist: <span id="m-artist"></span></div>
         <div>pu_id: <span id="m-pu_id"></span></div>
+        <div>star_id: <span id="m-star_id"></span></div>
+        <div>elements: <span id="m-elements"></span></div>
+        <div>status: <span id="m-status"></span></div>
+        <div>release: <span id="m-release"></span></div>
       </div>
     </div>
   )

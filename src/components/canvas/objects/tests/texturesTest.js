@@ -101,7 +101,7 @@ export default function SbTextures(loadingManager){
     new THREE.MeshBasicMaterial({map: loader.load(eback), side: THREE.BackSide}),
   ];
 
-  console.log("texturesTest");
+  // console.log("texturesTest");
 
   return {anger, sadness, love, joy, empowerment, wonder};
 }

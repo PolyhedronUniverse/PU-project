@@ -60,8 +60,9 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
         break;
         default: break;
       }
+      const rand = Math.random() * 500 - 250;
       const sprite = new THREE.Sprite( material );
-      sprite.position.set(item.x, item.y, item.z - 8000 )
+      sprite.position.set(item.x + rand, item.y + rand, item.z - 8000 + rand);
       sprite.name = item.name;
       sprite.userData = item;
       // wonderData.push(item);
@@ -180,16 +181,34 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
     if(mouse.y > -1.0 && mouse.y < 1.0 && Math.abs(mouse.x) < 0.7) {
       if (intersects.length > 0 && intersects[0].object.parent.visible) {
         insertUrlParam('on',intersects[0].object.name)
-
+        const object = intersects[0].object;
         document.getElementById("s-metadata").style.display = '';
         // document.getElementById("s-name-hover").style.display = 'none'
         document.getElementById("m-name").textContent = intersects[0].name;
-        document.getElementById("m-const").textContent = intersects[0].object.userData.constellation
-        document.getElementById("m-artist").textContent = intersects[0].object.userData.artist
-        document.getElementById("m-pu_id").textContent = intersects[0].object.userData.puID
-        document.getElementById('s-metadata').style.left=(window.innerWidth/2)+"px";
-        document.getElementById('s-metadata').style.top=(window.innerHeight/2-100)+"px";
+        document.getElementById("m-const").textContent = object.userData.constellation
+        document.getElementById("m-artist").textContent = object.userData.artist + "ft. (" + object.userData.feature + ")";
+        document.getElementById("m-pu_id").textContent = object.userData.puID
+        document.getElementById("m-star_id").textContent = object.userData.starID
+        document.getElementById("m-elements").textContent = object.userData.elements
+        document.getElementById("m-status").textContent = object.userData.status
+        document.getElementById("m-release").textContent = object.userData.release
 
+        switch( object.userData.status ){
+          case 'active':
+          document.getElementById('m-status').style.color = 'green';
+          break;
+          case 'inactive':
+          document.getElementById('m-status').style.color = 'red';
+          break;
+          case 'in-progress':
+          document.getElementById('m-status').style.color = 'yellow';
+          break;
+        }
+
+        // document.getElementById('s-metadata').style.top=(window.innerHeight/2-100)+"px";
+        // document.getElementById('s-metadata').style.left=(window.innerWidth/2)+"px";
+        document.getElementById('s-metadata').style.left = (event.clientX-rect.left)+"px";
+        document.getElementById('s-metadata').style.top = (event.clientY-rect.top+50)+"px";
         // console.log(document.innerWidth)
 
       }else {

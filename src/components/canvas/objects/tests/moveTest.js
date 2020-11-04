@@ -106,7 +106,7 @@ export default function MoveTest(scene, camera, nebulas, canvas, loadingManager)
     // console.log(intersects)
 
 
-    if(mouse.y > -1.0 && mouse.y < 1.0 && camera.position.z > 0) {
+    if(mouse.y > -1.0 && mouse.y < 1.0 && camera.position.z > 3498) {
       if (intersects.length > 0) {
         if(document.querySelector('#debug')) document.querySelector('#hover').textContent = intersects[0].object.name +" "+ intersects[0].object.id;
 

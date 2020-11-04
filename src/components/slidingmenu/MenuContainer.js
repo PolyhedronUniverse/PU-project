@@ -10,7 +10,7 @@ export default function MenuContainer(props){
     visibility="show";
   }
 
-  console.log("Valor de si es visible o no: "+ visible);
+  // console.log("Valor de si es visible o no: "+ visible);
 
 
     return (
