@@ -6,7 +6,8 @@ export default function Welcome(){
     console.log("Estamos en welcome");
     
     return(
-        <div className="welcome">
+        
+        <div id="overlay">
             <button id="musicaWelcome"><AiFillPlayCircle id="playWelcome"/></button>
         </div>
     )

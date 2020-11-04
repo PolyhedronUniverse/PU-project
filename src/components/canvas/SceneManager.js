@@ -126,9 +126,9 @@ export default function SceneManager ()  {
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 0, -8000);
     controls.maxDistance = 1000;
+    controls.enablePan = false;
     controls.saveState();
     controls.update()
-    controls.eneablePan = false;
     const type = 'orbit'
     return {controls,type};
   }

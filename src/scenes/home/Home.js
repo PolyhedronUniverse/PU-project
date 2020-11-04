@@ -2,7 +2,6 @@ import React, {Component, useState,useEffect} from 'react'
 import { Footer } from '../../components/footer/Footer'
 import { Header } from '../../components/header/Header'
 import { Mobile } from '../../components/mobile/Mobile'
-// import { Debug } from '../../components/debug/Debug'
 import { Count } from '../../components/countdown/countdown'
 import { Gui } from '../../components/gui/Gui'
 import '../../index.css'
@@ -11,7 +10,7 @@ import threeEntryPoint from '../../components/canvas/main';
 import MenuContainer from '../../components/slidingmenu/MenuContainer'
 import {Labels} from '../../components/labels/labels'
 import {MusicCel} from '../../components/musicCel/MusicCel'
-//import Welcome from '../../components/SplashScreen/Welcome'
+import Welcome from '../../components/SplashScreen/Welcome'
 
 class ThreeContainer extends Component {
   componentDidMount() {
@@ -29,6 +28,7 @@ class ThreeContainer extends Component {
 
 export const Home = () => {
   const [visible,setVisible]=useState(false);
+  const [overlay,setOverlay] = useState(false);
 
   function useWindowSize(){
     const [windowSize,setWindowSize]= useState({
