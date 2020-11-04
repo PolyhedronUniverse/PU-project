@@ -133,6 +133,6 @@ export default function MoveTest(scene, camera, nebulas, canvas, loadingManager)
 
   window.addEventListener('load', onLoad,false);
   document.getElementById("back").addEventListener("mousedown", back, false);
-  document.addEventListener('mousedown', onDocumentMouseDown, false);
+  document.addEventListener('click', onDocumentMouseDown, false);
   document.addEventListener('mousemove', onDocumentMouseMove, false);
 }

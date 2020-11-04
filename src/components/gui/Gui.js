@@ -7,7 +7,6 @@ export const Gui = () => {
     <div id="user">
       <div id="gui">
         <p>Click on any nebula to go inside</p>
-        <p>Press ENTER to return</p>
       </div>
       <div id="buttons">
         <button id="pause"><AiFillPauseCircle id="pausa"/><AiFillPlayCircle id="play"/></button>

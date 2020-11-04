@@ -166,6 +166,9 @@ export default function SceneManager ()  {
             control = myFlyControls();
             control.controls.movementSpeed = 1500;
             camera.position.z -= 1;
+            if(document.getElementById('gui')){
+              document.getElementById('gui').style.display = 'none'
+            }
           }
         }else if(query.location === 'home'){
           sceneSubjects.others[sceneSubjects.others.length - 1].update(query.location);

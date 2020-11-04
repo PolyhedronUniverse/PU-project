@@ -66,7 +66,7 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
       sprite.name = item.name;
       sprite.userData = item;
       // wonderData.push(item);
-      sprite.scale.set(20, 20, 1)
+      sprite.scale.set(40, 40, 1)
       // sprites.push(sprite)
       group.add(sprite);
     });
@@ -96,7 +96,7 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
 
   // console.log(wonder)
 
-  document.getElementById("star").style.display = 'none'
+  // document.getElementById("star").style.display = 'none'
   document.getElementById("s-metadata").style.display = 'none'
 
 
@@ -142,23 +142,82 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
 
     if(mouse.y > -1.0 && mouse.y < 1.0 && camera.position.z < 0) {
       if (intersects.length > 0 && intersects[0].object.parent.visible) {
+
         intersects[0].object.material.opacity = 1.0;
-        document.getElementById("canvas").style.cursor = "pointer";
-        document.getElementById("s-name").textContent = intersects[0].object.name;
-        document.getElementById("s-name").style.display = '';
-        document.getElementById('star').style.display = '';
-        document.getElementById('star').style.left = (event.clientX-rect.left)+"px";
-        document.getElementById('star').style.top = (event.clientY-rect.top+50)+"px";
+        insertUrlParam('on',intersects[0].object.name)
+        const object = intersects[0].object;
+        document.getElementById("s-metadata").style.display = '';
+        // document.getElementById("s-name-hover").style.display = 'none'
+        document.getElementById("m-region").textContent = object.userData.region;
+        document.getElementById("m-const").textContent = object.userData.constellation;
+        document.getElementById("m-name").textContent = object.userData.name;
+        document.getElementById("m-artist").textContent = object.userData.artist + " (ft. " + object.userData.feature + ")";
+        document.getElementById("m-pu_id").textContent = object.userData.puID
+        document.getElementById("m-star_id").textContent = object.userData.starID
+        document.getElementById("m-elements").textContent = object.userData.elements
+        document.getElementById("m-status").textContent = object.userData.status
+        document.getElementById("m-release").textContent = object.userData.release
+
+        switch( object.userData.region ){
+          case 'Anger':
+          document.getElementById('m-region').style.color = 'red';
+          break;
+          case 'Empowerment':
+          document.getElementById('m-region').style.color = 'orange';
+          break;
+          case 'Sadness':
+          document.getElementById('m-region').style.color = 'blue';
+          break;
+          case 'Joy':
+          document.getElementById('m-region').style.color = 'yellow';
+          break;
+          case 'Love':
+          document.getElementById('m-region').style.color = 'pink';
+          break;
+          case 'Wonder':
+          document.getElementById('m-region').style.color = 'green';
+          break;
+          default: break;
+        }
+
+
+        switch( object.userData.status ){
+          case 'Active':
+          document.getElementById('m-status').style.color = 'green';
+          break;
+          case 'Inactive':
+          document.getElementById('m-status').style.color = 'red';
+          break;
+          case 'In-Progress':
+          document.getElementById('m-status').style.color = 'yellow';
+          break;
+          default: break;
+        }
+
+        // document.getElementById('s-metadata').style.top=(window.innerHeight/2-100)+"px";
+        // document.getElementById('s-metadata').style.left=(window.innerWidth/2)+"px";
+        document.getElementById('s-metadata').style.left = (event.clientX-rect.left)+"px";
+        document.getElementById('s-metadata').style.top = (event.clientY-rect.top+50)+"px";
+        // console.log(document.innerWidth)
+
       }else{
+
         if(document.querySelector('#debug')){document.querySelector('#hover').textContent = "none";}
         document.getElementById("canvas").style.cursor = "default";
-        document.getElementById('star').style.display = 'none'
+        // document.getElementById('star').style.display = 'none'
         // intersects[0].object.material.opacity = 0.5;
+
+        document.getElementById("s-metadata").style.display = 'none';
+        deleteUrlParam('on');
       }
     }
     else{
       if(document.querySelector('#debug')){document.querySelector('#hover').textContent = "out";}
-      document.getElementById("star").style.display = 'none'
+      // document.getElementById("star").style.display = 'none'
+      document.getElementById("s-metadata").style.display = 'none';
+
+      deleteUrlParam('on');
+
     }
   }
 
@@ -184,8 +243,8 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
         const object = intersects[0].object;
         document.getElementById("s-metadata").style.display = '';
         // document.getElementById("s-name-hover").style.display = 'none'
-        document.getElementById("m-name").textContent = intersects[0].name;
         document.getElementById("m-const").textContent = object.userData.constellation
+        document.getElementById("m-name").textContent = object.userData.name;
         document.getElementById("m-artist").textContent = object.userData.artist + "ft. (" + object.userData.feature + ")";
         document.getElementById("m-pu_id").textContent = object.userData.puID
         document.getElementById("m-star_id").textContent = object.userData.starID
@@ -194,13 +253,13 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
         document.getElementById("m-release").textContent = object.userData.release
 
         switch( object.userData.status ){
-          case 'active':
+          case 'Active':
           document.getElementById('m-status').style.color = 'green';
           break;
-          case 'inactive':
+          case 'Inactive':
           document.getElementById('m-status').style.color = 'red';
           break;
-          case 'in-progress':
+          case 'In-Progress':
           document.getElementById('m-status').style.color = 'yellow';
           break;
         }
@@ -212,19 +271,19 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
         // console.log(document.innerWidth)
 
       }else {
-        document.getElementById("star").style.display = 'none'
+        // document.getElementById("star").style.display = 'none'
         document.getElementById("s-metadata").style.display = 'none';
         deleteUrlParam('on');
       }
     }else{
-      document.getElementById("star").style.display = 'none'
+      // document.getElementById("star").style.display = 'none'
       document.getElementById("s-metadata").style.display = 'none';
       deleteUrlParam('on');
     }
   }
 
   document.addEventListener('mousemove', onMouseMove, true);
-  document.addEventListener('click', onMouseDown, false);
+  // document.addEventListener('click', onMouseDown, false);
 
 
   let icons = [wonder, anger, sadness, love, joy, empowerment]

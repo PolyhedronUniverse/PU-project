@@ -78,7 +78,7 @@ export default function TubeTest(scene,loadingManager){
   this.update = function(posz){
     // mesh.rotation.x += 0.1
     // mesh.rotation.y += 0.5
-    mesh.rotation.z += 0.1
+    mesh.rotation.z += 0.01
 
     // cylinder.material.texture.
     // console.log(posz)
