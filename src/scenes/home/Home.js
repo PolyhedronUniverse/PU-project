@@ -14,7 +14,7 @@ import Welcome from '../../components/SplashScreen/Welcome'
 
 class ThreeContainer extends Component {
   componentDidMount() {
-    threeEntryPoint(this.three);
+    threeEntryPoint(this.three,this.props);
   }
   render () {
     return (
@@ -27,8 +27,9 @@ class ThreeContainer extends Component {
 
 
 export const Home = () => {
-  const [visible,setVisible]=useState(false);
+  const [visible,setVisible] = useState(false);
   const [overlay,setOverlay] = useState(false);
+  
 
   function useWindowSize(){
     const [windowSize,setWindowSize]= useState({
@@ -74,10 +75,10 @@ export const Home = () => {
     return(
       <div className="Home">
       <Header/>
-      <ThreeContainer/>
+      <ThreeContainer overlay={overlay} setOverlay={setOverlay}/>
       <Count/>
       <Gui/>
-      {/* <Welcome overlay={overlay} setOverlay={setOverlay}/> */}
+      <Welcome overlay={overlay}/>
       <Footer visible={visible} setVisible={setVisible}/>
       <MenuContainer visible={visible}/>
     </div>

@@ -1,8 +1,8 @@
 import SceneManager from './SceneManager';
 
-export default (containerElement) => {
+export default (containerElement, props) => {
 
-  const sceneManager = new SceneManager();
+  const sceneManager = new SceneManager(props);
 
   bindEventListeners();
   render();

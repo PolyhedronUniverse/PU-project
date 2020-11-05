@@ -24,11 +24,11 @@ import negy from './assets/skybox_test/main_skybox/main_skybox_DN.png'
 import posz from './assets/skybox_test/main_skybox/main_skybox_FT.png'
 import negz from './assets/skybox_test/main_skybox/main_skybox_BK.png'
 
-export default function SceneManager ()  {
-
+export default function SceneManager (props)  {
+  const {overlay,setOverlay}= props;
+  console.log("Estos son los props de scenemanager en main: "+ overlay);
   // Env
   const clock = new THREE.Clock();
-
   let offtop = document.getElementById("header").clientHeight;
   let offbottom = document.getElementById("footer").clientHeight;
 
@@ -42,7 +42,9 @@ export default function SceneManager ()  {
 
     loadingManager.onLoad = function ( ) {
       console.log( 'Loading complete!');
+      setOverlay(!overlay);
       RECURSOSDESCARGADOS = true
+      console.log("Esta es la variable de overlay 22222: "+ overlay);
     };
 
     // loadingManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
@@ -56,7 +58,6 @@ export default function SceneManager ()  {
 
   let control;
   const ratio = 1000;
-
   const scene = buildScene();
   const camera = buildCamera();
   const renderer = buildRender();
@@ -148,10 +149,10 @@ export default function SceneManager ()  {
 
   function update(){
     if(!RECURSOSDESCARGADOS){
-      document.getElementById('canvas').style.visibility = 'hidden'
+      document.getElementById('canvas').style.display = 'none'
       return;
     }else{
-      document.getElementById('canvas').style.visibility = 'visible'
+      //document.getElementById('canvas').style.visibility = 'visible'
       let query = Object.fromEntries(new URLSearchParams(window.location.search).entries());
       let prev = 'home';
 
