@@ -127,12 +127,49 @@ export default function MoveTest(scene, camera, nebulas, canvas, loadingManager)
   function onLoad(event){
     event.preventDefault()
     insertUrlParam('location','home')
+    document.querySelector('#back').style.display = 'none';
+    document.querySelector('#info-off').style.display = 'none';
+    // document.querySelector('#gui').style.display = '';
+
   }
 
+  function onInfoHover(event){
+    event.preventDefault();
 
+    // this.childNodes[0].style.display = 'none';
+    // this.childNodes[1].style.display = '';
+    let gui = document.getElementById("gui");
+    console.log(gui.style)
+
+    if(gui.style.display === "none"){
+      gui.style.display = '';
+      this.childNodes[0].style.display = 'none';
+      this.childNodes[1].style.display = '';
+      console.log("Primer if ." + gui.style.display + ".")
+    }else if(gui.style.display === ""){
+      gui.style.display = 'none';
+      this.childNodes[0].style.display = '';
+      this.childNodes[1].style.display = 'none';
+      console.log("Segundo if ." + gui.style.display + ".")
+    }
+  }
+
+  function onInfoOut(event){
+    event.preventDefault();
+
+    // console.log(this.childNodes[0])
+    this.childNodes[0].style.display = '';
+    this.childNodes[1].style.display = 'none';
+    document.getElementById("gui").style.display = 'none';
+  }
 
   window.addEventListener('load', onLoad,false);
   document.getElementById("back").addEventListener("mousedown", back, false);
-  document.addEventListener('click', onDocumentMouseDown, false);
+
+  document.getElementById("info").addEventListener("mousedown", onInfoHover, false);
+
+  // document.getElementById("info").addEventListener("mouseup", onInfoOut, false);
+  document.addEventListener('mousedown', onDocumentMouseDown, false);
+  document.addEventListener('mouseup', onDocumentMouseDown, false);
   document.addEventListener('mousemove', onDocumentMouseMove, false);
 }
