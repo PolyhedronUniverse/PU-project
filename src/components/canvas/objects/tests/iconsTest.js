@@ -158,6 +158,7 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
         document.getElementById("m-status").textContent = object.userData.status
         document.getElementById("m-release").textContent = object.userData.release
 
+
         switch( object.userData.region ){
           case 'Anger':
           document.getElementById('m-region').style.color = 'red';
@@ -199,6 +200,8 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
         document.getElementById('s-metadata').style.left = (event.clientX-rect.left)+"px";
         document.getElementById('s-metadata').style.top = (event.clientY-rect.top+50)+"px";
         // console.log(document.innerWidth)
+        document.getElementById("canvas").style.cursor = "pointer";
+
 
       }else{
 
@@ -215,6 +218,7 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
       if(document.querySelector('#debug')){document.querySelector('#hover').textContent = "out";}
       // document.getElementById("star").style.display = 'none'
       document.getElementById("s-metadata").style.display = 'none';
+      document.getElementById("canvas").style.cursor = "default";
 
       deleteUrlParam('on');
 

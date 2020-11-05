@@ -11,6 +11,7 @@ import MoveTest from './objects/tests/moveTest.js'
 import TubeTest from './objects/tests/tubeTest.js'
 import InsideTest from './objects/tests/insideTest.js'
 import Sonido from './objects/tests/sonidoTest'
+import WonderSystem from './objects/tests/wonderSystem'
 
 // Temp
 import Count from './objects/others/count.js'
@@ -51,9 +52,9 @@ export default function SceneManager (props)  {
     //   console.log( 'Loaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
     // };
 
-    loadingManager.onError = function ( url ) {
-      console.log( 'There was an error loading ' + url );
-    };
+    // loadingManager.onError = function ( url ) {
+    //   console.log( 'There was an error loading ' + url );
+    // };
   }
 
   let control;
@@ -94,20 +95,28 @@ export default function SceneManager (props)  {
     const farPlane = ratio*45;
     const camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
     camera.position.z = 3500;
-    camera.focus = 1000;
+    // camera.focus = 1000;
     scene.add(camera)
     return camera;
   }
 
   function createSceneSubjects() {// Aqui se agregan los diferentes objetos del canvas
     const nebulas = [
-      new NebulaTest(scene, "anger", 0.96, new THREE.Vector3(-1300,1000,700), 0.009), //Anger
-      new NebulaTest(scene, "sadness", 0.60, new THREE.Vector3(-1300,-700,500), 0.001), //Sadness
-      new NebulaTest(scene, "joy", 0.10, new THREE.Vector3(800,-800,300), 0.004), //Joy
+      new NebulaTest(scene, "anger", 0.96, new THREE.Vector3(-1300,-800,500), 0.009), //Anger
+      new NebulaTest(scene, "sadness", 0.60, new THREE.Vector3(-1400,600,700), 0.001), //Sadness
+      new NebulaTest(scene, "joy", 0.10, new THREE.Vector3(1600,-800,300), 0.004), //Joy
       new NebulaTest(scene, "love", 0.80, new THREE.Vector3(2000,500,500), 0.005), //Love
       new NebulaTest(scene, "empowerment", 0.02, new THREE.Vector3(1000,1000,600), 0.006), //Empowerment
-      new WonderTest(scene, new THREE.Vector3(0,0,-700), loadingManager),
+      new WonderSystem(scene, new THREE.Vector3(0,0,-700), loadingManager),
     ];
+
+
+    // new NebulaTest(scene, "anger", 0.96, new THREE.Vector3(-1300,-700,500), 0.009), //Anger
+    // new NebulaTest(scene, "sadness", 0.60, new THREE.Vector3(-1300,1000,700), 0.001), //Sadness
+    // new NebulaTest(scene, "joy", 0.10, new THREE.Vector3(800,-800,300), 0.004), //Joy
+    // new NebulaTest(scene, "love", 0.80, new THREE.Vector3(2000,500,500), 0.005), //Love
+    // new NebulaTest(scene, "empowerment", 0.02, new THREE.Vector3(1000,1000,600), 0.006), //Empowerment
+    // new WonderSystem(scene, new THREE.Vector3(0,0,-700), loadingManager),
 
     const others = [
       new StarsTest(scene, loadingManager),
@@ -126,7 +135,7 @@ export default function SceneManager (props)  {
     //Orbit Controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 0, -8000);
-    controls.maxDistance = 1000;
+    // controls.maxDistance = 1000;
     controls.enablePan = false;
     controls.saveState();
     controls.update()
@@ -207,6 +216,8 @@ export default function SceneManager (props)  {
           if( document.querySelector('#debug') ){
             document.querySelector('#cont').textContent = "fly";
           }
+          document.querySelector('#info-on').style.display = 'none';
+          document.querySelector('#info-off').style.display = '';
           document.querySelector('#back').style.display = 'none';
         }else if(control.type === 'orbit') {
           control.controls.update()
@@ -219,7 +230,7 @@ export default function SceneManager (props)  {
         if( document.querySelector('#debug') ){
           document.querySelector('#cont').textContent = "none";
         }
-        document.querySelector('#back').style.display = 'none';
+        // document.querySelector('#info-on').style.display = 'none';
       }
 
 
