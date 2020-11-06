@@ -23,13 +23,13 @@ export default function MoveTest(scene, camera, nebulas, canvas, loadingManager)
 
   audioLoader.load(inAudio, function (buffer){
     soundIn.setBuffer(buffer);
-    soundIn.setVolume(0.5)
+    soundIn.setVolume(0.3)
   });
 
 
   audioLoader.load(outAudio, function (buffer){
     soundOut.setBuffer(buffer);
-    soundOut.setVolume(0.5)
+    soundOut.setVolume(0.3)
   });
 
   // inSound.setVolume( 1.5 );

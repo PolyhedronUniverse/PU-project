@@ -26,8 +26,8 @@
   /* position: absolute;
   align-items: flex-end; */
   position: absolute;
-  left: 0;
-  top: 15vh;
+  left: 0%;
+  bottom: 5vh;
   padding: 1em;
   background: rgba(0, 0, 0, 0);
   color: white;
@@ -51,8 +51,8 @@
 
 #info{
   position: absolute;
-  left: 5vh;
-  top: 15vh;
+  left: 2.5%;
+  bottom: 5vh;
   padding: 1em;
   background: rgba(0, 0, 0, 0);
   color: white;
@@ -78,7 +78,7 @@
 #back{
   display: none;
   position: absolute;
-  left: 15vh;
+  left: 0%;
   top: 15vh;
   padding: 1em;
   background: rgba(0, 0, 0, 0);
