@@ -23,11 +23,13 @@ export default function MoveTest(scene, camera, nebulas, canvas, loadingManager)
 
   audioLoader.load(inAudio, function (buffer){
     soundIn.setBuffer(buffer);
+    soundIn.setVolume(0.5)
   });
 
 
   audioLoader.load(outAudio, function (buffer){
     soundOut.setBuffer(buffer);
+    soundOut.setVolume(0.5)
   });
 
   // inSound.setVolume( 1.5 );
@@ -88,7 +90,7 @@ export default function MoveTest(scene, camera, nebulas, canvas, loadingManager)
     let intersects = raycaster.intersectObjects(obj);
 
     if(event.which === 1) {
-      if(mouse.y > -1.0 && mouse.y < 1.0 && Math.abs(mouse.x) < 0.7 && camera.position.z > 0) {
+      if(mouse.y > -1.0 && mouse.y < 1.0 && Math.abs(mouse.x) < 0.7 && camera.position.z > 3498) {
         if (intersects.length > 0) {
 
           insertUrlParam('location',intersects[0].object.name)

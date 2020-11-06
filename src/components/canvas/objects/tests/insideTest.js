@@ -34,40 +34,59 @@ export default function InsideTest(scene, camera, dom, canvas,loadingManager){
       case 'wonder':
       if(box.material !== textures.wonder){
         box.material = textures.wonder;
-        icons.wonder.visible = true;
+        icons.wonder.children.forEach((item, i) => {
+          item.layers.set(0)
+          console.log(item)
+        });
       }
       break;
       case 'anger':
       if(box.material !== textures.anger){
         box.material = textures.anger;
-        icons.anger.visible = true;
+        icons.anger.children.forEach((item, i) => {
+          item.layers.set(0)
+          console.log(item)
+        });
+
       }
       break;
       case 'joy':
       if(box.material !== textures.joy){
         box.material = textures.joy;
-        icons.joy.visible = true;
+        icons.joy.children.forEach((item, i) => {
+          item.layers.set(0)
+          console.log(item)
+        });
       }
       break;
       case 'sadness':
       if(box.material !== textures.sadness){
         box.material = textures.sadness;
-        icons.sadness.visible = true;
+        icons.sadness.children.forEach((item, i) => {
+          item.layers.set(0)
+          console.log(item)
+        });
       }
       break;
       case 'love':
       if(box.material !== textures.love){
         box.material = textures.love;
-        icons.love.visible = true;
+        icons.love.children.forEach((item, i) => {
+          item.layers.set(0)
+          console.log(item)
+        });
       }
       break;
       case 'empowerment':
       if(box.material !== textures.empowerment){
         box.material = textures.empowerment;
-        icons.empowerment.visible = true;
+        icons.empowerment.children.forEach((item, i) => {
+          item.layers.set(0)
+          console.log(item)
+        });
       }
       break;
-      default: box.material = material; if(camera.position.z > 2000) icons.update();
+      default: box.material = material; if(camera.position.z > 2000) {icons.update(); }
       break;
     }
 

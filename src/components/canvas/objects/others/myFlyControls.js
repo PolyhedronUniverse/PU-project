@@ -1,6 +1,6 @@
 export default function MyFlyControls(camera){
 
-
+  console.log("me active - fly")
   // let thisCamera = camera
   let movementSpeed = 0;
   let update;

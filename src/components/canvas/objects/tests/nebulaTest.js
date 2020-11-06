@@ -190,24 +190,35 @@ export default function NebulaTest(scene, name, hue, origen, vel){
     },
     transparent: true,
     alphaTest: 0.5,
-    // depthWrite: false, 
+    // depthWrite: false,
     // depthTest: false
     // side: THREE.DoubleSide,
   });
 
   let shgeometry = new THREE.PlaneBufferGeometry(2500, 2500, 150, 150)
 
-  let cloud = new THREE.Mesh(shgeometry, material);
+  let cloudN = new THREE.Mesh(shgeometry, material);
 
 
-  cloud.rotation.z = 2 * Math.PI * Math.random() - Math.PI;
-  cloud.position.x = origen.x;
-  cloud.position.y = origen.y;
-  cloud.position.z = origen.z;
+  cloudN.rotation.z = 2 * Math.PI * Math.random() - Math.PI;
+  cloudN.position.x = origen.x;
+  cloudN.position.y = origen.y;
+  cloudN.position.z = origen.z;
   //cloud.userData.emotionalregion =
-  cloud.name = name;
 
-  scene.add(cloud);
+
+
+  let area = new THREE.CircleBufferGeometry(1000, 10);
+  let mat = new THREE.MeshBasicMaterial({color: 'red'});
+
+  let cloud = new THREE.Mesh(area, mat);
+  cloud.position.set(origen.x, origen.y, origen.z-100);
+  cloud.name = name;
+  cloud.visible = false;
+
+  scene.add(cloud)
+
+  scene.add(cloudN);
 
   // const textures = new SbTextures();
 
@@ -224,9 +235,9 @@ export default function NebulaTest(scene, name, hue, origen, vel){
   let update = function(cam){
     timer += vel;
 
-    cloud.rotation.z += vel;
+    cloudN.rotation.z += vel;
 
-    cloud.material.uniforms.time.value = timer;
+    cloudN.material.uniforms.time.value = timer;
 
     // cloud.lookAt(cam)
 

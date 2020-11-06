@@ -55,11 +55,36 @@ export default function WonderSystem(scene, origen, loadingManager){
     return geometry;
 
   }
+
+
+  function createGeometry2( amount) {
+
+
+    let geometry = new THREE.BufferGeometry();
+    let vertices = [];
+    const r = 2000
+    for ( var i = 2000; i < amount; i += 1 ) {
+      const theta = 2 * Math.PI * Math.random()
+      const phi = Math.acos(2 * Math.random() - 1)
+      const x = r/5 * Math.cos(theta)
+      const y = Math.random() * r/10 - r/20
+      const z = - Math.abs(5 * Math.sin(theta)) + 1000 + (Math.random() * 500 - 250)
+
+      vertices.push(x, y, z);
+
+    }
+
+
+    geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
+
+    return geometry;
+
+  }
   const loader = new THREE.TextureLoader(loadingManager)
   const texture = loader.load(spark);
 
   // Puntos 1
-  let geometry1 = createGeometry( 15000, 5, true );
+  let geometry1 = createGeometry2( 1000);
   let material1 = new THREE.PointsMaterial( {
     size: 200,
     map: texture,
@@ -68,40 +93,24 @@ export default function WonderSystem(scene, origen, loadingManager){
     color: "green"
   } );
   let points1 = new THREE.Points( geometry1, material1 );
-  points1.position.z = origen.z;
+  // points1.position.z = origen.z;
   // scene.add( points1 );
 
-
-  // Puntos 2
-  let geometry2 = createGeometry( 15000, 5, false );
-  let material2 = new THREE.PointsMaterial( {
-    size: 200,
-    map: texture,
-    depthWrite: false,
-    transparent: true,
-    color: "green"
-  } );
-  let points2 = new THREE.Points( geometry2, material2 );
-  points2.rotation.y = Math.PI;
-  points2.position.z = origen.z;
-  // scene.add( points2 );
-
   // Puntos 3
-  let geometry3 = createGeometry( 20000, 8, true );
+  let geometry3 = createGeometry2(10000);
   let material3 = new THREE.PointsMaterial( {
-    size: 40,
+    size: 10,
     map: texture,
     blending: THREE.AdditiveBlending,
     depthWrite: false,
     transparent: true,
-    color: "green"
   } );
   let points3 = new THREE.Points( geometry3, material3 );
-  points3.position.z = origen.z;
+  points3.position.z = 2000;
   // scene.add( points3 );
 
   // Puntos 4
-  let geometry4 = createGeometry( 20000, 8,false );
+  let geometry4 = createGeometry2( 20000, 8,false );
   let material4 = new THREE.PointsMaterial( {
     size: 40,
     map: texture,
@@ -112,7 +121,7 @@ export default function WonderSystem(scene, origen, loadingManager){
   } );
   let points4 = new THREE.Points( geometry4, material4 );
   points4.rotation.y = Math.PI;
-  points4.position.z = origen.z;
+  points4.position.z = 2000;
   // scene.add( points4 );
 
   // Puntos 5
@@ -130,7 +139,7 @@ export default function WonderSystem(scene, origen, loadingManager){
   // scene.add( points5 );
 
   // Puntos 6
-  let geometry6 = createGeometry( 20000, 0.4,false );
+  let geometry6 = createGeometry2( 20000,);
   let material6 = new THREE.PointsMaterial( {
     size: 25,
     map: texture,
@@ -139,9 +148,12 @@ export default function WonderSystem(scene, origen, loadingManager){
     transparent: true
   } );
   let points6 = new THREE.Points( geometry6, material6 );
-  points6.rotation.y = Math.PI;
-  points6.position.z = origen.z;
+  // points6.rotation.y = Math.PI;
+  points6.position.z = 2000;
   // scene.add( points6 );
+
+
+
 
   let moveNebula = 0;
   const g = new THREE.PlaneBufferGeometry(4000, 800, 10, 10)

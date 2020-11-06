@@ -31,7 +31,7 @@ export default function Sonido(camera,loadingManager){
 
     ambiental.setBuffer( buffer );
     ambiental.setLoop( true );
-    ambiental.setVolume( 0.0 );
+    ambiental.setVolume( 0.5 );
 
   } );
 

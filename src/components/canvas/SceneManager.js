@@ -135,7 +135,7 @@ export default function SceneManager (props)  {
     //Orbit Controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 0, 1200);
-    controls.maxDistance = 900;
+    controls.maxDistance = 700;
     controls.enablePan = false;
     controls.saveState();
     controls.update()
@@ -160,7 +160,7 @@ export default function SceneManager (props)  {
         if(query.location !== 'home' && query.location !== prev){
           sceneSubjects.others[sceneSubjects.others.length - 1].update(query.location);
           prev = query.location
-          if(!control){
+          if(!control && document.getElementById("overlay").style.display === 'none'){
             control = new MyFlyControls(camera);
             control.changeSpeed(-5);
             // camera.position.z -= 1;
@@ -189,8 +189,8 @@ export default function SceneManager (props)  {
           control.update();
 
           if(camera.position.z < 2500 && query.location !== 'home') {
-            console.log(control.movementSpeed)
-            if(control.movementSpeed !== -1.5 ) {console.log("eh"); control.changeSpeed(-1.5);}
+            // console.log(control.movementSpeed)
+            if(control.movementSpeed !== -1.5 ) {control.changeSpeed(-1.5);}
             if(camera.position.z < 2000){
               // control.controls.dispose();
               control = null;

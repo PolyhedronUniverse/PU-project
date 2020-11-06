@@ -16,6 +16,12 @@ import yhe from '../../assets/artist_icons/star_yhe-x_90.png'
 export default function IconsTest(scene, dom, camera, canvas,loadingManager){
 
   let raycaster = new THREE.Raycaster();
+  // raycaster.layers.set( 0 );
+
+  console.log(raycaster.layers)
+  console.log(camera.layers)
+
+
   let mouse = new THREE.Vector2();
 
   let wonder = new THREE.Group();
@@ -72,9 +78,9 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
     });
   }
 
-  wonder.visible = false;
-  anger.visible = false;
-  sadness.visible = false;
+  // wonder.visible = false;
+  // anger.visible = false;
+  // sadness.visible = false;
 
   scene.add( wonder );
   scene.add( anger );
@@ -92,7 +98,7 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
   storeMetaData(joyCoord, joy);
   storeMetaData(empowermentCoord, empowerment)
 
-
+  let obj = [wonder,anger,sadness, love, joy, empowerment]
 
   // console.log(wonder)
 
@@ -102,12 +108,12 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
 
   function insertUrlParam(key, value) {
     if (window.history.replaceState) {
-      console.log(window.history)
+      // console.log(window.history)
       let searchParams = new URLSearchParams(window.location.search);
       searchParams.set(key, value);
       let newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + searchParams.toString();
       window.history.replaceState({path: newurl}, '', newurl);
-      console.log("ayo=?")
+      // console.log("ayo=?")
     }
   }
 
@@ -138,7 +144,7 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
     raycaster.setFromCamera(mouse, camera);
     raycaster.params.Points.threshold = 100;
 
-    let intersects = raycaster.intersectObjects([wonder, anger, sadness, love, joy, empowerment], true);
+    let intersects = raycaster.intersectObjects(obj, true);
 
     if(mouse.y > -1.0 && mouse.y < 1.0 && camera.position.z < 2200) {
       if (intersects.length > 0 && intersects[0].object.parent.visible) {
@@ -202,13 +208,11 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
         // console.log(document.innerWidth)
         document.getElementById("canvas").style.cursor = "pointer";
 
-
       }else{
 
         if(document.querySelector('#debug')){document.querySelector('#hover').textContent = "none";}
         document.getElementById("canvas").style.cursor = "default";
         // document.getElementById('star').style.display = 'none'
-        // intersects[0].object.material.opacity = 0.5;
 
         document.getElementById("s-metadata").style.display = 'none';
         deleteUrlParam('on');
@@ -290,13 +294,18 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
   // document.addEventListener('click', onMouseDown, false);
 
 
-  let icons = [wonder, anger, sadness, love, joy, empowerment]
-  // console.log(icons)
   let update = function(){
-    icons.forEach((item, i) => {
-      if(item.visible){
-        item.visible = false;
-      }
+    obj.forEach((item, i) => {
+      // console.log(item.layers)
+      item.children.forEach((child, i) => {
+        if(child.layers.mask === 1 ){
+
+          child.layers.set(1);
+          console.log(child.layers)
+
+        }
+      });
+
     });
   }
   return {wonder, anger, sadness, love, joy, empowerment, update}
