@@ -60,7 +60,7 @@ export const Home = () => {
 
   // console.log("height: "+ size.height + " width: "+ size.width);
 
-  if (ancho <= 600) {
+  if (ancho <= 900) {
     return(
       <div className="Home">
       <Header/>
@@ -75,7 +75,7 @@ export const Home = () => {
     return(
       <div className="Home">
       <Header/>
-      {/* <ThreeContainer overlay={overlay} setOverlay={setOverlay}/> */}
+      <ThreeContainer overlay={overlay} setOverlay={setOverlay}/>
       <Count/>
       <Gui/>
       <Welcome overlay={overlay}/>
