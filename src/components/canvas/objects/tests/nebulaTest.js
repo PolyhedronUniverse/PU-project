@@ -189,11 +189,13 @@ export default function NebulaTest(scene, name, hue, origen, vel){
       e: { type: "f", value: 0.5},
     },
     transparent: true,
-    alphaTest: 0.1,
+    alphaTest: 0.5,
+    // depthWrite: false, 
+    // depthTest: false
     // side: THREE.DoubleSide,
   });
 
-  let shgeometry = new THREE.PlaneBufferGeometry(1500, 1500, 150, 150)
+  let shgeometry = new THREE.PlaneBufferGeometry(2500, 2500, 150, 150)
 
   let cloud = new THREE.Mesh(shgeometry, material);
 

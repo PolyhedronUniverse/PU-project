@@ -84,7 +84,7 @@ export default function StarsTest(scene, loadingManager){
 
     blending: THREE.AdditiveBlending,
     depthWrite: false,
-    transparent: true,
+    // transparent: true,
     vertexColors: true
   } );
 

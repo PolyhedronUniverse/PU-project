@@ -7,11 +7,31 @@ export default function MoveTest(scene, camera, nebulas, canvas, loadingManager)
   let raycaster = new THREE.Raycaster();
   let mouse = new THREE.Vector2();
 
-  let listener = new THREE.AudioListener();
-  camera.add( listener );
-  let sound = new THREE.Audio( listener );
-  scene.add(sound)
+  let audioLoader = new THREE.AudioLoader(loadingManager);
 
+  let listenerIn = new THREE.AudioListener();
+  let listenerOut = new THREE.AudioListener();
+
+  camera.add( listenerIn );
+  camera.add( listenerOut );
+
+  let soundIn = new THREE.Audio( listenerIn );
+  let soundOut = new THREE.Audio( listenerOut );
+  // scene.add(sound)
+
+  // sound.vol
+
+  audioLoader.load(inAudio, function (buffer){
+    soundIn.setBuffer(buffer);
+  });
+
+
+  audioLoader.load(outAudio, function (buffer){
+    soundOut.setBuffer(buffer);
+  });
+
+  // inSound.setVolume( 1.5 );
+  // let outSound = audioLoader.load(outAudio);
 
   let obj = [nebulas.length];
 
@@ -21,7 +41,6 @@ export default function MoveTest(scene, camera, nebulas, canvas, loadingManager)
 
   document.getElementById("nebula").style.display = 'none'
 
-  let audioLoader = new THREE.AudioLoader(loadingManager);
 
   function insertUrlParam(key, value) {
     if (window.history.replaceState) {
@@ -36,14 +55,16 @@ export default function MoveTest(scene, camera, nebulas, canvas, loadingManager)
   function back(event) {
     event.preventDefault()
 
-
     if(camera.position.z < 3500) {
       camera.position.set(0,0,-7101)
 
-      audioLoader.load( outAudio, function( buffer ) {
-        sound.setBuffer( buffer );
-        sound.play();
-      });
+      // sound.setBuffer(outSound);
+      soundOut.play();
+
+      // audioLoader.load( outAudio, function( buffer ) {
+      //   sound.setBuffer( buffer );
+      //   sound.play();
+      // });
 
       insertUrlParam('location','home')
     }
@@ -72,10 +93,13 @@ export default function MoveTest(scene, camera, nebulas, canvas, loadingManager)
 
           insertUrlParam('location',intersects[0].object.name)
 
-          audioLoader.load( inAudio, function( buffer ) {
-            sound.setBuffer( buffer );
-            sound.play();
-          });
+          // sound.setBuffer(inSound);
+          soundIn.play();
+
+          // audioLoader.load( inAudio, function( buffer ) {
+          //   sound.setBuffer( buffer );
+          //   sound.play();
+          // });
         }
       }
     }
@@ -131,6 +155,14 @@ export default function MoveTest(scene, camera, nebulas, canvas, loadingManager)
     document.querySelector('#info-off').style.display = 'none';
     // document.querySelector('#gui').style.display = '';
 
+
+    document.getElementById("back").addEventListener("mousedown", back, false);
+
+    document.getElementById("info").addEventListener("mousedown", onInfoHover, false);
+
+    document.addEventListener('mousedown', onDocumentMouseDown, false);
+    document.addEventListener('mouseup', onDocumentMouseDown, false);
+    document.addEventListener('mousemove', onDocumentMouseMove, false);
   }
 
   function onInfoHover(event){
@@ -154,22 +186,8 @@ export default function MoveTest(scene, camera, nebulas, canvas, loadingManager)
     }
   }
 
-  function onInfoOut(event){
-    event.preventDefault();
 
-    // console.log(this.childNodes[0])
-    this.childNodes[0].style.display = '';
-    this.childNodes[1].style.display = 'none';
-    document.getElementById("gui").style.display = 'none';
-  }
 
   window.addEventListener('load', onLoad,false);
-  document.getElementById("back").addEventListener("mousedown", back, false);
 
-  document.getElementById("info").addEventListener("mousedown", onInfoHover, false);
-
-  // document.getElementById("info").addEventListener("mouseup", onInfoOut, false);
-  document.addEventListener('mousedown', onDocumentMouseDown, false);
-  document.addEventListener('mouseup', onDocumentMouseDown, false);
-  document.addEventListener('mousemove', onDocumentMouseMove, false);
 }

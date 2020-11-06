@@ -62,7 +62,7 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
       }
       const rand = Math.random() * 500 - 250;
       const sprite = new THREE.Sprite( material );
-      sprite.position.set(item.x + rand, item.y + rand, item.z - 8000 + rand);
+      sprite.position.set(item.x + rand, item.y + rand, item.z + 1000 + rand);
       sprite.name = item.name;
       sprite.userData = item;
       // wonderData.push(item);
@@ -140,7 +140,7 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
 
     let intersects = raycaster.intersectObjects([wonder, anger, sadness, love, joy, empowerment], true);
 
-    if(mouse.y > -1.0 && mouse.y < 1.0 && camera.position.z < 0) {
+    if(mouse.y > -1.0 && mouse.y < 1.0 && camera.position.z < 2200) {
       if (intersects.length > 0 && intersects[0].object.parent.visible) {
 
         intersects[0].object.material.opacity = 1.0;

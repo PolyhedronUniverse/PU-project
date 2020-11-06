@@ -19,7 +19,7 @@ export default function InsideTest(scene, camera, dom, canvas,loadingManager){
   const g = new THREE.BoxBufferGeometry(3500/2, 3500/2, 3500/2)
   const material = new THREE.MeshBasicMaterial({color: 'black'});
   let box =  new THREE.Mesh(g, material);
-  box.position.set(0, 0, -8000)
+  box.position.set(0, 0, 1200)
   // box.name = name;
   // console.log(textures)
 
@@ -67,11 +67,11 @@ export default function InsideTest(scene, camera, dom, canvas,loadingManager){
         icons.empowerment.visible = true;
       }
       break;
-      default: box.material = material; if(camera.position.z > -7000) icons.update();
+      default: box.material = material; if(camera.position.z > 2000) icons.update();
       break;
     }
 
-    if(camera.position.z < -7000){
+    if(camera.position.z < 2200){
       box.visible = true;
     }else {
 

@@ -154,16 +154,16 @@ export default function WonderSystem(scene, origen, loadingManager){
   cloud.name = "wonder"
 
 
-  let backMaterial = new THREE.MeshBasicMaterial({alphaMap: loader.load(wonder1op), map: loader.load(wonder1), transparent: true})
+  let backMaterial = new THREE.MeshBasicMaterial({alphaMap: loader.load(wonder1op), map: loader.load(wonder1), transparent: true,  })
   let backWonder = new THREE.PlaneBufferGeometry(40000,40000,10,10);
   let meshWonder = new THREE.Mesh(backWonder, backMaterial);
 
-  meshWonder.position.z = -30000;
+  meshWonder.position.z = -25000;
   meshWonder.rotation.z = -Math.PI * 0.3;
   scene.add(meshWonder)
 
-  let curveMaterialIzq = new THREE.MeshBasicMaterial({alphaMap: loader.load(wonder2op), map: loader.load(wonder2), transparent: true})
-  let curveMaterialDer = new THREE.MeshBasicMaterial({alphaMap: loader.load(wonder2op), map: loader.load(wonder2), transparent: true})
+  let curveMaterialIzq = new THREE.MeshBasicMaterial({alphaMap: loader.load(wonder2op), map: loader.load(wonder2), transparent: true, })
+  let curveMaterialDer = new THREE.MeshBasicMaterial({alphaMap: loader.load(wonder2op), map: loader.load(wonder2), transparent: true, })
   let curveWonder = new THREE.PlaneBufferGeometry(40000,20000,10,10);
 
   curveMaterialIzq.map.wrapS = THREE.RepeatWrapping;
@@ -179,9 +179,9 @@ export default function WonderSystem(scene, origen, loadingManager){
   let meshCurveIzq = new THREE.Mesh(curveWonder,curveMaterialIzq)
   let meshCurveDer = new THREE.Mesh(curveWonder,curveMaterialDer)
 
-  meshCurveIzq.position.set(-20000, 15000, -40000)
+  meshCurveIzq.position.set(-20000, 15000, -30000)
   meshCurveIzq.rotation.z = -0.3
-  meshCurveDer.position.set(20000, -15000, -40000)
+  meshCurveDer.position.set(20000, -15000, -30000)
   meshCurveDer.rotation.z = -0.3
 
   scene.add(meshCurveIzq)

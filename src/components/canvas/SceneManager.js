@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { FlyControls } from 'three/examples/jsm/controls/FlyControls'
 
 // OTROS
 import NebulaTest from './objects/tests/nebulaTest.js'
@@ -12,6 +11,7 @@ import TubeTest from './objects/tests/tubeTest.js'
 import InsideTest from './objects/tests/insideTest.js'
 import Sonido from './objects/tests/sonidoTest'
 import WonderSystem from './objects/tests/wonderSystem'
+import MyFlyControls from './objects/others/myFlyControls.js'
 
 // Temp
 import Count from './objects/others/count.js'
@@ -95,18 +95,18 @@ export default function SceneManager (props)  {
     const farPlane = ratio*45;
     const camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
     camera.position.z = 3500;
-    // camera.focus = 1000;
+    camera.focus = 1000;
     scene.add(camera)
     return camera;
   }
 
   function createSceneSubjects() {// Aqui se agregan los diferentes objetos del canvas
     const nebulas = [
-      new NebulaTest(scene, "anger", 0.96, new THREE.Vector3(-1300,-800,500), 0.009), //Anger
-      new NebulaTest(scene, "sadness", 0.60, new THREE.Vector3(-1400,600,700), 0.001), //Sadness
-      new NebulaTest(scene, "joy", 0.10, new THREE.Vector3(1600,-800,300), 0.004), //Joy
-      new NebulaTest(scene, "love", 0.80, new THREE.Vector3(2000,500,500), 0.005), //Love
-      new NebulaTest(scene, "empowerment", 0.02, new THREE.Vector3(1000,1000,600), 0.006), //Empowerment
+      new NebulaTest(scene, "anger", 0.96, new THREE.Vector3(-2300,-800,-1500), 0.009), //Anger
+      new NebulaTest(scene, "sadness", 0.60, new THREE.Vector3(-2400,1600,-1700), 0.001), //Sadness
+      new NebulaTest(scene, "joy", 0.10, new THREE.Vector3(2400,-1200,-1300), 0.004), //Joy
+      new NebulaTest(scene, "love", 0.80, new THREE.Vector3(3500,500,-1500), 0.005), //Love
+      new NebulaTest(scene, "empowerment", 0.02, new THREE.Vector3(2000,1500,-1600), 0.006), //Empowerment
       new WonderSystem(scene, new THREE.Vector3(0,0,-700), loadingManager),
     ];
 
@@ -134,8 +134,8 @@ export default function SceneManager (props)  {
   function myOrbitControls(){
     //Orbit Controls
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.target.set(0, 0, -8000);
-    // controls.maxDistance = 1000;
+    controls.target.set(0, 0, 1200);
+    controls.maxDistance = 900;
     controls.enablePan = false;
     controls.saveState();
     controls.update()
@@ -143,18 +143,6 @@ export default function SceneManager (props)  {
     return {controls,type};
   }
 
-  function myFlyControls(){
-    //Fly Controls
-    const controls = new FlyControls( camera, renderer.domElement );
-    controls.domElement = renderer.domElement;
-    controls.movementSpeed = 0;
-    controls.rollSpeed = 0;
-    controls.autoForward = true;
-    controls.dragToLook = false;
-    const type = 'fly';
-    controls.update(clock.getDelta());
-    return {controls, type};
-  }
 
   function update(){
     if(!RECURSOSDESCARGADOS){
@@ -173,9 +161,9 @@ export default function SceneManager (props)  {
           sceneSubjects.others[sceneSubjects.others.length - 1].update(query.location);
           prev = query.location
           if(!control){
-            control = myFlyControls();
-            control.controls.movementSpeed = 1500;
-            camera.position.z -= 1;
+            control = new MyFlyControls(camera);
+            control.changeSpeed(-5);
+            // camera.position.z -= 1;
             if(document.getElementById('gui')){
               document.getElementById('gui').style.display = 'none'
             }
@@ -187,9 +175,9 @@ export default function SceneManager (props)  {
             control.controls.reset()
             control.controls.dispose()
             control = null;
-            control = myFlyControls();
-            control.controls.movementSpeed = -1500;
-            camera.position.z += 1;
+            control = new MyFlyControls(camera);
+            control.changeSpeed(5);
+            // camera.position.z += 1;
           }
         }
       }
@@ -198,18 +186,19 @@ export default function SceneManager (props)  {
 
       if(control){
         if(control.type === 'fly'){
-          control.controls.update(delta);
+          control.update();
 
-          if(camera.position.z < -6500 && query.location !== 'home') {
-            if(control.controls.movementSpeed > 1000 ) control.controls.movementSpeed = 75;
-            if(camera.position.z < -7100){
-              control.controls.dispose();
+          if(camera.position.z < 2500 && query.location !== 'home') {
+            console.log(control.movementSpeed)
+            if(control.movementSpeed !== -1.5 ) {console.log("eh"); control.changeSpeed(-1.5);}
+            if(camera.position.z < 2000){
+              // control.controls.dispose();
               control = null;
               control = myOrbitControls()
-              camera.position.z = -7500;
+              camera.position.z = 1900;
             }
           } else if(camera.position.z > 3490 && query.location === 'home'){
-            control.controls.dispose();
+            // control.controls.dispose();
             control = null;
             camera.position.z = 3500;
           }
