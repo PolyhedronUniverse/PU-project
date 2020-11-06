@@ -63,12 +63,12 @@ export const Home = () => {
   if (ancho <= 900) {
     return(
       <div className="Home">
-      <Header/>
+      {/* <Header/> */}
       <Mobile/>
       <Count/>
       <MusicCel/>
-      <Footer visible={visible} setVisible={setVisible}/>
-      <MenuContainer visible={visible}/>
+      {/* <Footer visible={visible} setVisible={setVisible}/>
+      <MenuContainer visible={visible}/> */}
     </div>
     )
   }else{
