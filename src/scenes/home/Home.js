@@ -75,7 +75,7 @@ export const Home = () => {
     return(
       <div className="Home">
       <Header/>
-      <ThreeContainer overlay={overlay} setOverlay={setOverlay}/>
+      {/* <ThreeContainer overlay={overlay} setOverlay={setOverlay}/> */}
       <Count/>
       <Gui/>
       <Welcome overlay={overlay}/>

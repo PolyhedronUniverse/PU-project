@@ -52,7 +52,7 @@ export default function MenuContainer(props){
             src = {require('../../assets/Artist_UI_Icons_Light/artist_pol-y_w.png')}
             onMouseOver = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_pol-y_b.png'))}
             onMouseOut = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_pol-y_w.png'))}
-            onClick={() => window.open(' https://www.youtube.com/channel/UCniBFi3JxA4f0f3rOF-GiRQ', '_blank')}
+            onClick={() => window.open('https://open.spotify.com/artist/5HdTXO9LCbV9RGvFmywaK2')}
           />
           <img
             className='short'
@@ -68,7 +68,7 @@ export default function MenuContainer(props){
             src = {require('../../assets/Artist_UI_Icons_Light/artist_dron-z_w.png')}
             onMouseOver = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_dron-z_b.png'))}
             onMouseOut = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_dron-z_w.png'))}
-            onClick={() => window.open(' https://www.youtube.com/channel/UCniBFi3JxA4f0f3rOF-GiRQ', '_blank')}
+            onClick={() => window.open('https://open.spotify.com/artist/537gbKOPT2B3rO7EnPLFTU?si=yOMrlZlrTVeulWHMLRvIzA')}
           />
         </div>
         {/* <div className="cell">
