@@ -35,13 +35,13 @@ position: fixed;
 width: 100%; 
 height: 100%;
 top: 0%;
-overflow: hidden;
+/* overflow: hidden; */
 }
 
 #musicaWelcome{
   position: absolute;
-  left: 89vh;
-  top: 75vh;
+  left: 42.5%;
+  top: 75%;
   padding: 1em;
   background: rgba(0, 0, 0, 0);
   color: white;
@@ -78,8 +78,8 @@ overflow: hidden;
 
 #imagenDisable{
     position: absolute;
-    left: 96vh;
-    top: 76.8vh;
+    left: 45.5%;
+    top: 76.8%;
     padding: 1em;
     background: rgba(0, 0, 0, 0);
     color: white;

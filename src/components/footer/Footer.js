@@ -33,7 +33,7 @@ export const Footer = (props) => {
             src={require('../../assets/Tiktok_w.png')}
             onMouseOver = {e => (e.currentTarget.src = require('../../assets/Tiktok_b.png'))}
             onMouseOut = {e => (e.currentTarget.src = require('../../assets/Tiktok_w.png'))}
-            onClick = {e => (window.open('#', '_blank'))}
+            onClick = {e => (window.open('https://www.tiktok.com/@pubackstage'))}
             />
       </div>
 
