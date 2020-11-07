@@ -38,7 +38,7 @@ export default function InsideTest(scene, camera, dom, canvas,loadingManager){
       if(camera.position.z < 2200)
       icons.wonder.children.forEach((item, i) => {
         item.layers.set(0)
-        console.log(item)
+        // console.log(item)
       });
       break;
       case 'anger':
@@ -48,7 +48,7 @@ export default function InsideTest(scene, camera, dom, canvas,loadingManager){
       if(camera.position.z < 2200)
       icons.anger.children.forEach((item, i) => {
         item.layers.set(0)
-        console.log(item)
+        // console.log(item)
       });
       break;
       case 'joy':
@@ -58,7 +58,7 @@ export default function InsideTest(scene, camera, dom, canvas,loadingManager){
       if(camera.position.z < 2200)
       icons.joy.children.forEach((item, i) => {
         item.layers.set(0)
-        console.log(item)
+        // console.log(item)
       });
       break;
       case 'sadness':
@@ -68,7 +68,7 @@ export default function InsideTest(scene, camera, dom, canvas,loadingManager){
       if(camera.position.z < 2200)
       icons.sadness.children.forEach((item, i) => {
         item.layers.set(0)
-        console.log(item)
+        // console.log(item)
       });
       break;
       case 'love':
@@ -78,7 +78,7 @@ export default function InsideTest(scene, camera, dom, canvas,loadingManager){
       if(camera.position.z < 2200)
       icons.love.children.forEach((item, i) => {
         item.layers.set(0)
-        console.log(item)
+        // console.log(item)
       });
       break;
       case 'empowerment':
@@ -88,7 +88,7 @@ export default function InsideTest(scene, camera, dom, canvas,loadingManager){
       if(camera.position.z < 2200)
       icons.empowerment.children.forEach((item, i) => {
         item.layers.set(0)
-        console.log(item)
+        // console.log(item)
       });
       break;
       default: box.material = material; if(camera.position.z > 2000) {icons.update(); }
@@ -96,7 +96,7 @@ export default function InsideTest(scene, camera, dom, canvas,loadingManager){
     }
 
     if(camera.position.z < 2200){
-      console.log(getQuery())
+      // console.log(getQuery())
 
       box.visible = true;
     }else {

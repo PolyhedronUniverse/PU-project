@@ -168,18 +168,18 @@ export default function MoveTest(scene, camera, nebulas, canvas, loadingManager)
     // this.childNodes[0].style.display = 'none';
     // this.childNodes[1].style.display = '';
     let gui = document.getElementById("gui");
-    console.log(gui.style)
+    // console.log(gui.style)
 
     if(gui.style.display === "none"){
       gui.style.display = '';
       this.childNodes[0].style.display = 'none';
       this.childNodes[1].style.display = '';
-      console.log("Primer if ." + gui.style.display + ".")
+      // console.log("Primer if ." + gui.style.display + ".")
     }else if(gui.style.display === ""){
       gui.style.display = 'none';
       this.childNodes[0].style.display = '';
       this.childNodes[1].style.display = 'none';
-      console.log("Segundo if ." + gui.style.display + ".")
+      // console.log("Segundo if ." + gui.style.display + ".")
     }
   }
 

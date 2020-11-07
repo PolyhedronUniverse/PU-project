@@ -16,10 +16,6 @@ import yhe from '../../assets/artist_icons/star_yhe-x_90.png'
 export default function IconsTest(scene, dom, camera, canvas,loadingManager){
 
   let raycaster = new THREE.Raycaster();
-  // raycaster.layers.set( 0 );
-
-  console.log(raycaster.layers)
-  console.log(camera.layers)
 
 
   let mouse = new THREE.Vector2();
@@ -42,7 +38,6 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
 
 
   function storeMetaData(json, group){
-    console.log(json)
     json.forEach((item, i) => {
       let material = new THREE.SpriteMaterial({color: 'red'});
       switch(item.artist){
