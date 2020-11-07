@@ -20,14 +20,9 @@
     "serve": "^11.3.2",
     "three": "^0.120.1"
   },
-<<<<<<< HEAD
  "scripts": {
     "dev": "react-scripts start",
     "start": "serve -s build",
-=======
-  "scripts": {
-    "start": "react-scripts start",
->>>>>>> c3c30be66a9aa2cdce90952e70a39ec24a3350c8
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
