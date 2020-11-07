@@ -1,6 +1,7 @@
 import React from 'react'
 import './gui.css'
-import {AiFillPauseCircle, AiFillPlayCircle, AiFillQuestionCircle, AiOutlineQuestionCircle} from 'react-icons/ai'
+import {AiFillQuestionCircle, AiOutlineQuestionCircle} from 'react-icons/ai'
+import {FaVolumeMute,FaVolumeUp} from 'react-icons/fa'
 import back from '../canvas/assets/Back__s75_h.png'
 
 export const Gui = () => {
@@ -18,7 +19,7 @@ export const Gui = () => {
         </ol>
       </div>
       <div id="buttons">
-        <button id="pause"><AiFillPauseCircle id="pausa"/><AiFillPlayCircle id="play"/></button>
+        <button id="pause"><FaVolumeUp id="pausa"/><FaVolumeMute id="play"/></button>
         <button id="info"><AiFillQuestionCircle id="info-off"/><AiOutlineQuestionCircle id="info-on"/></button>
         <button id="back"><img id="b-back" src={back}></img></button>
       </div>

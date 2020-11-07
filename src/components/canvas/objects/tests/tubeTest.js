@@ -11,7 +11,7 @@ import lensflare3 from '../../assets/lensflare/lensflare3.png'
 // import uvtest from '../../assets/Panning_Scene_Assets/Textures/UVTest.jpg'
 import wormhole1 from '../../assets/scene_textures/wormhole_textures/wonder_wormhole_diffuse.png'
 import wormhole2 from '../../assets/scene_textures/wormhole_textures/wormhole_opacity.png'
-import warp from '../../assets/warp3.jpg'
+import warp from '../../assets/warp3.png'
 
 export default function TubeTest(scene,loadingManager){
 

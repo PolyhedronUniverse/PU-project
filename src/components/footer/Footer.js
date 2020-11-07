@@ -12,7 +12,7 @@ export const Footer = (props) => {
             src={require('../../assets/linkedin_w.png')}
             onMouseOver = {e => (e.currentTarget.src = require('../../assets/linkedin_b.png'))}
             onMouseOut = {e => (e.currentTarget.src = require('../../assets/linkedin_w.png'))}
-            onClick = {e => (window.open('#', '_blank'))}
+            onClick = {e => (window.open('https://www.linkedin.com/company/polyhedronuniverse/'))}
             />
       </div>
       <div>
@@ -77,7 +77,7 @@ export const Footer = (props) => {
             src={require('../../assets/Twitch_w.png')}
             onMouseOver = {e => (e.currentTarget.src = require('../../assets/Twitch_b.png'))}
             onMouseOut = {e => (e.currentTarget.src = require('../../assets/Twitch_w.png'))}
-            onClick = {e => (window.open('#', '_blank'))}
+            onClick = {e => (window.open('https://www.twitch.tv/pu_livestream'))}
             />
       </div>
 
