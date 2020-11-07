@@ -11,6 +11,8 @@ import lensflare3 from '../../assets/lensflare/lensflare3.png'
 // import uvtest from '../../assets/Panning_Scene_Assets/Textures/UVTest.jpg'
 import wormhole1 from '../../assets/scene_textures/wormhole_textures/wonder_wormhole_diffuse.png'
 import wormhole2 from '../../assets/scene_textures/wormhole_textures/wormhole_opacity.png'
+import inner1 from '../../assets/scene_textures/wormhole_textures/enter_wonder_inner_diffuse.png'
+import inner2 from '../../assets/scene_textures/wormhole_textures/enter_wonder_inner_opacity.png'
 import warp from '../../assets/warp3.png'
 
 export default function TubeTest(scene,loadingManager){
@@ -18,7 +20,7 @@ export default function TubeTest(scene,loadingManager){
   let loader = new THREE.TextureLoader(loadingManager)
 
   let innerGeom = new THREE.CylinderBufferGeometry( 50, 5, 400, 32, 32, true );
-  let innerMat = new THREE.MeshBasicMaterial( {map: loader.load(warp), side: THREE.BackSide, transparent: true, opacity: 0.0, alphaTest: 0.1 } );
+  let innerMat = new THREE.MeshBasicMaterial( {alphaMap: loader.load(inner2), map: loader.load(inner1), side: THREE.BackSide, transparent: true, opacity: 0.4, alphaTest: 0.1 } );
   innerMat.map.wrapS = THREE.MirroredRepeatWrapping;
   innerMat.map.wrapT = THREE.MirroredRepeatWrapping;
   innerMat.map.repeat.set(2, 2);
@@ -29,14 +31,14 @@ export default function TubeTest(scene,loadingManager){
   innerCylinder.rotation.set(0.5*Math.PI,0,0)
   scene.add(innerCylinder)
 
-  let outerGeom = new THREE.CylinderBufferGeometry( 60, 5, 200, 32, 32, true );
+  let outerGeom = new THREE.CylinderBufferGeometry( 60, 5, 400, 32, 32, true );
   let outerMat = new THREE.MeshBasicMaterial( {map: loader.load(warp), side: THREE.DoubleSide, alphaTest: 0.1, opacity: 0.5 } );
   outerMat.map.wrapS = THREE.MirroredRepeatWrapping;
   outerMat.map.wrapT = THREE.MirroredRepeatWrapping;
   outerMat.map.repeat.set(2, 2);
   let outerCylinder = new THREE.Mesh( outerGeom, outerMat );
   // outerCylinder.position.set(0,0,-7000)
-  outerCylinder.position.set(0,0,2200)
+  outerCylinder.position.set(0,0,2300)
 
   outerCylinder.rotation.set(0.5*Math.PI,0,0)
   scene.add(outerCylinder)
@@ -63,21 +65,10 @@ export default function TubeTest(scene,loadingManager){
 
   scene.add(mesh)
 
-  // const m = new THREE.MeshBasicMaterial({side: THREE.BackSide})
-  // m.color.setHSL(hue, 1.0, 0.5)
-  // const g = new THREE.BoxBufferGeometry(3500/2, 3500/2, 3500/2)
-  // const box =  new THREE.Mesh(g, m);
-  // box.position.set(0, 0, -8000)
-  // scene.add(box);
-
   this.update = function(posz){
-    // mesh.rotation.x += 0.1
-    // mesh.rotation.y += 0.5
-    mesh.rotation.z += 0.01
 
-    // cylinder.material.texture.
-    // console.log(posz)
-    // if(posz < -6650){
+    mesh.rotation.z += 0.001
+
     if(posz < 2500){
       if( !light.visible ){
         light.visible = true;
@@ -90,6 +81,12 @@ export default function TubeTest(scene,loadingManager){
       light.visible = false;
       innerCylinder.visible = false;
       outerCylinder.visible = false;
+    }
+
+    if(posz < 3500){
+      mesh.visible = true;
+    }else {
+      mesh.visible = false;
     }
 
     innerCylinder.material.map.offset.y -= 0.005

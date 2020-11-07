@@ -29,7 +29,7 @@ export default function MoveTest(scene, camera, nebulas, canvas, loadingManager)
 
   audioLoader.load(outAudio, function (buffer){
     soundOut.setBuffer(buffer);
-    soundOut.setVolume(0.2)
+    soundOut.setVolume(0.3)
   });
 
   // inSound.setVolume( 1.5 );
@@ -60,13 +60,7 @@ export default function MoveTest(scene, camera, nebulas, canvas, loadingManager)
     if(camera.position.z < 3500) {
       camera.position.set(0,0,-7101)
 
-      // sound.setBuffer(outSound);
       soundOut.play();
-
-      // audioLoader.load( outAudio, function( buffer ) {
-      //   sound.setBuffer( buffer );
-      //   sound.play();
-      // });
 
       insertUrlParam('location','home')
     }
@@ -147,6 +141,7 @@ export default function MoveTest(scene, camera, nebulas, canvas, loadingManager)
       }
     }else{
       document.getElementById("nebula").style.display = 'none'
+      document.getElementById("canvas").style.cursor = "default";
     }
   }
 

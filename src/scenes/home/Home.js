@@ -2,7 +2,6 @@ import React, {Component, useState,useEffect} from 'react'
 import { Footer } from '../../components/footer/Footer'
 import { Header } from '../../components/header/Header'
 import { Mobile } from '../../components/mobile/Mobile'
-import { Count } from '../../components/countdown/countdown'
 import { Gui } from '../../components/gui/Gui'
 import '../../index.css'
 import threeEntryPoint from '../../components/canvas/main';
@@ -20,6 +19,7 @@ class ThreeContainer extends Component {
   render () {
     return (
       <div id="canvas" ref={element => this.three = element}>
+        <Gui/>
         <Labels/>
       </div>
     );
@@ -66,7 +66,6 @@ export const Home = () => {
   //     <div className="Home">
   //     {/* <Header/> */}
   //     <Mobile/>
-  //     <Count/>
   //     <MusicCel/>
   //     {/* <Footer visible={visible} setVisible={setVisible}/>
   //     <MenuContainer visible={visible}/> */}
@@ -77,7 +76,6 @@ export const Home = () => {
   //     <div className="Home">
   //     <Header/>
   //     <ThreeContainer overlay={overlay} setOverlay={setOverlay}/>
-  //     <Count/>
   //     <Gui/>
   //     <Welcome overlay={overlay}/>
   //     <Footer visible={visible} setVisible={setVisible}/>
@@ -90,7 +88,6 @@ export const Home = () => {
     <div className="Home">
     {/* <Header/> */}
     <Mobile/>
-    <Count/>
     <MusicCel/>
     {/* <Footer visible={visible} setVisible={setVisible}/>
     <MenuContainer visible={visible}/> */}
@@ -101,8 +98,6 @@ export const Home = () => {
       <div className="Home">
       <Header/>
       <ThreeContainer overlay={overlay} setOverlay={setOverlay}/>
-      <Count/>
-      <Gui/>
       <Welcome overlay={overlay}/>
       <Footer visible={visible} setVisible={setVisible}/>
       <MenuContainer visible={visible}/>

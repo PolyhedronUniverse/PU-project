@@ -2,7 +2,7 @@
   {
     "id": 4,
     "region": "Empowerment",
-    "constStars": "Caelum",
+    "constellation": "Caelum",
     "name": "- -",
     "artist": "Nord-Z",
     "feature": "Yhe-X & Lop-Y",
@@ -18,7 +18,7 @@
   {
     "id": 5,
     "region": "Empowerment",
-    "constStars": "Caelum",
+    "constellation": "Caelum",
     "name": "- -",
     "artist": "Dron-Z",
     "feature": "Yhe-X",

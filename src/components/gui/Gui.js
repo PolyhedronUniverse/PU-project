@@ -2,7 +2,7 @@ import React from 'react'
 import './gui.css'
 import {AiFillQuestionCircle, AiOutlineQuestionCircle} from 'react-icons/ai'
 import {FaVolumeMute,FaVolumeUp} from 'react-icons/fa'
-import back from '../canvas/assets/Back__s75_h.png'
+import back from '../canvas/assets/Back__ns50_b.png'
 
 export const Gui = () => {
   return (
@@ -21,7 +21,7 @@ export const Gui = () => {
       <div id="buttons">
         <button id="pause"><FaVolumeUp id="pausa"/><FaVolumeMute id="play"/></button>
         <button id="info"><AiFillQuestionCircle id="info-off"/><AiOutlineQuestionCircle id="info-on"/></button>
-        <button id="back"><img id="b-back" src={back}></img></button>
+        <button id="back"><img id="b-back" src={back} alt="back"></img></button>
       </div>
   </div>
   )
