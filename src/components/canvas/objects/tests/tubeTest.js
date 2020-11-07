@@ -61,7 +61,7 @@ export default function TubeTest(scene,loadingManager){
 
   this.update = function(posz){
 
-    mesh.rotation.z += 0.001
+    mesh.rotation.z += 0.01
 
     if(posz < 2500){
       if( !light.visible ){
@@ -77,11 +77,11 @@ export default function TubeTest(scene,loadingManager){
       outerCylinder.visible = false;
     }
 
-    if(posz < 3500){
-      mesh.visible = true;
-    }else {
-      mesh.visible = false;
-    }
+    // if(posz < 3500){
+    //   mesh.visible = true;
+    // }else {
+    //   mesh.visible = false;
+    // }
 
     innerCylinder.material.map.offset.y -= 0.005
     outerCylinder.material.map.offset.y -= 0.01

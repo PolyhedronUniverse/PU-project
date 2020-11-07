@@ -152,7 +152,11 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
         document.getElementById("m-region").textContent = object.userData.region;
         document.getElementById("m-const").textContent = object.userData.constellation;
         document.getElementById("m-name").textContent = object.userData.name;
+        if(object.userData.feature !== "")
         document.getElementById("m-artist").textContent = object.userData.artist + " (ft. " + object.userData.feature + ")";
+        else{
+          document.getElementById("m-artist").textContent = object.userData.artist
+        }
         document.getElementById("m-pu_id").textContent = object.userData.puID
         document.getElementById("m-star_id").textContent = object.userData.starID
         document.getElementById("m-elements").textContent = object.userData.elements
