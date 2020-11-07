@@ -208,6 +208,8 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
         // console.log(document.innerWidth)
         document.getElementById("canvas").style.cursor = "pointer";
 
+
+
       }else{
 
         if(document.querySelector('#debug')){document.querySelector('#hover').textContent = "none";}
@@ -216,6 +218,7 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
 
         document.getElementById("s-metadata").style.display = 'none';
         deleteUrlParam('on');
+        turnOff()
       }
     }
     else{
@@ -229,70 +232,7 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
     }
   }
 
-  function onMouseDown(event){
-    event.preventDefault();
-    const rect = canvas.getBoundingClientRect();
-
-    const pos = {
-      x: (event.clientX - rect.left) * canvas.width  / rect.width,
-      y: (event.clientY - rect.top ) * canvas.height / rect.height,
-    }
-
-    mouse.x = (pos.x / canvas.width ) *  2 - 1;
-    mouse.y = (pos.y / canvas.height) * -2 + 1;
-
-    raycaster.setFromCamera(mouse, camera);
-
-    let intersects = raycaster.intersectObjects([wonder,anger,sadness, love, joy, empowerment], true);
-
-    if(mouse.y > -1.0 && mouse.y < 1.0 && Math.abs(mouse.x) < 0.7) {
-      if (intersects.length > 0 && intersects[0].object.parent.visible) {
-        insertUrlParam('on',intersects[0].object.name)
-        const object = intersects[0].object;
-        document.getElementById("s-metadata").style.display = '';
-        // document.getElementById("s-name-hover").style.display = 'none'
-        document.getElementById("m-const").textContent = object.userData.constellation
-        document.getElementById("m-name").textContent = object.userData.name;
-        document.getElementById("m-artist").textContent = object.userData.artist + "ft. (" + object.userData.feature + ")";
-        document.getElementById("m-pu_id").textContent = object.userData.puID
-        document.getElementById("m-star_id").textContent = object.userData.starID
-        document.getElementById("m-elements").textContent = object.userData.elements
-        document.getElementById("m-status").textContent = object.userData.status
-        document.getElementById("m-release").textContent = object.userData.release
-
-        switch( object.userData.status ){
-          case 'Active':
-          document.getElementById('m-status').style.color = 'green';
-          break;
-          case 'Inactive':
-          document.getElementById('m-status').style.color = 'red';
-          break;
-          case 'In-Progress':
-          document.getElementById('m-status').style.color = 'yellow';
-          break;
-        }
-
-        // document.getElementById('s-metadata').style.top=(window.innerHeight/2-100)+"px";
-        // document.getElementById('s-metadata').style.left=(window.innerWidth/2)+"px";
-        document.getElementById('s-metadata').style.left = (event.clientX-rect.left)+"px";
-        document.getElementById('s-metadata').style.top = (event.clientY-rect.top+50)+"px";
-        // console.log(document.innerWidth)
-
-      }else {
-        // document.getElementById("star").style.display = 'none'
-        document.getElementById("s-metadata").style.display = 'none';
-        deleteUrlParam('on');
-      }
-    }else{
-      // document.getElementById("star").style.display = 'none'
-      document.getElementById("s-metadata").style.display = 'none';
-      deleteUrlParam('on');
-    }
-  }
-
   document.addEventListener('mousemove', onMouseMove, true);
-  // document.addEventListener('click', onMouseDown, false);
-
 
   let update = function(){
     obj.forEach((item, i) => {
@@ -301,12 +241,29 @@ export default function IconsTest(scene, dom, camera, canvas,loadingManager){
         if(child.layers.mask === 1 ){
 
           child.layers.set(1);
-          console.log(child.layers)
-
+          // console.log(child.layers)
         }
       });
 
     });
   }
+
+  let turnOff = function(){
+
+    obj.forEach((item, i) => {
+
+      item.children.forEach((child, i) => {
+        if(child.layers.mask === 1 ){
+
+          if(child.material.opacity === 1)
+            child.material.opacity = 0.5;
+
+        }
+      });
+    });
+  }
+
+
+
   return {wonder, anger, sadness, love, joy, empowerment, update}
 }

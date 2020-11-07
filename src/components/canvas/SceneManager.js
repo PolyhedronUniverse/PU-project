@@ -3,7 +3,6 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 // OTROS
 import NebulaTest from './objects/tests/nebulaTest.js'
-import WonderTest from './objects/tests/wonderTest.js'
 import HudTest from './objects/tests/hudTest.js'
 import StarsTest from './objects/tests/starsTest.js'
 import MoveTest from './objects/tests/moveTest.js'
@@ -12,10 +11,6 @@ import InsideTest from './objects/tests/insideTest.js'
 import Sonido from './objects/tests/sonidoTest'
 import WonderSystem from './objects/tests/wonderSystem'
 import MyFlyControls from './objects/others/myFlyControls.js'
-
-// Temp
-import Count from './objects/others/count.js'
-
 
 // Skyboxes
 import posx from './assets/skybox_test/main_skybox/main_skybox_RT.png'
@@ -29,7 +24,6 @@ export default function SceneManager (props)  {
   const {overlay,setOverlay}= props;
   console.log("Estos son los props de scenemanager en main: "+ overlay);
   // Env
-  const clock = new THREE.Clock();
   let offtop = document.getElementById("header").clientHeight;
   let offbottom = document.getElementById("footer").clientHeight;
 
@@ -102,11 +96,11 @@ export default function SceneManager (props)  {
 
   function createSceneSubjects() {// Aqui se agregan los diferentes objetos del canvas
     const nebulas = [
-      new NebulaTest(scene, "anger", 0.96, new THREE.Vector3(-2300,-800,-1500), 0.009), //Anger
+      new NebulaTest(scene, "anger", 0.96, new THREE.Vector3(-2300,-800,-1500), 0.009, loadingManager), //Anger
       new NebulaTest(scene, "sadness", 0.60, new THREE.Vector3(-2400,1600,-1700), 0.001), //Sadness
       new NebulaTest(scene, "joy", 0.10, new THREE.Vector3(2400,-1200,-1300), 0.004), //Joy
-      new NebulaTest(scene, "love", 0.80, new THREE.Vector3(3500,500,-1500), 0.005), //Love
-      new NebulaTest(scene, "empowerment", 0.02, new THREE.Vector3(2000,1500,-1600), 0.006), //Empowerment
+      new NebulaTest(scene, "love", 0.80, new THREE.Vector3(3500,1000,-1500), 0.005), //Love
+      new NebulaTest(scene, "empowerment", 0.02, new THREE.Vector3(1200,1500,-1600), 0.006), //Empowerment
       new WonderSystem(scene, new THREE.Vector3(0,0,-700), loadingManager),
     ];
 
@@ -123,7 +117,6 @@ export default function SceneManager (props)  {
       new TubeTest(scene, loadingManager),
       new MoveTest(scene, camera, nebulas, document.getElementsByTagName("canvas")[0], loadingManager),
       new HudTest(scene,camera, loadingManager),
-      new Count(),
       new Sonido(camera, loadingManager),
       new InsideTest(scene,camera,renderer.domElement,document.getElementsByTagName("canvas")[0], loadingManager)
     ];
@@ -182,7 +175,7 @@ export default function SceneManager (props)  {
         }
       }
 
-      var delta = clock.getDelta();
+
 
       if(control){
         if(control.type === 'fly'){

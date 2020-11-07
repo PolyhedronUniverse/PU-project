@@ -1,6 +1,7 @@
 import * as THREE from "three";
+import wormhole2 from '../../assets/scene_textures/wormhole_textures/Anger_nebula_opacity.png'
 
-export default function NebulaTest(scene, name, hue, origen, vel){
+export default function NebulaTest(scene, name, hue, origen, vel, loadingManager){
 
   let timer = 0;
   let moveNebula = 0;
@@ -63,8 +64,8 @@ export default function NebulaTest(scene, name, hue, origen, vel){
 
     void main() {
       vUv = uv;
-      float t = time *.3 + sin(time) * .5;
-      float t2 = time *.1 + cos(time * .2) * .05;
+      float t = time *.3;
+      float t2 = time *.1;
       vec2 pos = vUv * 2.0;
 
       vec2 displacement = vec2(t, t2) + (1.0 + mousePosition * .5);
@@ -206,15 +207,22 @@ export default function NebulaTest(scene, name, hue, origen, vel){
   cloudN.position.z = origen.z;
   //cloud.userData.emotionalregion =
 
+  let loader = new THREE.TextureLoader(loadingManager)
+  let color = new THREE.Color();
 
-
-  let area = new THREE.CircleBufferGeometry(1000, 10);
-  let mat = new THREE.MeshBasicMaterial({color: 'red'});
+  let area = new THREE.CircleBufferGeometry(1200, 10);
+  let mat = new THREE.MeshBasicMaterial({
+    alphaMap: loader.load(wormhole2),
+    // map: loader.load(wormhole1),
+    transparent: true,
+    // opacity: 1.5,
+    color: color.setHSL(hue, 1.0, 0.5)
+  });
 
   let cloud = new THREE.Mesh(area, mat);
   cloud.position.set(origen.x, origen.y, origen.z-100);
   cloud.name = name;
-  cloud.visible = false;
+  // cloud.visible = false;
 
   scene.add(cloud)
 
@@ -234,6 +242,8 @@ export default function NebulaTest(scene, name, hue, origen, vel){
 
   let update = function(cam){
     timer += vel;
+
+    cloud.rotation.z += vel;
 
     cloudN.rotation.z += vel;
 
