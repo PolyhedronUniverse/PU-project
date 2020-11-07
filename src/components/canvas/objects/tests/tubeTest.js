@@ -3,12 +3,6 @@ import { Lensflare, LensflareElement } from 'three/examples/jsm/objects/Lensflar
 import lensflare0 from '../../assets/lensflare/lensflare0.png'
 // import lensflare2 from '../../assets/lensflare/lensflare2.png'
 import lensflare3 from '../../assets/lensflare/lensflare3.png'
-// import milky from '../../assets/Panning_Scene_Assets/Textures/milky_walpha.png';
-// import nebulat from '../../assets/Panning_Scene_Assets/Textures/nebulat_walpha.png';
-// import nebulat2 from '../../assets/Panning_Scene_Assets/Textures/nebulat2_walpha.png';
-// import tec from '../../assets/Panning_Scene_Assets/Textures/Technical_Texturetest_walpha.png';
-// import tec2 from '../../assets/Panning_Scene_Assets/Textures/Technical_Texturetest_walpha_2.png';
-// import uvtest from '../../assets/Panning_Scene_Assets/Textures/UVTest.jpg'
 import wormhole1 from '../../assets/scene_textures/wormhole_textures/wonder_wormhole_diffuse.png'
 import wormhole2 from '../../assets/scene_textures/wormhole_textures/wormhole_opacity.png'
 import inner1 from '../../assets/scene_textures/wormhole_textures/enter_wonder_inner_diffuse.png'
