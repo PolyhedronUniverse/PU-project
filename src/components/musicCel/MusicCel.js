@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react'
 import musica from '../../assets/SonidosMusica/pu-home.ogg'
-import {AiFillPauseCircle,AiFillPlayCircle} from 'react-icons/ai'
+import {FaVolumeMute,FaVolumeUp} from 'react-icons/fa'
 import './musicCel.css'
 
 export const MusicCel = () => {
@@ -35,7 +35,7 @@ export const MusicCel = () => {
 
     return (
         <div id="celular">
-            <button id="musicaCel"><AiFillPauseCircle id="pausaCel"/><AiFillPlayCircle id="playCel"/></button>
+            <button id="musicaCel"><FaVolumeUp id="pausaCel"/><FaVolumeMute id="playCel"/></button>
         </div>
     )
 }
