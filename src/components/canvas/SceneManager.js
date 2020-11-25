@@ -76,7 +76,7 @@ export default function SceneManager (props)  {
     offbottom = document.getElementById("footer").clientHeight;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(1);
     renderer.setSize(window.innerWidth , window.innerHeight - offtop - offbottom );
     document.getElementById("canvas").appendChild( renderer.domElement );
     return renderer;

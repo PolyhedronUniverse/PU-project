@@ -19,7 +19,7 @@
     "react-scripts": "3.4.3",
     "serve": "^11.3.2",
     "three": "^0.120.1"
-  },
+  },   
   "scripts": {
     "dev": "react-scripts start",
     "start": "serve -s build",
