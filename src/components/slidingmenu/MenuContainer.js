@@ -24,7 +24,7 @@ export default function MenuContainer(props){
             src = {require('../../assets/Artist_UI_Icons_Light/artist_lop-y_w.png')}
             onMouseOver = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_lop-y_b.png'))}
             onMouseOut = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_lop-y_w.png'))}
-            onClick={() => window.open('https://www.notion.so/LOP-Y-f825668f0fb1464fb0b3ade33860021a')}
+            onClick={() => window.open('https://open.spotify.com/artist/7tNQTfmH8piyvI5tPoCKu0?si=oIo7lzWvRV-2DqnH1ecvwQ')}
           />
           <img
             className='short'
@@ -32,7 +32,7 @@ export default function MenuContainer(props){
             src = {require('../../assets/Artist_UI_Icons_Light/artist_ehy-x_w.png')}
             onMouseOver = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_ehy-x_b.png'))}
             onMouseOut = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_ehy-x_w.png'))}
-            onClick={() => window.open('https://www.notion.so/EHY-X-cb79be675ce541a0a580454f26c4a5b9')}
+            onClick={() => window.open('https://open.spotify.com/artist/6Y7mmCgTmm5iMI7OTzwY5K?si=hSisVqkfR4q1Plp2AlgC8Q')}
           />
           <img
             className='short'
@@ -40,7 +40,7 @@ export default function MenuContainer(props){
             src = {require('../../assets/Artist_UI_Icons_Light/artist_nord-z_w.png')}
             onMouseOver = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_nord-z_b.png'))}
             onMouseOut = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_nord-z_w.png'))}
-            onClick={() => window.open('https://www.notion.so/NORD-Z-22210fe050564c8486e149fbeda7fd60')}
+            onClick={() => window.open('https://open.spotify.com/artist/2oTpOYg3y1NZqIcZKCRgCD?si=mLB0Pp2vTPGQuv06nPYpRA')}
           />
         </div>
         {/* <div className="cell">
@@ -60,7 +60,7 @@ export default function MenuContainer(props){
             src = {require('../../assets/Artist_UI_Icons_Light/artist_yhe-x_w.png')}
             onMouseOver = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_yhe-x_b.png'))}
             onMouseOut = {e => (e.currentTarget.src = require('../../assets/Artist_UI_Icons_Light/artist_yhe-x_w.png'))}
-            onClick={() => window.open(' https://www.notion.so/YHE-X-67398dcba81d47b7acb6b5ddaaa86d1a')}
+            onClick={() => window.open('https://open.spotify.com/artist/3OetgG3Q4Jvp8zKk3gcz2k?si=eXWKBNiIQQKYHcV52VBojQ')}
           />
           <img
             className='short'
