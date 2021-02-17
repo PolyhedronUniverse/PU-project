@@ -11,6 +11,7 @@ import InsideTest from './objects/tests/insideTest.js'
 import Sonido from './objects/tests/sonidoTest'
 import WonderSystem from './objects/tests/wonderSystem'
 import MyFlyControls from './objects/others/myFlyControls.js'
+import MyStats from './objects/others/stats'
 
 // Skyboxes
 import posx from './assets/skybox_test/main_skybox/main_skybox_RT.png'
@@ -57,6 +58,7 @@ export default function SceneManager (props)  {
   const camera = buildCamera();
   const renderer = buildRender();
   const sceneSubjects = createSceneSubjects();
+  const stats = new MyStats();
   // control = myOrbitControls();
 
 
@@ -225,7 +227,7 @@ export default function SceneManager (props)  {
         document.querySelector('#y').textContent = camera.position.y
         document.querySelector('#z').textContent = camera.position.z
       }
-
+      stats.update();
       renderer.render(scene, camera);
     }
   }

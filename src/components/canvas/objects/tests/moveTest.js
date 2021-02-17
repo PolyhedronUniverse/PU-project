@@ -145,6 +145,8 @@ export default function MoveTest(scene, camera, nebulas, canvas, loadingManager)
     }
   }
 
+
+
   function onLoad(event){
     event.preventDefault()
     insertUrlParam('location','home')
