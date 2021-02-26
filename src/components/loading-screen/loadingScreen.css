@@ -1,0 +1,77 @@
+#load-overlay{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../../assets/1024hud.jpg');
+  /* filter: grayscale(100%); */
+  font-family: 'MyFont';
+  /* color: white; */
+
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#load-logo{
+  width: 40%;
+  /* background-color: #ffffff; */
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+
+  /* opacity: 50%; */
+}
+
+#load-logo img{
+  width: 40%;
+}
+
+#load-message{
+}
+
+#load-button{
+
+}
+
+#load-message p{
+  text-align: center;
+  font-size: 16pt;
+}
+
+.overlay-content{
+
+  text-align: center;
+}
+
+.loading-button{
+  width: auto;
+  padding: 5px 12px;
+  /* cursor: pointer; */
+  border: solid thin;
+  border-radius: 15px;
+  background-color: rgba(0,0,0,0.5);
+  font-family: 'MyFont';
+  font-size: 14pt;
+  color: white;
+  /* display: none; */
+}
+
+.enter-button:hover{
+  filter: invert(100%);
+  cursor: pointer;
+}
+
+.loading{
+  opacity: 0;
+  animation: fadeinout 5s infinite;
+}
+
+@keyframes fadeinout {
+  /* 0%,100% { opacity: 0 } */
+  50% { opacity: 1 }
+}

@@ -1,96 +1,106 @@
-import React from 'react'
+import React from 'react';
 import './footer.css'
+import SpotifyMenu from '../spotify/spotifyMenu.js'
 
-export const Footer = (props) => {
-  const {visible,setVisible}= props;
-  return (
-    <div className="footer" id="footer">
-      <div>
-          <img
-            className='shortcut'
-            alt='linkedin'
-            src={require('../../assets/linkedin_w.png')}
-            onMouseOver = {e => (e.currentTarget.src = require('../../assets/linkedin_b.png'))}
-            onMouseOut = {e => (e.currentTarget.src = require('../../assets/linkedin_w.png'))}
-            onClick = {e => (window.open('https://www.linkedin.com/company/polyhedronuniverse/'))}
-            />
-      </div>
-      <div>
-          <img
-            className='shortcut'
-            alt='twitter'
-            src={require('../../assets/twitter_w.png')}
-            onMouseOver = {e => (e.currentTarget.src = require('../../assets/twitter_b.png'))}
-            onMouseOut = {e => (e.currentTarget.src = require('../../assets/twitter_w.png'))}
-            onClick={() => window.open('https://twitter.com/polyhedronuniv')}
-            />
-      </div>
 
-      <div>
-          <img
-            className='shortcut'
-            alt='tiktok'
-            src={require('../../assets/Tiktok_w.png')}
-            onMouseOver = {e => (e.currentTarget.src = require('../../assets/Tiktok_b.png'))}
-            onMouseOut = {e => (e.currentTarget.src = require('../../assets/Tiktok_w.png'))}
-            onClick = {e => (window.open('https://www.tiktok.com/@pubackstage'))}
-            />
-      </div>
+import linkedin_b from '../../assets/linkedin_b.png'
+import linkedin_w from'../../assets/linkedin_w.png'
+import twitter_b from '../../assets/twitter_b.png'
+import twitter_w from '../../assets/twitter_w.png'
+import tiktok_b from '../../assets/Tiktok_b.png'
+import tiktok_w from '../../assets/Tiktok_w.png'
+import youtube_b from '../../assets/youtube_b.png'
+import youtube_w from '../../assets/youtube_w.png'
+import instagram_b from '../../assets/instagram_b.png'
+import instagram_w from '../../assets/instagram_w.png'
+import facebook_b from '../../assets/facebook_b.png'
+import facebook_w from '../../assets/facebook_w.png'
+import twitch_b from '../../assets/Twitch_b.png'
+import twitch_w from '../../assets/Twitch_w.png'
+import spotify_b from '../../assets/spotify_b.png'
+import spotify_w from '../../assets/spotify_w.png'
 
-      <div>
-          <img
-            className='shortcut'
-            alt='youtube'
-            src = {require('../../assets/youtube_w.png')}
-            onMouseOver = {e => (e.currentTarget.src = require('../../assets/youtube_b.png'))}
-            onMouseOut = {e => (e.currentTarget.src = require('../../assets/youtube_w.png'))}
-            onClick={() => window.open(' https://www.youtube.com/channel/UCniBFi3JxA4f0f3rOF-GiRQ', '_blank')}
-            />
-      </div>
+class SocialIcons extends React.Component {
 
-      <div>
-          <img
-            className='shortcut'
-            alt='instagram'
-            src={require('../../assets/instagram_w.png')}
-            onMouseOver = {e => (e.currentTarget.src = require('../../assets/instagram_b.png'))}
-            onMouseOut = {e => (e.currentTarget.src = require('../../assets/instagram_w.png'))}
-            onClick={() => window.open('https://www.instagram.com/polyhedronuniverse/')}
-            />
-      </div>
 
-      <div>
+  render() {
+    return (
+      <div className='shortcut'>
+        <a className='link-sm' href={this.props.social}>
           <img
-            className='shortcut'
-            alt='facebook'
-            src={require('../../assets/facebook_w.png')}
-            onMouseOver = {e => (e.currentTarget.src = require('../../assets/facebook_b.png'))}
-            onMouseOut = {e => (e.currentTarget.src = require('../../assets/facebook_w.png'))}
-            onClick={() => window.open('https://www.facebook.com/polyhedronuniverse/')}
+            className='image-sm'
+            alt={this.props.alt}
+            src={this.props.white}
+            onMouseOut={e=>(e.currentTarget.src=this.props.white)}
+            onMouseOver={e=>(e.currentTarget.src=this.props.black)}
+            onClick = {this.props.onClick}
             />
+        </a>
       </div>
+    );
+  }
+}
 
-      <div>
-          <img
-            className='shortcut'
-            alt='twitch'
-            src={require('../../assets/Twitch_w.png')}
-            onMouseOver = {e => (e.currentTarget.src = require('../../assets/Twitch_b.png'))}
-            onMouseOut = {e => (e.currentTarget.src = require('../../assets/Twitch_w.png'))}
-            onClick = {e => (window.open('https://www.twitch.tv/pu_livestream'))}
-            />
-      </div>
 
-      <div>
-          <img
-            className='shortcut'
-            alt='spotify'
-            src={require('../../assets/spotify_w.png')}
-            onMouseOver = {e => (e.currentTarget.src = require('../../assets/spotify_b.png'))}
-            onMouseOut = {e => (e.currentTarget.src = require('../../assets/spotify_w.png'))}
-            onClick={() => setVisible(!visible)}
-            />
-      </div>
+export default function Footer(){
+
+  return(
+    <>
+    <div id='footer'>
+      <SocialIcons
+        social='https://www.linkedin.com/company/polyhedronuniverse/'
+        white={linkedin_w}
+        black={linkedin_b}
+        alt={'linkedin'}
+        />
+      <SocialIcons
+        social='https://twitter.com/polyhedronuniv'
+        white={twitter_w}
+        black={twitter_b}
+        alt={'twitter'}
+        />
+      <SocialIcons
+        social='https://www.tiktok.com/@pubackstage'
+        white={tiktok_w}
+        black={tiktok_b}
+        alt={'tiktok'}
+        />
+      <SocialIcons
+        social='https://www.youtube.com/channel/UCniBFi3JxA4f0f3rOF-GiRQ'
+        white={youtube_w}
+        black={youtube_b}
+        alt={'youtube'}
+        />
+      <SocialIcons
+        social='https://www.instagram.com/polyhedronuniverse/'
+        white={instagram_w}
+        black={instagram_b}
+        alt={'instagram'}
+        />
+      <SocialIcons
+        social='https://www.facebook.com/polyhedronuniverse/'
+        white={facebook_w}
+        black={facebook_b}
+        alt={'facebook'}
+        />
+      <SocialIcons
+        social='https://www.twitch.tv/pu_livestream'
+        white={twitch_w}
+        black={twitch_b}
+        alt={'twitch'}
+        />
+      <SocialIcons
+        white={spotify_w}
+        black={spotify_b}
+        alt={'spotify'}
+        onClick={() => {
+          document.getElementById("spotifyMenu").style.width = "25%"
+          document.getElementById("spotifyMenu").style.height = "25%"
+          document.getElementById("spotifyMenu").style.border = "solid thin"
+        }}
+      />
     </div>
+    <SpotifyMenu />
+    </>
   )
 }

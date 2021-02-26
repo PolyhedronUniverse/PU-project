@@ -1,0 +1,39 @@
+#spotifyMenu{
+  position: fixed;
+  bottom: 0; /* Stay at the top */
+  right: 0;
+  overflow-x: hidden;
+
+  border-radius: 10px;
+  width: 0px;
+  height: 0px;
+  max-height: 40%;
+  transition: 0.5s;
+  background-color: #f7f6fb;
+}
+
+#flexContainer{
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: space-around;
+}
+
+.s-artist{
+  width: 30%;
+
+}
+
+.s-image{
+  width: 100%;
+}
+
+.titleArtist{
+  text-align: center;
+  font-family: 'MyFont';
+  font-size: 2vw;
+  margin-bottom: 10px;
+}
+
+.s-link{
+  width: 50%;
+}

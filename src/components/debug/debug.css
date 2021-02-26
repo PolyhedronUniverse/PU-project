@@ -1,9 +1,0 @@
-#debug {
-  position: absolute;
-  left: 80%;
-  top: 10em;
-  padding: 1em;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  font-family: monospace;
-}

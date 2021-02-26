@@ -1,38 +1,66 @@
-@font-face{
-  font-family: 'MyFont';
-  src: url('./selawkl.ttf') format('truetype');
+@media screen and (min-width: 601px) {
+  #header {
+    font-size: 2.5vw;
+  }
 }
 
-.header{
+@media screen and (max-width: 601px) {
+  #header {
+    font-size: 2.5vw;
+  }
+}
+
+
+
+#header{
+  height: 15%;
+  width: 100%;
+  text-align: center;
+  font-family: 'MyFont';
+  background-color: #f7f6fb;
+
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: #f7f6fb;
+  justify-content: space-around;
+}
 
-  width: 100%;
-  font-family: 'MyFont';
-  font-size: 2.5vw;
+#name1{
+  width: 25%;
+  text-align: right;
 }
 
 #logo{
-  width: 8%;
-  margin-left: 1%;
-  margin-right: 1%;
-  /* border: solid thin */
+  height: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-.patreonButton{
-  width: 7%;
-  margin-top: 0.3%;
+#name2{
+  width: 25%;
+  text-align: left;
+}
+
+#button, #span{
+  width: 10%;
+}
+
+#logoHeader{
+  height: 100%;
+}
+
+
+
+#patreonButton{
+  /* width: 7.5%; */
+  padding: 7.5px 7.5px;
   cursor: pointer;
+  border: solid thin;
+  border-radius: 10px;
+  background-color: #ffffff;
+  font-family: 'MyFont';
+  font-size: 1vw;
 }
 
-.patreon:hover{
-  color: white;
-  background-color: black;
-}
-
-p{
-  margin-left: 7.5%;
-  margin-right: 7.5%;
+#patreonButton:hover{
+  filter: invert(100%);
 }

@@ -1,27 +1,32 @@
 import React from 'react'
 import './header.css'
 
-export const Header = () => {
-  return (
-    <div className="header" id="header">
+import pulogo from '../../assets/PU_Logo.png'
 
-      <p>P  O  L  Y  H  E  D  R  O  N</p>
-      <img
-        className='logo'
-        id="logo"
-        alt='logo'
-        src={require('../../assets/PU_Logo.png')}
-        />
-      <p>U  N  I  V  E  R  S  E</p>
+export default function Header(){
 
-      <img
-          className='patreonButton'
-          alt='patreon'
-          src = {require('../../assets/Patreon_w_160.png')}
-          onMouseOver = {e => (e.currentTarget.src = require('../../assets/Patreon_b_160.png'))}
-          onMouseOut = {e => (e.currentTarget.src = require('../../assets/Patreon_w_160.png'))}
-          onClick={() => window.open('https://www.patreon.com/polyhedronuniverse?')}
-        />
+  return(
+    <div id='header'>
+
+      <div id='span'>
+      </div>
+
+      <div id='name1'>
+        P O L Y H E D R O N
+      </div>
+
+      <div id='logo'>
+        <img id='logoHeader' alt='pu-logo' src={pulogo}/>
+      </div>
+
+      <div id='name2'>
+        U N I V E R S E
+      </div>
+
+
+      <div id='button'>
+        <button id='patreonButton' alt='patreon'>P A T R E O N</button>
+      </div>
 
     </div>
   )

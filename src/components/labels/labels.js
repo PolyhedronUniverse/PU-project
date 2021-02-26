@@ -1,7 +1,7 @@
 import React from 'react'
 import './labels.css'
 
-export const Labels = () => {
+export default function Labels() {
   return (
     <div id="labels">
       <div id="nebula" className="label">
