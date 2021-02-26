@@ -78,16 +78,21 @@
   }
   
   #back{
+    /* width: 5%; */
     position: absolute;
-    left: 0%;
-    top: 15vh;
-    padding: 1em;
-    background: rgba(0, 0, 0, 0.904);
+    left: 1%;
+    top: 16vh;
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.5);
     color: white;
     font-family: 'MyFont';  
+    border: solid thin;
+    border-radius: 15px;
+    font-size: 12pt;
   }
   
   #back:hover{
     cursor: pointer;
+    filter: invert(100%);
   }
   

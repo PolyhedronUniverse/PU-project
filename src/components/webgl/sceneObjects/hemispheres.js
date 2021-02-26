@@ -40,6 +40,7 @@ export default function Hemispheres(scene, loadingManager, camera){
   const geometry = new THREE.ShapeGeometry( shape );
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.z=camera.position.z-0.97
+  // mesh.position.z=-0.97
 
   mesh.name = "MainHud"
   scene.add(mesh)

@@ -1,3 +1,10 @@
+/*
+  todo: Clean scripts
+  todo: test on mobile and overall the page
+  todo: improve the travel
+  todo: check slug
+*/
+
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
@@ -34,7 +41,6 @@ export default function MainScene(header, footer) {
   document.getElementById('header').style.visibility = 'hidden';
   document.getElementById('footer').style.visibility = 'hidden';
   const stats = new MyStats()
-  // document.body.appendChild(stats.dom)
 
   // # END CONSTANT VARIABLES #
 
@@ -54,15 +60,9 @@ export default function MainScene(header, footer) {
      *  todo: ?
      */
 
-    //// const loader = new THREE.CubeTextureLoader(loadingManager)
-    //// const texture = loader.load([
-    ////   posx,negx,posy,negy,posz,negz
-    //// ])
-
     const scene = new THREE.Scene();
     scene.name = "MainScene";
     scene.background = texture;
-    // scene.background = new THREE.Color(0xffffff)
     return scene;
   }
 
@@ -112,21 +112,14 @@ export default function MainScene(header, footer) {
   }
 
   //* 4. Orbit Controls 
-  function myOrbitControls(camera, renderer, target) {
+  function myOrbitControls(camera, renderer) {
     /**
      * * This function will ganerate the OrbitControls and set the
      * * needed configuration. It should recive the main camera
      * * and the canvas element.
      */
 
-    /**
-     * todo:
-     */
-    // camera.far = 100;
-    // camera.updateProjectionMatrix();
-    // console.log(camera)
     const controls = new OrbitControls(camera, renderer.domElement);
-    // controls.target.set(target.x, target.y, target.z);
     controls.target.set(0, 0, -4000)
     controls.maxDistance = 200;
     controls.enablePan = false;
@@ -136,20 +129,10 @@ export default function MainScene(header, footer) {
     controls.saveState();
     controls.update()
     const type = 'orbit'
-    console.log('cam on')
     return { controls, type };
   }
 
-  //* 5. Travel to nebula
-  // function travelTo(camera, renderer) {
-  //   // camera.position.z = -1500;
-  //   // control = myOrbitControls(camera,renderer)
-  //   // if(camera.position < 0){
-
-  //   // }
-  // }
-
-  //* 6. Add scene objects 
+  //* 5. Add scene objects 
   function addObject(object) {
     // ! need to figuire this shit out
     // let newObj = [];
@@ -158,15 +141,15 @@ export default function MainScene(header, footer) {
   }
 
   /* Other functions */
-  //* 7. Display nebula name
+  //* 6. Display nebula name
   function displayNebula(name, left, top) {
     document.getElementById("n-name").textContent = name;
-    document.getElementById("nebula").style.display = ''
+    document.getElementById('nebula').style.display = ''
     document.getElementById('nebula').style.left = (left) + "px";
     document.getElementById('nebula').style.top = (top + 50) + "px";
   }
 
-  //* 8. Display Star Meta data
+  //* 7. Display Star Meta data
   function starMetadata(metadata, left, top) {
     /**
      * todo: copy code from SceneManager
@@ -264,7 +247,7 @@ export default function MainScene(header, footer) {
   const renderer = buildRender(); // * Call the renderer builder and store it.
   const camera = buildCamera(scene); // * Call the camera builder and pass the scene variable.
 
-  // control = myOrbitControls(camera, renderer)
+  // * por si las moscas - control = myOrbitControls(camera, renderer)
 
   // # END CALLING FUNCTIONS #
 
@@ -273,21 +256,17 @@ export default function MainScene(header, footer) {
   // # ADD OBJECTS TO THE SCENE #
 
   let objects = []
-  // let areas = [];
 
   // * static
   Hemispheres(scene, loadingManager, camera)
-  // Planets(scene, loadingManager)
-  // WonderSystem(scene, loadingManager)
   // * needs update
   objects.push(addObject(new Nebulas(scene, loadingManager)));
   objects.push(addObject(new Wormhole(camera, loadingManager)));
   objects.push(addObject(new OldWonder(scene, loadingManager)));
   objects.push(addObject(new Stars(scene, loadingManager)));
-  // objects.push(addObject(new WonderSystem(scene, loadingManager)))
+  // todo: contine testing shaders - objects.push(addObject(new WonderSystem(scene, loadingManager)))
   objects.push(addObject(new Planets(scene, loadingManager)));
-  // console.log(objects[4])
-  // console.log(nebulas)
+
 
   // # END ADD OBJECTS TO THE SCENE #
 
@@ -298,7 +277,7 @@ export default function MainScene(header, footer) {
   const sounds = Sounds(camera, loadingManager)
 
 
-  // const analyser = new THREE.AudioAnalyser( sound, 128 );
+  // ? const analyser = new THREE.AudioAnalyser( sound, 128 );
 
   // # END AUDIO SHIT #
 
@@ -329,9 +308,12 @@ export default function MainScene(header, footer) {
         control = myOrbitControls(camera, renderer);
         scene.background = nebulas[query.location + 'Texture'];
         objects[4][query.location + 'Points'].layers.enable(0)
+        document.getElementById("back").style.display = '';
+        document.getElementById("gui").style.display = 'none';
       }
     } else {
       InsertParameter('location', 'home');
+      query.location = 'home';
     }
   }
 
@@ -345,7 +327,6 @@ export default function MainScene(header, footer) {
     camera.aspect = window.innerWidth / (window.innerHeight * 0.775);
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight * 0.775);
-    console.debug('resize')
   }
 
   //* 3. OnMouseMove
@@ -390,7 +371,7 @@ export default function MainScene(header, footer) {
         // console.log(intersects[0].object.userData[att.index.array[INTERSECTED]])
         att.a_opacity.array[INTERSECTED] = 1;
         att.a_opacity.needsUpdate = true;
-        starMetadata(intersects[0].object.userData[att.index.array[INTERSECTED]], event.clientX - rect.left, event.clientY - rect.top)
+        // starMetadata(intersects[0].object.userData[att.index.array[INTERSECTED]], event.clientX - rect.left, event.clientY - rect.top)
       } else
         displayNebula(intersects[0].object.userData.displayName, event.clientX - rect.left, event.clientY - rect.top)
 
@@ -403,9 +384,9 @@ export default function MainScene(header, footer) {
         INTERSECTED = null;
       }
 
-      document.getElementById('canvas-area').style.cursor = "default";
-      document.getElementById("nebula").style.display = 'none';
-      document.getElementById("s-metadata").style.display = 'none';
+      document.getElementById('canvas-area').style.cursor = 'default';
+      document.getElementById('nebula').style.display = 'none';
+      // document.getElementById('s-metadata').style.display = 'none';
     }
   }
 
@@ -424,7 +405,6 @@ export default function MainScene(header, footer) {
     event.preventDefault();
     // console.log(event.which)
     if (event.which !== 1) {
-      console.log('not left mouse button')
       return;
     }
 
@@ -441,53 +421,91 @@ export default function MainScene(header, footer) {
 
     raycaster.setFromCamera(mouse, camera);
 
-    intersects = raycaster.intersectObjects(objects[0].nebulas, true)
+    let att;
+    if (query.location !== 'home') {
+      // console.log(query.location)
+      intersects = raycaster.intersectObjects([objects[4][query.location + 'Points']], true)
+      att = objects[4][query.location + 'Points'].geometry.attributes;
+    } else {
+      intersects = raycaster.intersectObjects(objects[0].nebulas, true)
+    }
+
+
+
     if (intersects.length > 0) {
-      const name = intersects[0].object.userData.displayName
-      InsertParameter('location', name);
-      query.location = name;
-      camera.position.z -= 10;
-      travel = 'forward';
-      target = intersects[0].object.parent.position;
-      objects[4][query.location + 'Points'].layers.enable(0)
-      sounds.onSound.play();
-      document.getElementById('gui').style.display = 'none'
-      // travelTo(camera,renderer)
-      // if((intersects[0].uv.length) < 1 )
-      // console.log(intersects[0].object.parent.position)
 
-      // console.log(window.location)
+      if (query.location !== 'home') {
+        starMetadata(intersects[0].object.userData[att.index.array[INTERSECTED]], event.clientX - rect.left, event.clientY - rect.top)
 
-      camera.lookAt(intersects[0].object.parent.position)
-      camera.updateProjectionMatrix();
+      } else {
+        const name = intersects[0].object.userData.displayName
+        InsertParameter('location', name);
+        query.location = name;
+        camera.position.z -= 10;
+        travel = 'forward';
+        target = intersects[0].object.parent.position;
+        objects[4][query.location + 'Points'].layers.enable(0)
+        sounds.onSound.play();
+        document.getElementById('gui').style.display = 'none'
 
-      // control = myOrbitControls(camera,renderer)
+        camera.lookAt(intersects[0].object.parent.position)
+        camera.updateProjectionMatrix();
+      }
+
+    }else{
+      document.getElementById('s-metadata').style.display = 'none';
     }
   }
 
   //* 5. OnKeyDown
   function onKeyDown(event) {
+    if (event.which === 82) {
+      if (query.location !== 'home') {
+        if (control) {
+          console.log(control)
+          control.controls.reset()
+          control.controls.dispose()
+          control.controls.update()
+          console.log(control)
+          control = null;
+        }
+        camera.position.set(0, 0, -3900);
+        camera.lookAt(0, 0, -4000);
+        camera.updateProjectionMatrix()
+        travel = 'backward';
+        objects[4][query.location + 'Points'].layers.disableAll();
+        // this.style.display = 'none';
+        camera.children[0].position.z = 10;
+        camera.children[0].material.uniforms.a.value = 1;
+        sounds.onSound.play();
+        InsertParameter('location', 'home');
+        query.location = 'home';
+        // starMetadata()
+      }
 
+
+    }
+    // console.log(event.which)
   }
 
   //* 6. Back button
-  function backOnPointerDown(event){
-    if(query.location !== 'home'){
-      if(control){
+  function backOnPointerDown(event) {
+    if (query.location !== 'home') {
+      if (control) {
         control.controls.reset()
         control.controls.dispose()
         control = null;
       }
-      camera.position.set(0,0,-3900);
-      camera.lookAt(0,0,-4000);
+      camera.position.set(0, 0, -3900);
+      camera.lookAt(0, 0, -4000);
       camera.updateProjectionMatrix()
       travel = 'backward';
-      objects[4][query.location+'Points'].layers.disableAll();
+      objects[4][query.location + 'Points'].layers.disableAll();
       this.style.display = 'none';
       camera.children[0].position.z = 10;
       camera.children[0].material.uniforms.a.value = 1;
       sounds.onSound.play();
-      InsertParameter('location','home');
+      InsertParameter('location', 'home');
       query.location = 'home';
     }
   }
@@ -502,7 +520,7 @@ export default function MainScene(header, footer) {
   window.addEventListener('load', onLoad, false)
   renderer.domElement.addEventListener('pointermove', onMouseMove, false)
   renderer.domElement.addEventListener('pointerdown', onMouseDown, false)
-  window.addEventListener('keydown', onKeyDown, false)
+  // ? window.addEventListener('keydown', onKeyDown, false)
   document.getElementById('back').addEventListener('pointerup', backOnPointerDown, false)
 
   // # END ATTACH EVENTLISTENERS #
@@ -515,7 +533,7 @@ export default function MainScene(header, footer) {
   function update() {
     requestAnimationFrame(update)
     if (!LOADED) {
-
+      console.log('loading')
 
 
     } else {
@@ -546,28 +564,28 @@ export default function MainScene(header, footer) {
             target = new THREE.Vector3(0, 0, -4000);
           }
         }
-      }else if(travel === 'backward'){
-        if(camera.position.z > 340){
-          camera.position.set(0,0,350)
+      } else if (travel === 'backward') {
+        if (camera.position.z > 340) {
+          camera.position.set(0, 0, 350)
           camera.lookAt(0, 0, -4000);
           camera.updateProjectionMatrix();
           travel = 'off'
           camera.children[0].userData.reset();
-        }else {
+        } else {
 
-          if(camera.position.z > -1200){
+          if (camera.position.z > -1200) {
             // camera.children[0].material.uniform.a.value = Math.abs(camera.position.distanceTo(new THREE.Vector3(0,0,350))) ;
-            camera.children[0].material.uniforms.a.value = 1 - (camera.position.z + 1200) / 1550; 
+            camera.children[0].material.uniforms.a.value = 1 - (camera.position.z + 1200) / 1550;
             // camera.children[0].position.z = -(3500 + camera.position.z )/230;
             camera.translateZ(5);
-          }else if(camera.position.z > -3500){
+          } else if (camera.position.z > -3500) {
             camera.translateZ(10);
-          }else{
+          } else {
             camera.translateZ(15)
           }
           camera.children[0].position.z -= 0.02
 
-          if (Math.abs(camera.position.distanceTo(new THREE.Vector3(0,0,-1000))) < 10) {
+          if (Math.abs(camera.position.distanceTo(new THREE.Vector3(0, 0, -1000))) < 10) {
             scene.background = nebulas['mainTexture'];
           }
         }
@@ -579,9 +597,7 @@ export default function MainScene(header, footer) {
     }
   }
 
-  // console.log(window.devicePixelRatio)
   let name = 'Main Scene' + window.devicePixelRatio;
-  // console.log(renderer.info)
   return (
     {
       renderer,

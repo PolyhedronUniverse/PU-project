@@ -168,14 +168,14 @@ export default function Planets(scene, loadingManager) {
     wonderPoints.layers.disableAll();
     scene.add(wonderPoints);
 
-    const geometry = new THREE.SphereBufferGeometry(10, 10, 10);
-    const mat = new THREE.MeshBasicMaterial({
-        color: 'red'
-    })
+    // const geometry = new THREE.SphereBufferGeometry(10, 10, 10);
+    // const mat = new THREE.MeshBasicMaterial({
+    //     color: 'red'
+    // })
 
-    const mesh = new THREE.Mesh(geometry, mat)
-    mesh.position.set(0, 0, -4000)
-    scene.add(mesh)
+    // const mesh = new THREE.Mesh(geometry, mat)
+    // mesh.position.set(0, 0, -4000)
+    // scene.add(mesh)
 
     let update = function () {
 

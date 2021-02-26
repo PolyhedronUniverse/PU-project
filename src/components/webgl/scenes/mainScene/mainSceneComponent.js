@@ -2,7 +2,7 @@ import React from 'react';
 import MainScene from './mainScene'
 // import Gui from '../gui/gui'
 import Labels from '../../../labels/labels'
-import Gui from '../../../info/info'
+import Info from '../../../info/info'
 
 class CanvasWebgl extends React.Component {
 
@@ -20,7 +20,7 @@ class CanvasWebgl extends React.Component {
   render(){
     return(
       <>
-        <Gui />
+        <Info />
         {/* <p id='sceneName'>main scene{window.devicePixelRatio}</p> */}
         <div id='canvas-area' style={{ width: "100%", display: "none" }} ref={mount => {this.mount = mount}}>
           <Labels />

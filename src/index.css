@@ -19,3 +19,8 @@ html, body, #root, .webgl{
 *{
   margin: 0;
 }
+
+canvas { 
+  outline: none; 
+  border: none; 
+}

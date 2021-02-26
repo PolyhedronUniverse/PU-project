@@ -46,8 +46,8 @@ export default function Stars(scene, loadingManager) {
 
     const texture = new THREE.TextureLoader(loadingManager).load(spark);
 
-    const yellow = createGeometry(4096, 1, 48, 1, 0.5)
-    const white = createGeometry(4096, 1, 48, 1, 1.0)
+    const yellow = createGeometry(2048, 1, 48, 1, 0.5)
+    const white = createGeometry(1024, 1, 48, 1, 1.0)
     
     const vs = `
     attribute float size;

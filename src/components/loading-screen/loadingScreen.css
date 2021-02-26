@@ -6,7 +6,13 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('../../assets/1024hud.jpg');
+  /* todo: reference to new image */
+  background-image: url('../../assets/PU_Splashscreen.png');
+  /* ? background propietes temporal */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; /* Resize the background image to cover the entire container */
+  
   /* filter: grayscale(100%); */
   font-family: 'MyFont';
   /* color: white; */
@@ -44,12 +50,12 @@
 }
 
 .overlay-content{
-
+  background-color: green;
   text-align: center;
 }
 
 .loading-button{
-  width: auto;
+  width: 10%;
   padding: 5px 12px;
   /* cursor: pointer; */
   border: solid thin;
@@ -59,6 +65,20 @@
   font-size: 14pt;
   color: white;
   /* display: none; */
+
+  /* ? temporals */
+  position:absolute;
+  bottom: 10%;
+  left: 45%;
+}
+
+.enter-button{
+  /* ? temporals */
+  width: 10%;
+  /* background-color: red; */
+  position:absolute;
+  bottom: 10%;
+  left: 45%;
 }
 
 .enter-button:hover{

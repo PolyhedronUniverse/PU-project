@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {isMobile} from 'react-device-detect';
 import wormhole from '../sceneAssets/wormholeTexture/wormhole_opacity.png';
 import Shaders from '../sceneAssets/shaders/shaders'
 
@@ -37,9 +38,12 @@ export default function Nebulas(scene, loadingManager) {
 
     const areaMesh = new THREE.Mesh(
       areaGeo,
-      new THREE.MeshBasicMaterial({ alphaMap: texture, color: new THREE.Color().setHSL(color, 1, .5), transparent: true })
+      new THREE.MeshBasicMaterial({ 
+        alphaMap: texture, 
+        color: new THREE.Color().setHSL(color, 1, .5), 
+        transparent: true })
     )
-    areaMesh.position.z = -200;
+    areaMesh.position.z = -100;
     areaMesh.userData.displayName = name;
 
     const group = new THREE.Group();
@@ -62,12 +66,12 @@ export default function Nebulas(scene, loadingManager) {
     return { group, update }
   }
   let geometry;
-  if(window.devicePixelRatio > 1){
+  if(isMobile){
     geometry = new THREE.PlaneBufferGeometry(250, 250, 30, 30);
   }else{
-    geometry = new THREE.PlaneBufferGeometry(250, 250, 110, 110);
+    geometry = new THREE.PlaneBufferGeometry(280, 280, 110, 110);
   }
-  const areaG = new THREE.CircleBufferGeometry(80, 10);
+  const areaG = new THREE.CircleBufferGeometry(140, 32);
 
 
   // const anger1 = createNebula(
@@ -155,17 +159,17 @@ export default function Nebulas(scene, loadingManager) {
   );
   scene.add(empowerment.group)
 
-  // const wonder = createNebula(
-  //   geometry,
-  //   areaG,
-  //   120/360,
-  //   new THREE.Vector3(0,0,-550),
-  //   new THREE.Vector3(0,0,350),
-  //   'wonder',
-  //   0.02,
-  //   {vs: myShaders.vs, fs:myShaders.fs}
-  // )
-  // scene.add(wonder.group)
+  const wonder = createNebula(
+    geometry,
+    areaG,
+    120/360,
+    new THREE.Vector3(0,0,-550),
+    new THREE.Vector3(0,0,350),
+    'wonder',
+    0.002,
+    {vs: myShaders.vs, fs:myShaders.fs}
+  )
+  scene.add(wonder.group)
 
   const g = new THREE.PlaneBufferGeometry(250, 50, 10, 10)
   const m = new THREE.MeshBasicMaterial({color: "green", wireframe: false, transparent:true, opacity: 0.5})
@@ -183,7 +187,7 @@ export default function Nebulas(scene, loadingManager) {
     joy.update();
     love.update();
     empowerment.update();
-    // wonder.update();
+    wonder.update();
     // anger1.update()
     // ? anger2.update()
 
