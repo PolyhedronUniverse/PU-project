@@ -16,6 +16,8 @@ import OldWonder from '../../sceneObjects/oldWonder'
 import Wormhole from '../../sceneObjects/wormhole'
 import Stars from '../../sceneObjects/stars'
 import Planets from '../../sceneObjects/planets'
+import OldPlanets from '../../sceneObjects/oldPlanets'
+
 // import Wonder from '../../sceneObjects/wonder'
 // import WonderSystem from '../../sceneObjects/wonderSystem'
 
@@ -124,8 +126,8 @@ export default function MainScene(header, footer) {
     controls.maxDistance = 200;
     controls.enablePan = false;
     controls.enableDamping = true;
-    controls.dampingFactor = 0.01;
-    controls.zoomSpeed = 0.1;
+    controls.dampingFactor = 0.1;
+    controls.zoomSpeed = 0.5;
     controls.saveState();
     controls.update()
     const type = 'orbit'
@@ -265,12 +267,13 @@ export default function MainScene(header, footer) {
   objects.push(addObject(new OldWonder(scene, loadingManager)));
   objects.push(addObject(new Stars(scene, loadingManager)));
   // todo: contine testing shaders - objects.push(addObject(new WonderSystem(scene, loadingManager)))
-  objects.push(addObject(new Planets(scene, loadingManager)));
-
-
+  // objects.push(addObject(new oldPlanets(scene, loadingManager)));
+  const planets = OldPlanets(scene, loadingManager);
+  
+  
   // # END ADD OBJECTS TO THE SCENE #
-
-
+  
+  
 
   // # AUDIO SHIT #
 
@@ -307,7 +310,8 @@ export default function MainScene(header, footer) {
         camera.position.z = -3950;
         control = myOrbitControls(camera, renderer);
         scene.background = nebulas[query.location + 'Texture'];
-        objects[4][query.location + 'Points'].layers.enable(0)
+        planets[query.location + 'Points'].layers.enable(0)
+        planets[query.location + 'Points'].userData.enable()
         document.getElementById("back").style.display = '';
         document.getElementById("gui").style.display = 'none';
       }
@@ -359,18 +363,20 @@ export default function MainScene(header, footer) {
     let att;
     if (query.location !== 'home') {
       // console.log(query.location)
-      intersects = raycaster.intersectObjects([objects[4][query.location + 'Points']], true)
-      att = objects[4][query.location + 'Points'].geometry.attributes;
+      intersects = raycaster.intersectObjects([planets[query.location + 'Points']], true)
+      // att = planets[query.location + 'Points'].geometry.attributes;
 
     } else
       intersects = raycaster.intersectObjects(objects[0].nebulas, true)
 
     if (intersects.length > 0) {
+      // console.log(intersects[0].object)
+      // intersects[0].object.parent.userData.changeLayer()
       if (query.location !== 'home') {
-        INTERSECTED = intersects[0].index;
+        // INTERSECTED = intersects[0].index;
         // console.log(intersects[0].object.userData[att.index.array[INTERSECTED]])
-        att.a_opacity.array[INTERSECTED] = 1;
-        att.a_opacity.needsUpdate = true;
+        // att.a_opacity.array[INTERSECTED] = 1;
+        // att.a_opacity.needsUpdate = true;
         // starMetadata(intersects[0].object.userData[att.index.array[INTERSECTED]], event.clientX - rect.left, event.clientY - rect.top)
       } else
         displayNebula(intersects[0].object.userData.displayName, event.clientX - rect.left, event.clientY - rect.top)
@@ -378,11 +384,11 @@ export default function MainScene(header, footer) {
       document.getElementById('canvas-area').style.cursor = "pointer";
     } else {
 
-      if (INTERSECTED != null && query.location !== 'home') {
-        att.a_opacity.array[INTERSECTED] = 0.5;
-        att.a_opacity.needsUpdate = true;
-        INTERSECTED = null;
-      }
+      // if (INTERSECTED != null && query.location !== 'home') {
+      //   att.a_opacity.array[INTERSECTED] = 0.5;
+      //   att.a_opacity.needsUpdate = true;
+      //   INTERSECTED = null;
+      // }
 
       document.getElementById('canvas-area').style.cursor = 'default';
       document.getElementById('nebula').style.display = 'none';
@@ -424,8 +430,8 @@ export default function MainScene(header, footer) {
     let att;
     if (query.location !== 'home') {
       // console.log(query.location)
-      intersects = raycaster.intersectObjects([objects[4][query.location + 'Points']], true)
-      att = objects[4][query.location + 'Points'].geometry.attributes;
+      intersects = raycaster.intersectObjects([planets[query.location + 'Points']], true)
+      // att = planets[query.location + 'Points'].geometry.attributes;
     } else {
       intersects = raycaster.intersectObjects(objects[0].nebulas, true)
     }
@@ -435,7 +441,8 @@ export default function MainScene(header, footer) {
     if (intersects.length > 0) {
 
       if (query.location !== 'home') {
-        starMetadata(intersects[0].object.userData[att.index.array[INTERSECTED]], event.clientX - rect.left, event.clientY - rect.top)
+        // starMetadata(intersects[0].object.userData[att.index.array[INTERSECTED]], event.clientX - rect.left, event.clientY - rect.top)
+        starMetadata(intersects[0].object.userData, event.clientX - rect.left, event.clientY - rect.top)
 
       } else {
         const name = intersects[0].object.userData.displayName
@@ -444,7 +451,8 @@ export default function MainScene(header, footer) {
         camera.position.z -= 10;
         travel = 'forward';
         target = intersects[0].object.parent.position;
-        objects[4][query.location + 'Points'].layers.enable(0)
+        planets[query.location + 'Points'].layers.enable(0)
+        planets[query.location + 'Points'].userData.enable()
         sounds.onSound.play();
         document.getElementById('gui').style.display = 'none'
 
@@ -500,7 +508,9 @@ export default function MainScene(header, footer) {
       camera.lookAt(0, 0, -4000);
       camera.updateProjectionMatrix()
       travel = 'backward';
-      objects[4][query.location + 'Points'].layers.disableAll();
+      planets[query.location + 'Points'].layers.disableAll();
+      planets[query.location + 'Points'].userData.disable();
+
       this.style.display = 'none';
       camera.children[0].position.z = 10;
       camera.children[0].material.uniforms.a.value = 1;

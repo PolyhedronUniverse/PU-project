@@ -36,7 +36,6 @@ export default function Planets(scene, loadingManager) {
         precision highp float;
 
         uniform sampler2D pointTexture[6];
-        // uniform float opacity;
         varying vec3 vColor;
         varying float vId;
         varying float vOpacity;
