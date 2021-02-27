@@ -2,8 +2,8 @@ import React from 'react'
 
 import {isMobile} from 'react-device-detect';
 
-import Header from '../components/header/header'
-import Footer from '../components/footer/footer'
+import Header from '../components/header/header.js'
+import Footer from '../components/footer/footer.js'
 // import Canvas from '../components/canvas/canvas'
 import MainCanvas from '../components/webgl/scenes/mainScene/mainSceneComponent'
 // import Experience01 from '../components/webgl/scenes/experience01/exp01Component'

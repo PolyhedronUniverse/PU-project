@@ -2,8 +2,8 @@ import React, {useState,useEffect} from 'react'
 
 import {isMobile} from 'react-device-detect';
 
-import Header from '../components/header/header'
-import Footer from '../components/footer/footer'
+import Header from '../components/header/header.js'
+import Footer from '../components/footer/footer.js'
 // import Canvas from '../components/canvas/canvas'
 // import LoadingScreen from '../components/loading-screen/loadingScreen'
 // import SceneManager from '../components/webgl/sceneManager'
