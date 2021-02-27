@@ -49,13 +49,11 @@ export default function OldPlanets(scene, loadingManager) {
     angerPoints.position.set(0, 0, -4000)
     angerPoints.layers.disableAll();
     angerPoints.userData.enable = function(){
-        console.log(angerPoints.children)
         angerPoints.children.forEach(element => {
             element.layers.enable(0)
         });
     }
     angerPoints.userData.disable = function(){
-        console.log(angerPoints.children)
         angerPoints.children.forEach(element => {
             element.layers.disableAll()
         });

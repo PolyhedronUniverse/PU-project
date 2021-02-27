@@ -373,6 +373,9 @@ export default function MainScene(header, footer) {
       // console.log(intersects[0].object)
       // intersects[0].object.parent.userData.changeLayer()
       if (query.location !== 'home') {
+        // console.log(intersects[0])
+        INTERSECTED=intersects[0].object
+        INTERSECTED.material.opacity = 1;
         // INTERSECTED = intersects[0].index;
         // console.log(intersects[0].object.userData[att.index.array[INTERSECTED]])
         // att.a_opacity.array[INTERSECTED] = 1;
@@ -383,12 +386,14 @@ export default function MainScene(header, footer) {
 
       document.getElementById('canvas-area').style.cursor = "pointer";
     } else {
+      
 
-      // if (INTERSECTED != null && query.location !== 'home') {
+      if (INTERSECTED != null && query.location !== 'home') {
       //   att.a_opacity.array[INTERSECTED] = 0.5;
       //   att.a_opacity.needsUpdate = true;
-      //   INTERSECTED = null;
-      // }
+        INTERSECTED.material.opacity = 0.5
+        INTERSECTED = null;
+      }
 
       document.getElementById('canvas-area').style.cursor = 'default';
       document.getElementById('nebula').style.display = 'none';
