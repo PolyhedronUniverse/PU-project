@@ -1,13 +1,13 @@
 #spotifyMenu{
   position: fixed;
-  bottom: 0; /* Stay at the top */
+  bottom: 7.5vh; /* Stay at the top */
   right: 0;
   overflow-x: hidden;
 
   border-radius: 10px;
   width: 0px;
   height: 0px;
-  max-height: 40%;
+  max-height: 40vh;
   transition: 0.5s;
   background-color: #f7f6fb;
 }
@@ -18,9 +18,22 @@
   justify-content: space-around;
 }
 
-.s-artist{
-  width: 30%;
+@media screen and (min-width: 601px) {
+  .s-artist{
+    width: 30%;
+  }
+  .titleArtist{
+    font-size: 2vw;
+  }
+}
 
+@media screen and (max-width: 601px) {
+  .s-artist{
+    width: 52.5%;
+  }
+  .titleArtist{
+    font-size: 3vw;
+  }
 }
 
 .s-image{
@@ -30,7 +43,6 @@
 .titleArtist{
   text-align: center;
   font-family: 'MyFont';
-  font-size: 2vw;
   margin-bottom: 10px;
 }
 

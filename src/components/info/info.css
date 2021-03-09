@@ -1,98 +1,114 @@
-#gui{
-    position: absolute;
-    left: 1vw;
-    top: 22vh;
-    padding: 1.5vh;
-    margin-left: 0;
-    margin-right: 0;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    font-family: 'MyFont';
-    font-size: 13px;
-    width: 10%;
-    list-style-position: outside;
-  }
-  
-#gui ol {
-/* background: #cce5ff; */
-    padding: 15px;
+#user{
+  position: absolute;
+  height: 77.5vh;
+  width: 10vw;
+  /* background-color: rgb(255, 8, 0); */
 }
+
+#user div{
+  /* max-width: 100%; */
+}
+
+div#back{
+  padding: 1.5vh 1vw 1.5vh 1vw;
+  position: absolute;
+  top: 0;
+}
+
+button#back{
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  border: solid thin;
+  color: white;
+  font: 'MyFont';
+  padding: 1vh 2vw;
+}
+
+button#back:hover{
+  filter: invert(100%);
+  cursor: pointer;
+}
+
+#back{
+  /* display: none; */
+}
+
+#info{
+  position: absolute;
+  top: 10%;
+  left: 25vw;
+  overflow: hidden;
   
-  #gui li{
-    margin-bottom: 10px;
-  }
+  border-radius: 10%;
+  border: solid;
+  height: 80%;
+  transition: 1.0s;
+  background-color: rgba(0, 0, 0, 0.75);
+  font-family: 'MyFont';
+  font-size: 2vw;
+  color: white;
   
-  #audio {
-    /* position: absolute;
-    align-items: flex-end; */
-    position: absolute;
-    left: 0.3%;
-    bottom: 6.5vh;
-    padding: 1em;
-    background: rgba(0, 0, 0, 0);
-    font-family: 'MyFont';
-    height: 53px;
-    width: 53px;
-    border-width: 0px;
-    cursor: pointer;
-  }
+  padding: 10px;
+  /* margin: 0px; */
   
-  #vol-up, #vol-down{
-    color: rgb(86,101, 115);
-    height: 100%;
-    width: 100%;
-  }
-  /* 
-    #play{
-    color:rgb(86,101, 115);
-    height: 90%;
-    width: 90%;
-    padding-top: 6%;
-    padding-right: 10%;
-  } */
+  /* width: 50vw; */
+
+  display: flex;
+  flex-flow: wrap column;
+  justify-content:center;
   
-  #info{
-    position: absolute;
-    left: 0%;
-    bottom: 12vh;
-    padding: 1em;
-    background: rgba(0, 0, 0, 0);
-    color: white;
-    font-family: 'MyFont';
-    height: 60px;
-    width: 60px;
-    border-width: 0px;
-    cursor: pointer;
-  }
-  
-  #info-on{
-    color: rgb(86,101, 115);
-    height: 100%;
-    width: 100%;
-  }
-  
-  #info-off{
-    color:rgb(86,101, 115);;
-    height: 100%;
-    width: 100%;
-  }
-  
-  #back{
-    /* width: 5%; */
-    position: absolute;
-    left: 1%;
-    top: 16vh;
-    padding: 10px 12px;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    font-family: 'MyFont';  
-    border: solid thin;
-    border-radius: 15px;
-    font-size: 12pt;
-  }
-  
-  #back:hover{
-    cursor: pointer;
-    filter: invert(100%);
-  }
-  
+}
+
+#info ol{
+  list-style-position: inside;
+  margin: 0;
+  padding: 0;
+}
+
+#info li{
+  /* border: solid thin; */
+
+}
+
+
+div#info-b{
+  position: absolute;
+  bottom: 10%;
+  left: 5%;
+}
+
+button#info-b{
+  background-color: rgb(88, 82, 82);
+  color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+  border: thin;
+  border-radius: 50%;
+
+  height: 5vh;
+  width: 5vh;
+}
+
+div#audio{
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+}
+
+button#audio{
+  background-color: rgb(88, 82, 82);
+  color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+  border: 0;
+  border-radius: 50%;
+
+  height: 5vh;
+  width: 5vh;
+
+  /* background-color: green; */
+}
+
+#user svg{
+  height: 100%;
+  width: 100%;
+  /* background-color: red; */
+}

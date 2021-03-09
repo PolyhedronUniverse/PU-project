@@ -41,7 +41,9 @@ export default function Nebulas(scene, loadingManager) {
       new THREE.MeshBasicMaterial({ 
         alphaMap: texture, 
         color: new THREE.Color().setHSL(color, 1, .5), 
-        transparent: true })
+        transparent: true,
+        // wireframe: true
+      })
     )
     areaMesh.position.z = -100;
     areaMesh.userData.displayName = name;
@@ -71,7 +73,7 @@ export default function Nebulas(scene, loadingManager) {
   }else{
     geometry = new THREE.PlaneBufferGeometry(280, 280, 110, 110);
   }
-  const areaG = new THREE.CircleBufferGeometry(140, 32);
+  const areaG = new THREE.CircleBufferGeometry(120, 32);
 
 
   // const anger1 = createNebula(

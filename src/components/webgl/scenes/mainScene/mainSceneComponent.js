@@ -9,7 +9,8 @@ class CanvasWebgl extends React.Component {
   componentDidMount(){
     let scene = MainScene(this.props.header*0.15, this.props.footer*0.075)
     this.mount.appendChild(scene.renderer.domElement);
-
+    // console.log(scene.renderer.domElement.id)
+    scene.renderer.domElement.id = 'mainCanvas'
     this.name = scene.name;
 
     // console.log('main')
@@ -20,7 +21,10 @@ class CanvasWebgl extends React.Component {
   render(){
     return(
       <>
-        <Info />
+          <Info />
+          {/* <p id='sceneName'>h:{window.innerHeight}<br></br>
+            w:{window.innerWidth}
+          </p> */}
         {/* <p id='sceneName'>main scene{window.devicePixelRatio}</p> */}
         <div id='canvas-area' style={{ width: "100%", display: "none" }} ref={mount => {this.mount = mount}}>
           <Labels />

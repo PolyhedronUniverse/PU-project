@@ -45,12 +45,9 @@ export default function Hemispheres(scene, loadingManager, camera){
   mesh.name = "MainHud"
   scene.add(mesh)
 
-  let update = function(){
+  // let update = function(){
 
-  }
+  // }
 
-  return{
-    update,
-    mesh
-  }
+  return mesh
 }

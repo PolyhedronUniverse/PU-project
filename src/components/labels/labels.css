@@ -1,19 +1,79 @@
-.label{
+#labels{
   position: absolute;
+  background-color: rgba(0,255,0,0.5);
+
   color: white;
-  font-weight: bold;
-  text-shadow: 2px 2px 10px black ;
-  background-color: black
 }
 
-#n-name, #s-name{
-  font: large 'MyFont';
+#nebula{
+  position: absolute;
+  left: 50vw;
+  top: 50vh;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  /* padding: 10px; */
+  text-align: center;
+  transition: 0.7s;
+  overflow: hidden;
+  color: white;
+}
+
+#n-name{
+  align-items: center;
   text-transform: uppercase;
+  /* background-color: red; */
 }
 
 #s-metadata {
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  padding: 1em;
-  font: 15px 'MyFont'
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  /* border: thin solid; */
+  overflow: hidden;
+
+  position: absolute;
+  left: 55vw;
+  top: 20vh;
+  transition: 0.7s;
+
+  /* max-width: 25vw; */
+  max-height: 30vh;
+
+}
+
+#m-region.Anger{
+  color: red;
+}
+
+#m-region.Empowerment{
+  color: orange;
+}
+
+#m-region.Sadness{
+  color: blue;
+  
+}
+
+#m-region.Joy{
+  color: yellow;
+}
+
+#m-region.Love{
+  color: pink;
+}
+
+#m-region.Wonder{
+  color: green;
+}
+
+#m-status.Active{
+  color: green;
+}
+  
+#m-status.In-Progress{
+  color: yellow;
+}
+
+#m-status.Inactive{
+  color: red;
 }

@@ -9,6 +9,7 @@ import MainCanvas from '../components/webgl/scenes/mainScene/mainSceneComponent'
 // import Experience01 from '../components/webgl/scenes/experience01/exp01Component'
 import LoadingScreen from '../components/loading-screen/loadingScreen'
 // import SceneManager from '../components/webgl/sceneManager'
+import Generic from '../components/webgl/scenes/generic/generic'
 
 export default function Home() {
   // console.log(SceneManager())
@@ -19,6 +20,7 @@ export default function Home() {
     <div className="webgl">
       <Header/>
       <MainCanvas />
+      <Generic />
       <Footer/>
       <LoadingScreen/>
 
@@ -29,6 +31,7 @@ export default function Home() {
       <div className="webgl">
         <Header/>
         <MainCanvas />
+        <Generic />
         <Footer/>
         <LoadingScreen/>
       </div>

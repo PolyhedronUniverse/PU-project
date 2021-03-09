@@ -5,7 +5,7 @@ export default function Labels() {
   return (
     <div id="labels">
       <div id="nebula" className="label">
-        <div><span id="n-name"></span></div>
+        <span id="n-name">name</span>
       </div>
 
       <div id="s-metadata" className="label">

@@ -13,7 +13,7 @@ body {
 }
 
 html, body, #root, .webgl{
-  height: 100%;
+  height: 100vh;
 }
 
 *{
@@ -23,4 +23,54 @@ html, body, #root, .webgl{
 canvas { 
   outline: none; 
   border: none; 
+}
+
+
+@media only screen and (orientation:portrait){
+  #generic{
+    visibility: visible;
+    width: 100vw;
+    height: 77.5vh;
+    /* background-color: red; */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    font: 'MyFont';
+    color: white;
+    /* font- */
+  }
+
+  #generic div{
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  #canvas-area{
+    visibility: hidden !important;
+    display: none;
+
+  }
+
+  #user{
+    visibility: hidden !important;
+    display: none;
+  }
+
+  #rotate{
+    height: 10vh;
+    width: 10vw;
+    color: rgb(86,101, 115);
+    /* background-color: rgba(0, 0, 0, 0.685); */
+
+  }
+}
+
+@media only screen and (orientation:landscape){
+  #generic{
+    visibility: hidden;
+    display: none;
+    
+  }
 }

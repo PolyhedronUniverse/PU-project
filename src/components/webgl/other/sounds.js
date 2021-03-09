@@ -58,31 +58,42 @@ export default function Sounds(camera, loadingManager){
     )
 
 
-    const info = document.getElementById('gui')
-    const infoOff = document.getElementById('info-off')
-    const infoOn = document.getElementById('info-on')
+    const info = document.getElementById('info');
+    const infoIcon = document.getElementById('info-icon');
+    // const infoOn = document.getElementById('info-on')
 
-    infoOff.style.display = 'none';
+    // infoOff.style.display = 'none';
+    // info.style.width = '50vw';
+    infoIcon.parentElement.style.filter = 'invert(100)';
+    info.style.width = '0vw';
+    info.style.padding = '0';
+    info.style.border = '0';
+    info.style.opacity = '0';
     
-    infoOff.addEventListener(
+    infoIcon.addEventListener(
         'pointerdown',
         function(event){
-            infoOn.style.display = ''
-            this.style.display = 'none'
-            info.style.display = ''
+            if(info.clientWidth > 0){
+                this.parentElement.style.filter = 'invert(100)';
+                info.style.width = '0vw';
+                info.style.padding = '0';
+                info.style.border = '0';
+                info.style.opacity = '0';
+
+            }else{
+                info.style.width = '50vw';
+                this.parentElement.style.filter = 'invert(0)';
+                info.style.padding = '';
+                info.style.border = '';
+                info.style.opacity = '1';
+
+            }
+            console.log(this.parentElement)
         },
         false
     )
 
-    infoOn.addEventListener(
-        'pointerdown',
-        function(event){
-            infoOff.style.display = ''
-            this.style.display = 'none'
-            info.style.display = 'none'
-        },
-        false
-    )
+
 
     const onSound = new THREE.Audio(listener)
     const outSound = new THREE.Audio(listener)

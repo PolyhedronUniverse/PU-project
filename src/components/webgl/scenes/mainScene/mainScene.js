@@ -2,7 +2,6 @@
   todo: Clean scripts
   todo: test on mobile and overall the page
   todo: improve the travel
-  todo: check slug
 */
 
 import * as THREE from 'three';
@@ -15,7 +14,7 @@ import Nebulas from '../../sceneObjects/nebulas'
 import OldWonder from '../../sceneObjects/oldWonder'
 import Wormhole from '../../sceneObjects/wormhole'
 import Stars from '../../sceneObjects/stars'
-import Planets from '../../sceneObjects/planets'
+// import Planets from '../../sceneObjects/planets'
 import OldPlanets from '../../sceneObjects/oldPlanets'
 
 // import Wonder from '../../sceneObjects/wonder'
@@ -144,19 +143,32 @@ export default function MainScene(header, footer) {
 
   /* Other functions */
   //* 6. Display nebula name
-  function displayNebula(name, left, top) {
-    document.getElementById("n-name").textContent = name;
-    document.getElementById('nebula').style.display = ''
-    document.getElementById('nebula').style.left = (left) + "px";
-    document.getElementById('nebula').style.top = (top + 50) + "px";
+  function displayNebula(name, left, top, h, w, p) {
+    const neb = document.getElementById('nebula')
+    // document.getElementById('nebula').style.padding = p;
+    
+    // document.getElementById('nebula').style.height = (h);
+    // document.getElementById('nebula').style.width = (w);
+
+    if(left < window.innerWidth/2){
+      neb.style.left = (left + neb.clientWidth) + "px";
+    }else{
+      neb.style.left = (left - 1.5 * neb.clientWidth) + "px";
+
+    }
+    document.getElementById('nebula').style.top = (top) - header + "px";
+    document.getElementById('n-name').textContent = name;
+    // document.getElementById('n-name').style.opacity = '1';
   }
 
   //* 7. Display Star Meta data
-  function starMetadata(metadata, left, top) {
-    /**
-     * todo: copy code from SceneManager
-     */
-    document.getElementById("s-metadata").style.display = '';
+  function starMetadata(metadata) {
+    document.getElementById('s-metadata').style.opacity = '1';
+
+    document.getElementById('s-metadata').style.width = '20vw';
+    document.getElementById('s-metadata').style.height = 'auto';
+    document.getElementById('s-metadata').style.border = 'thin solid';
+
     document.getElementById("m-region").textContent = metadata.region;
     document.getElementById("m-const").textContent = metadata.constellation;
     document.getElementById("m-name").textContent = metadata.name;
@@ -171,46 +183,9 @@ export default function MainScene(header, footer) {
     document.getElementById("m-status").textContent = metadata.status
     document.getElementById("m-release").textContent = metadata.release
 
-    switch (metadata.region) {
-      case 'Anger':
-        document.getElementById('m-region').style.color = 'red';
-        break;
-      case 'Empowerment':
-        document.getElementById('m-region').style.color = 'orange';
-        break;
-      case 'Sadness':
-        document.getElementById('m-region').style.color = 'blue';
-        break;
-      case 'Joy':
-        document.getElementById('m-region').style.color = 'yellow';
-        break;
-      case 'Love':
-        document.getElementById('m-region').style.color = 'pink';
-        break;
-      case 'Wonder':
-        document.getElementById('m-region').style.color = 'green';
-        break;
-      default: break;
-    }
+    document.getElementById('m-region').className = metadata.region;
 
-
-    switch (metadata.status) {
-      case 'Active':
-        document.getElementById('m-status').style.color = 'green';
-        break;
-      case 'Inactive':
-        document.getElementById('m-status').style.color = 'red';
-        break;
-      case 'In-Progress':
-        document.getElementById('m-status').style.color = 'yellow';
-        break;
-      default: break;
-    }
-
-    document.getElementById('s-metadata').style.left = (left) + "px";
-    document.getElementById('s-metadata').style.top = (top + 50) + "px";
-    // console.log(document.innerWidth)
-    // document.getElementById("canvas").style.cursor 
+    document.getElementById('m-status').className = metadata.status;
   }
 
   // # END FUNCTIONS DECLARATION #
@@ -260,7 +235,8 @@ export default function MainScene(header, footer) {
   let objects = []
 
   // * static
-  Hemispheres(scene, loadingManager, camera)
+  const hem = Hemispheres(scene, loadingManager, camera)
+  console.log(hem)
   // * needs update
   objects.push(addObject(new Nebulas(scene, loadingManager)));
   objects.push(addObject(new Wormhole(camera, loadingManager)));
@@ -295,15 +271,17 @@ export default function MainScene(header, footer) {
      * * page has finished loading all it's elements
      */
 
-    /**
-     * todo: finish reproducing the event
-     */
-
     console.log('all loaded');
-    document.getElementById("nebula").style.display = 'none'
-    document.getElementById("s-metadata").style.display = 'none';
-    document.getElementById("back").style.display = 'none';
-    // document.getElementById('eb').textContent = 'Enter'
+
+    displayNebula('0', 0, 0, '0px', '0px', '0em')
+
+    document.getElementById('s-metadata').style.width = '0vw';
+    document.getElementById('s-metadata').style.height = '0vh';
+    document.getElementById('s-metadata').style.border = '';
+
+    window.addEventListener('pointermove', onMouseMove, false)
+    window.addEventListener('pointerdown', onMouseDown, false)
+
     query = Object.fromEntries(new URLSearchParams(window.location.search).entries());
     if (query.location) {
       if (query.location !== 'home') {
@@ -312,13 +290,18 @@ export default function MainScene(header, footer) {
         scene.background = nebulas[query.location + 'Texture'];
         planets[query.location + 'Points'].layers.enable(0)
         planets[query.location + 'Points'].userData.enable()
-        document.getElementById("back").style.display = '';
-        document.getElementById("gui").style.display = 'none';
+        document.getElementById('back').style.display = ''
+
+      }else{
+        document.getElementById('back').style.display = 'none'
       }
     } else {
       InsertParameter('location', 'home');
       query.location = 'home';
+      document.getElementById('back').style.display = 'none'
+
     }
+
   }
 
   //* 2. onWindowResize
@@ -360,44 +343,49 @@ export default function MainScene(header, footer) {
 
     raycaster.setFromCamera(mouse, camera);
     raycaster.params.Points.threshold = 5;
-    let att;
+    // let att;
     if (query.location !== 'home') {
-      // console.log(query.location)
       intersects = raycaster.intersectObjects([planets[query.location + 'Points']], true)
       // att = planets[query.location + 'Points'].geometry.attributes;
-
-    } else
+    } else{
       intersects = raycaster.intersectObjects(objects[0].nebulas, true)
+    }
 
-    if (intersects.length > 0) {
-      // console.log(intersects[0].object)
-      // intersects[0].object.parent.userData.changeLayer()
+
+    if (intersects.length > 0 && event.target.id === 'mainCanvas') {
       if (query.location !== 'home') {
-        // console.log(intersects[0])
-        INTERSECTED=intersects[0].object
+        INTERSECTED = intersects[0].object
         INTERSECTED.material.opacity = 1;
-        // INTERSECTED = intersects[0].index;
-        // console.log(intersects[0].object.userData[att.index.array[INTERSECTED]])
-        // att.a_opacity.array[INTERSECTED] = 1;
-        // att.a_opacity.needsUpdate = true;
-        // starMetadata(intersects[0].object.userData[att.index.array[INTERSECTED]], event.clientX - rect.left, event.clientY - rect.top)
-      } else
-        displayNebula(intersects[0].object.userData.displayName, event.clientX - rect.left, event.clientY - rect.top)
+      } else{
+        document.getElementById('nebula').style.padding = '0.5em';
+    
+        // document.getElementById('nebula').style.height = (h);
+        // document.getElementById('nebula').style.width = (w);
+        displayNebula(intersects[0].object.userData.displayName, event.clientX, event.clientY, 'auto', 'auto', '0.5em')
+        document.getElementById('nebula').style.height = 'auto';
+        document.getElementById('nebula').style.width = 'auto';
+  
+      }
 
-      document.getElementById('canvas-area').style.cursor = "pointer";
+      document.getElementById('canvas-area').style.cursor = 'pointer';
     } else {
-      
-
+  
       if (INTERSECTED != null && query.location !== 'home') {
-      //   att.a_opacity.array[INTERSECTED] = 0.5;
-      //   att.a_opacity.needsUpdate = true;
         INTERSECTED.material.opacity = 0.5
         INTERSECTED = null;
       }
+      
+      // document.getElementById('n-name').style.opacity = '0';
+      // document.getElementById('nebula').style.height = '0';
+      // document.getElementById('nebula').style.width = '0';
+  
+      // displayNebula('d', event.clientX, event.clientY-rect.top, '0px', '0px', '0em')
+      document.getElementById('nebula').style.padding = '0';
+      document.getElementById('nebula').style.height = '0';
+      document.getElementById('nebula').style.width = '0';
 
+      
       document.getElementById('canvas-area').style.cursor = 'default';
-      document.getElementById('nebula').style.display = 'none';
-      // document.getElementById('s-metadata').style.display = 'none';
     }
   }
 
@@ -442,12 +430,18 @@ export default function MainScene(header, footer) {
     }
 
 
-
-    if (intersects.length > 0) {
+    if (intersects.length > 0 && event.target.id === 'mainCanvas') {
 
       if (query.location !== 'home') {
-        // starMetadata(intersects[0].object.userData[att.index.array[INTERSECTED]], event.clientX - rect.left, event.clientY - rect.top)
-        starMetadata(intersects[0].object.userData, event.clientX - rect.left, event.clientY - rect.top)
+        
+        starMetadata(intersects[0].object.userData)
+        console.log(intersects[0])
+        control.controls.target.set(
+          intersects[0].object.position.x,
+          intersects[0].object.position.y,
+          intersects[0].object.position.z - 4000)
+        if(intersects[0].distance > 10)
+        {camera.translateZ(-intersects[0].distance)}
 
       } else {
         const name = intersects[0].object.userData.displayName
@@ -459,14 +453,20 @@ export default function MainScene(header, footer) {
         planets[query.location + 'Points'].layers.enable(0)
         planets[query.location + 'Points'].userData.enable()
         sounds.onSound.play();
-        document.getElementById('gui').style.display = 'none'
+        // document.getElementById('info').style.display = 'none'
 
         camera.lookAt(intersects[0].object.parent.position)
         camera.updateProjectionMatrix();
       }
-
     }else{
-      document.getElementById('s-metadata').style.display = 'none';
+      if (query.location !== 'home' && document.getElementById('s-metadata').clientWidth > 0) {
+        control.controls.reset()
+        document.getElementById('s-metadata').style.opacity = '0';
+
+        document.getElementById('s-metadata').style.width = '0vw';
+        // document.getElementById('s-metadata').style.height = '0vh';
+        document.getElementById('s-metadata').style.border = '';
+      }
     }
   }
 
@@ -533,8 +533,8 @@ export default function MainScene(header, footer) {
   // # ATTACH EVENTLISTENERS #
 
   window.addEventListener('load', onLoad, false)
-  renderer.domElement.addEventListener('pointermove', onMouseMove, false)
-  renderer.domElement.addEventListener('pointerdown', onMouseDown, false)
+  // window.addEventListener('pointermove', onMouseMove, false)
+  // window.addEventListener('pointerdown', onMouseDown, false)
   // ? window.addEventListener('keydown', onKeyDown, false)
   document.getElementById('back').addEventListener('pointerup', backOnPointerDown, false)
 

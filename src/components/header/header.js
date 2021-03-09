@@ -24,8 +24,8 @@ export default function Header(){
       </div>
 
 
-      <div id='button'>
-        <button id='patreonButton' alt='patreon'>P A T R E O N</button>
+      <div id='p-button'>
+        <a id='patreonButton' href = 'https://www.patreon.com/polyhedronuniverse' rel='noopener noreferrer' target='_blank'>P A T R E O N</a>
       </div>
 
     </div>
