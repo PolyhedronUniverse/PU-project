@@ -1,8 +1,21 @@
+@media only screen and (max-width: 601px) {
+  #labels {
+    font-size: 2vh;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  #labels {
+    font-size: 2.5vh;
+  }
+}
+
 #labels{
   position: absolute;
   background-color: rgba(0,255,0,0.5);
 
   color: white;
+  /* font-size: 2. */
 }
 
 #nebula{
@@ -14,7 +27,7 @@
   border-radius: 10px;
   /* padding: 10px; */
   text-align: center;
-  transition: 0.7s;
+  transition: 0.5s;
   overflow: hidden;
   color: white;
 }

@@ -5,10 +5,6 @@
   /* background-color: rgb(255, 8, 0); */
 }
 
-#user div{
-  /* max-width: 100%; */
-}
-
 div#back{
   padding: 1.5vh 1vw 1.5vh 1vw;
   position: absolute;
@@ -29,11 +25,7 @@ button#back:hover{
   cursor: pointer;
 }
 
-#back{
-  /* display: none; */
-}
-
-#info{
+#info-cont{
   position: absolute;
   top: 10%;
   left: 25vw;
@@ -59,55 +51,46 @@ button#back:hover{
   
 }
 
-#info ol{
-  list-style-position: inside;
-  margin: 0;
-  padding: 0;
-}
 
-#info li{
-  /* border: solid thin; */
-
-}
-
-
-div#info-b{
+#b-info{
   position: absolute;
-  bottom: 10%;
-  left: 5%;
+  bottom: 6vh;
+  left: 0.5vw;
 }
 
-button#info-b{
-  background-color: rgb(88, 82, 82);
-  color: rgba(255, 255, 255, 1);
-  cursor: pointer;
-  border: thin;
-  border-radius: 50%;
-
-  height: 5vh;
-  width: 5vh;
-}
-
-div#audio{
-  position: absolute;
-  bottom: 0;
-  left: 5%;
-}
-
-button#audio{
+#info-button{
   background-color: rgb(88, 82, 82);
   color: rgba(255, 255, 255, 1);
   cursor: pointer;
   border: 0;
-  border-radius: 50%;
-
+  border-radius: 15%;
+  padding: 1px;
   height: 5vh;
-  width: 5vh;
+  width: 2.5vw;
+}
+
+#b-audio{
+  position: absolute;
+  bottom: 0vh;
+  left: 0.5vw;
+}
+
+#audio{
+  background-color: rgb(88, 82, 82);
+  color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+  border: 0;
+  border-radius: 15%;
+  padding: 1px;
+  height: 5vh;
+  width: 2.5vw;
 
   /* background-color: green; */
 }
 
-#user svg{
+.icon{
+  /* transform: scale(1.5); */
+  /* stroke-width: 2px; */
   height: 100%;
   width: 100%;
   /* background-color: red; */

@@ -143,7 +143,7 @@ export default function MainScene(header, footer) {
 
   /* Other functions */
   //* 6. Display nebula name
-  function displayNebula(name, left, top, h, w, p) {
+  function displayNebula(name, left, top) {
     const neb = document.getElementById('nebula')
     // document.getElementById('nebula').style.padding = p;
     
@@ -361,7 +361,7 @@ export default function MainScene(header, footer) {
     
         // document.getElementById('nebula').style.height = (h);
         // document.getElementById('nebula').style.width = (w);
-        displayNebula(intersects[0].object.userData.displayName, event.clientX, event.clientY, 'auto', 'auto', '0.5em')
+        displayNebula(intersects[0].object.userData.displayName, event.clientX, event.clientY)
         document.getElementById('nebula').style.height = 'auto';
         document.getElementById('nebula').style.width = 'auto';
   
@@ -378,8 +378,8 @@ export default function MainScene(header, footer) {
       // document.getElementById('n-name').style.opacity = '0';
       // document.getElementById('nebula').style.height = '0';
       // document.getElementById('nebula').style.width = '0';
-  
-      // displayNebula('d', event.clientX, event.clientY-rect.top, '0px', '0px', '0em')
+
+      displayNebula('', event.clientX, event.clientY)
       document.getElementById('nebula').style.padding = '0';
       document.getElementById('nebula').style.height = '0';
       document.getElementById('nebula').style.width = '0';
