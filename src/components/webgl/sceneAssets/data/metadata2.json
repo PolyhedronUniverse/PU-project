@@ -13,9 +13,8 @@
       "puID": "NZ09+001",
       "status": "In-Progress",
       "release": "April 2021",
-      "x": 100,
-      "y": 0,
-      "z": 0
+      "hr-id": 3438,
+      "abbreviation": "pyx"
     },
     "2": {
       "id": 2,
@@ -29,9 +28,8 @@
       "puID": "EX10+001",
       "status": "Inactive",
       "release": "January 2022",
-      "x": 0,
-      "y": 100,
-      "z": 0
+      "hr-id": 3468,
+      "abbreviation": "pyx"
     },
     "3": {
       "id": 3,
@@ -45,9 +43,8 @@
       "puID": "YX10+001",
       "status": "Inactive",
       "release": "November 2022",
-      "x": 0,
-      "y": 0,
-      "z": 100
+      "hr-id": 3518,
+      "abbreviation": "pyx"
     }
   },
   "empowerment":
@@ -64,9 +61,8 @@
       "puID": "NZ12+001",
       "status": "Inactive",
       "release": "February 2022",
-      "x": 100,
-      "y": 0,
-      "z": 0
+      "hr-id": 1443,
+      "abbreviation": "cae"
     },
     "5":{
       "id": 5,
@@ -80,9 +76,8 @@
       "puID": "DZ11+001",
       "status": "Inactive",
       "release": "October 2022",
-      "x": -100,
-      "y": 0,
-      "z": 0
+      "hr-id": 1502,
+      "abbreviation": "cae"
     }
   },
   "joy":
@@ -99,9 +94,8 @@
       "puID": "YX03+001",
       "status": "Inactive",
       "release": "March 2022",
-      "x": 0,
-      "y": 0,
-      "z": 100
+      "hr-id": 4273,
+      "abbreviation": "ant"
     },
     "7": {
       "id": 7,
@@ -115,9 +109,8 @@
       "puID": "NZ09+001",
       "status": "Inactive",
       "release": "July 2022",
-      "x": 0,
-      "y": 0,
-      "z": 0
+      "hr-id": 4104,
+      "abbreviation": "ant"
     },
     "8": {
       "id": 8,
@@ -131,9 +124,8 @@
       "puID": "DZ13+001",
       "status": "Inactive",
       "release": "February 2023",
-      "x": 100,
-      "y": 0,
-      "z": 0
+      "hr-id": 3871,
+      "abbreviation": "ant"
     },
     "9":{
       "id": 9,
@@ -147,9 +139,8 @@
       "puID": "NZ10+001",
       "status": "Inactive",
       "release": "December 2022",
-      "x": 0,
-      "y": 100,
-      "z": 0
+      "hr-id": 3765,
+      "abbreviation": "ant"
     }
   },
   "love":
@@ -166,9 +157,8 @@
       "puID": "EX04+001",
       "status": "Inactive",
       "release": "April 2022",
-      "x": 100,
-      "y": 0,
-      "z": 0
+      "hr-id": 6783,
+      "abbreviation": "tel"
     },
     "11":{
       "id": 11,
@@ -182,9 +172,8 @@
       "puID": "NZ08+001",
       "status": "Inactive",
       "release": "August 2022",
-      "x": 0,
-      "y": 100,
-      "z": 0
+      "hr-id": 6897,
+      "abbreviation": "tel"
     },
     "12":{
       "id": 12,
@@ -198,9 +187,8 @@
       "puID": "LY04+001",
       "status": "In-Progress",
       "release": "November 2021",
-      "x": 0,
-      "y": 0,
-      "z": 100
+      "hr-id": 6905,
+      "abbreviation": "tel"
     }
   },
   "anger":
@@ -217,9 +205,8 @@
       "puID": "DZ11+001",
       "status": "In-Progress",
       "release": "August 2021",
-      "x": 100,
-      "y": 0,
-      "z": 0
+      "hr-id": 4915,
+      "abbreviation": "cvn"
     },
     "14": {
       "id": 14,
@@ -233,9 +220,8 @@
       "puID": "YX11+001",
       "status": "Inactive",
       "release": "May 2022",
-      "x": -100,
-      "y": 0,
-      "z": 0
+      "hr-id": 4785,
+      "abbreviation": "cvn"
     }
   },
   "sadness":
@@ -252,9 +238,8 @@
       "puID": "PY01+001",
       "status": "Inactive",
       "release": "June 2022",
-      "x": 100,
-      "y": 0,
-      "z": 0
+      "hr-id": 8131,
+      "abbreviation": "equ"
     },
     "16": {
       "id": 16,
@@ -268,9 +253,8 @@
       "puID": "YX04+001",
       "status": "In-Progress",
       "release": "October 2021",
-      "x": 0,
-      "y": 0,
-      "z": 100
+      "hr-id": 8178,
+      "abbreviation": "equ"
     },
     "17":{
       "id": 17,
@@ -284,9 +268,8 @@
       "puID": "DZ04+001",
       "status": "Inactive",
       "release": "September 2022",
-      "x": 0,
-      "y": 100,
-      "z": 0
+      "hr-id": 8123,
+      "abbreviation": "equ"
     },
     "18": {
       "id": 18,
@@ -300,9 +283,8 @@
       "puID": "EX05+001",
       "status": "Inactive",
       "release": "January 2023",
-      "x": 0,
-      "y": -100,
-      "z": 0
+      "hr-id": 8097,
+      "abbreviation": "equ"
     }
   }
 }

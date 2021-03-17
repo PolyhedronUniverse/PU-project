@@ -35,7 +35,7 @@ export default function OldPlanets(scene, loadingManager) {
                 // const rand = Math.random() * 100 - 50;
                 const sprite = new THREE.Sprite(material);
                 sprite.scale.set(5, 5)
-                sprite.position.set(Math.random() * 50 - 25, Math.random() * 50 - 25, Math.random() * 50 - 25);
+                sprite.position.set(Math.random() * 100 - 50, Math.random() * 100 - 50, Math.random() * 100 - 50);
                 sprite.userData = json[key];
                 group.add(sprite);
             }

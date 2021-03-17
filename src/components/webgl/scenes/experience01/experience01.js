@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 import NebulasTextures from '../../other/nebulasTextures'
+import Particles from '../../sceneObjects/particles'
 
 export default function SceneManager(header, footer){
 
@@ -103,12 +104,12 @@ export default function SceneManager(header, footer){
   }
 
   /* 5. Add scene objects */
-  // function addObject(object){
+  function addObject(object){
 
-    // let newObj = [];
-    // console.log(object)
-    // return object;
-  // }
+    let newObj = [];
+    console.log(object)
+    return object;
+  }
 
   /* ##### END FUNCTIONS DECLARATION ##### */
 
@@ -208,7 +209,7 @@ export default function SceneManager(header, footer){
 
   let objects = []
 
-  // objects.push(addObject(new Particles(scene,  renderer, loadingManager, camera)));
+  objects.push(addObject(new Particles(scene,renderer, camera)));
   // objects.push(addObject(new Hemispheres(scene, loadingManager, camera)))
 
 

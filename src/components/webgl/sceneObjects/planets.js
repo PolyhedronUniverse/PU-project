@@ -2,6 +2,9 @@ import * as THREE from 'three';
 import IconsTexture from '../other/iconsTexture';
 // import metadata from '../sceneAssets/data/metadata.json'
 import metadata from '../sceneAssets/data/metadata2.json'
+import DatLoader from '../other/datLoader'
+// import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial'
+// import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry';
 
 export default function Planets(scene, loadingManager) {
 
@@ -26,7 +29,7 @@ export default function Planets(scene, loadingManager) {
 
             vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
 
-            gl_PointSize = 25. * ( 300.0 / -mvPosition.z );
+            gl_PointSize = 10. * ( 300.0 / -mvPosition.z );
 
             gl_Position = projectionMatrix * mvPosition;
 
@@ -73,22 +76,66 @@ export default function Planets(scene, loadingManager) {
         vertexColors: true,
     })
 
+    const material = new THREE.LineBasicMaterial({
+        color: 0xff0000,
+        linewidth: 10,
+    });
 
-
-    function createCluster(json){
-
+    const aux = DatLoader()
+    // console.log(aux)
+    function createCluster(json) {
+        // console.log(json)
         let positions = [];
         let index = [];
         let textures = [];
         let opacity = [];
-
+        let points = [];
+        let i = 0;
         for (const key in json) {
             if (json.hasOwnProperty(key)) {
-                // console.log(json[key].id);
-                // positions.push(element.x * Math.random() - element.x, element.y * Math.random(), element.z * Math.random());
-                positions.push(100 * Math.random() - 50, 100 * Math.random() - 50, 100 * Math.random() - 50);
+
+                const r = 100
+                const theta = 2 * Math.PI * Math.random()
+                const phi = Math.acos(2 * Math.random() - 1)
+                const x = r * Math.sin(theta) * Math.cos(phi)
+                const y = r * Math.sin(theta) * Math.sin(phi)
+                const z = r * Math.cos(theta)
+
+                const hrid = json[key]['hr-id'];
+                const abbr = json[key]['abbreviation'];
+
+                // positions.push(aux.positions[hrid].coords.x)
+                // positions.push(aux.positions[hrid].coords.y)
+                // positions.push(aux.positions[hrid].coords.z)
+
+                // points.push(aux.positions[aux.linesOrder[abbr][i]].coords)
+                // i++;
+
+                if (key > 3) {
+                    positions.push(aux.positions[hrid].coords.x)
+                    positions.push(aux.positions[hrid].coords.y)
+                    positions.push(aux.positions[hrid].coords.z)
+
+                    points.push(aux.positions[aux.linesOrder[abbr][i]].coords)
+                    i++;
+                    // positions.push(x, y, z);
+                    // points.push(new THREE.Vector3(x, y, z));
+                }
+                else {
+                    console.log(aux.pos.slice(3*(key-1),3*(key)))
+                    console.log(aux.positions[hrid].coords)
+
+                    // console.log(3 * (key - 1))
+                    // console.log(key * 3 - 2)
+                    // console.log(key * 3 - 1)
+                    // console.log(aux.pos)
+                    positions.push(aux.pos[3 * (key - 1)], aux.pos[3 * key - 2], aux.pos[3 * key - 1])
+                    points.push(new THREE.Vector3(aux.pos[3 * (key - 1)], aux.pos[3 * key - 2], aux.pos[3 * key - 1]));
+                }
+
+
                 index.push(json[key].id);
-                switch(json[key].artist){
+                switch (json[key].artist) {
                     case 'Dron-Z':
                         textures.push(0);
                         break;
@@ -114,57 +161,76 @@ export default function Planets(scene, loadingManager) {
             }
         }
 
-        
 
-        const geometry = new THREE.BufferGeometry();
-        geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-        geometry.setAttribute('index', new THREE.Float32BufferAttribute(index, 1));
-        geometry.setAttribute('a_ti', new THREE.Float32BufferAttribute(textures, 1));
-        geometry.setAttribute('a_opacity', new THREE.Float32BufferAttribute(opacity, 1));
 
-        return geometry;
+        const pointsGeo = new THREE.BufferGeometry();
+        pointsGeo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+        pointsGeo.setAttribute('index', new THREE.Float32BufferAttribute(index, 1));
+        pointsGeo.setAttribute('a_ti', new THREE.Float32BufferAttribute(textures, 1));
+        pointsGeo.setAttribute('a_opacity', new THREE.Float32BufferAttribute(opacity, 1));
+        // console.log(points)
+        const linesGeo = new THREE.BufferGeometry().setFromPoints(points)
+        return { pointsGeo, linesGeo };
     }
 
     let angerGeo = createCluster(metadata.anger)
-    const angerPoints = new THREE.Points(angerGeo, shaderPoints);
+    const angerPoints = new THREE.Points(angerGeo.pointsGeo, shaderPoints);
     angerPoints.userData = metadata.anger;
     angerPoints.position.z = -4000;
     angerPoints.layers.disableAll();
+    const line1 = new THREE.Line(angerGeo.linesGeo, material);
+    line1.position.z = -4000
+    scene.add(line1)
     scene.add(angerPoints);
 
     let sadnessGeo = createCluster(metadata.sadness)
-    const sadnessPoints = new THREE.Points(sadnessGeo, shaderPoints);
+    const sadnessPoints = new THREE.Points(sadnessGeo.pointsGeo, shaderPoints);
     sadnessPoints.userData = metadata.sadness;
     sadnessPoints.position.z = -4000;
     sadnessPoints.layers.disableAll();
+    const line2 = new THREE.Line(sadnessGeo.linesGeo, material);
+    line2.position.z = -4000
+    scene.add(line2)
     scene.add(sadnessPoints);
-    
+
     let joyGeo = createCluster(metadata.joy)
-    const joyPoints = new THREE.Points(joyGeo, shaderPoints);
+    const joyPoints = new THREE.Points(joyGeo.pointsGeo, shaderPoints);
     joyPoints.userData = metadata.joy;
     joyPoints.position.z = -4000;
     joyPoints.layers.disableAll();
+    const line3 = new THREE.Line(joyGeo.linesGeo, material);
+    line3.position.z = -4000
+    scene.add(line3)
     scene.add(joyPoints);
 
     let loveGeo = createCluster(metadata.love)
-    const lovePoints = new THREE.Points(loveGeo, shaderPoints);
+    const lovePoints = new THREE.Points(loveGeo.pointsGeo, shaderPoints);
     lovePoints.userData = metadata.love;
     lovePoints.position.z = -4000;
     lovePoints.layers.disableAll();
+    const line4 = new THREE.Line(loveGeo.linesGeo, material);
+    line4.position.z = -4000
+    scene.add(line4)
     scene.add(lovePoints);
 
     let empowermentGeo = createCluster(metadata.empowerment)
-    const empowermentPoints = new THREE.Points(empowermentGeo, shaderPoints);
+    const empowermentPoints = new THREE.Points(empowermentGeo.pointsGeo, shaderPoints);
     empowermentPoints.userData = metadata.empowerment;
     empowermentPoints.position.z = -4000;
     empowermentPoints.layers.disableAll();
+    const line5 = new THREE.Line(empowermentGeo.linesGeo, material);
+    line5.position.z = -4000
+    scene.add(line5)
     scene.add(empowermentPoints);
 
     let wonderGeo = createCluster(metadata.wonder)
-    const wonderPoints = new THREE.Points(wonderGeo, shaderPoints);
+    const wonderPoints = new THREE.Points(wonderGeo.pointsGeo, shaderPoints);
     wonderPoints.userData = metadata.wonder;
     wonderPoints.position.z = -4000;
     wonderPoints.layers.disableAll();
+    const line6 = new THREE.Line(wonderGeo.linesGeo, material);
+    line6.position.z = -4000
+    scene.add(line6)
     scene.add(wonderPoints);
 
     // const geometry = new THREE.SphereBufferGeometry(10, 10, 10);
@@ -176,17 +242,14 @@ export default function Planets(scene, loadingManager) {
     // mesh.position.set(0, 0, -4000)
     // scene.add(mesh)
 
-    let update = function () {
 
-    }
 
-    return { 
-        update, 
-        angerPoints, 
-        sadnessPoints, 
-        joyPoints, 
-        lovePoints, 
-        empowermentPoints, 
-        wonderPoints 
+    return {
+        angerPoints,
+        sadnessPoints,
+        joyPoints,
+        lovePoints,
+        empowermentPoints,
+        wonderPoints
     }
 }

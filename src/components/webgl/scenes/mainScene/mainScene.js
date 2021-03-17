@@ -235,12 +235,14 @@ export default function MainScene(header, footer) {
   let objects = []
 
   // * static
-  const hem = Hemispheres(scene, loadingManager, camera)
-  console.log(hem)
+  // const hem = 
+  Hemispheres(scene, loadingManager, camera)
+  // console.log(hem)
   // * needs update
   objects.push(addObject(new Nebulas(scene, loadingManager)));
   objects.push(addObject(new Wormhole(camera, loadingManager)));
   objects.push(addObject(new OldWonder(scene, loadingManager)));
+  // objects.push(addObject(new WonderSystem(scene, loadingManager)));
   objects.push(addObject(new Stars(scene, loadingManager)));
   // todo: contine testing shaders - objects.push(addObject(new WonderSystem(scene, loadingManager)))
   // objects.push(addObject(new oldPlanets(scene, loadingManager)));
@@ -343,6 +345,7 @@ export default function MainScene(header, footer) {
 
     raycaster.setFromCamera(mouse, camera);
     raycaster.params.Points.threshold = 5;
+    
     // let att;
     if (query.location !== 'home') {
       intersects = raycaster.intersectObjects([planets[query.location + 'Points']], true)
@@ -354,39 +357,45 @@ export default function MainScene(header, footer) {
 
     if (intersects.length > 0 && event.target.id === 'mainCanvas') {
       if (query.location !== 'home') {
-        INTERSECTED = intersects[0].object
-        INTERSECTED.material.opacity = 1;
+        // console.log('on planet')
+        INTERSECTED = intersects[0].object // for OldPlanets
+        INTERSECTED.material.opacity = 1 // for OldPlanets
+
+        // INTERSECTED = intersects[0].index
+        // console.log(intersects[0].index)
+        // att.a_opacity.array[intersects[0].index] = 1
+        
+        // att.a_opacity.needsUpdate = true
+        // console.log(att.a_opacity)
+
       } else{
         document.getElementById('nebula').style.padding = '0.5em';
     
-        // document.getElementById('nebula').style.height = (h);
-        // document.getElementById('nebula').style.width = (w);
         displayNebula(intersects[0].object.userData.displayName, event.clientX, event.clientY)
         document.getElementById('nebula').style.height = 'auto';
         document.getElementById('nebula').style.width = 'auto';
-  
       }
 
       document.getElementById('canvas-area').style.cursor = 'pointer';
     } else {
   
       if (INTERSECTED != null && query.location !== 'home') {
-        INTERSECTED.material.opacity = 0.5
+        INTERSECTED.material.opacity = 0.5 // for OldPlanets
+
+        // att.a_opacity.array[INTERSECTED] = 0.5
+        // att.a_opacity.needsUpdate = true
         INTERSECTED = null;
       }
-      
-      // document.getElementById('n-name').style.opacity = '0';
-      // document.getElementById('nebula').style.height = '0';
-      // document.getElementById('nebula').style.width = '0';
 
       displayNebula('', event.clientX, event.clientY)
       document.getElementById('nebula').style.padding = '0';
       document.getElementById('nebula').style.height = '0';
       document.getElementById('nebula').style.width = '0';
-
       
       document.getElementById('canvas-area').style.cursor = 'default';
     }
+
+    // console.log(INTERSECTED)
   }
 
   //* 4. OnMouseDown
@@ -420,7 +429,7 @@ export default function MainScene(header, footer) {
 
     raycaster.setFromCamera(mouse, camera);
 
-    let att;
+    // let att;
     if (query.location !== 'home') {
       // console.log(query.location)
       intersects = raycaster.intersectObjects([planets[query.location + 'Points']], true)
@@ -436,12 +445,12 @@ export default function MainScene(header, footer) {
         
         starMetadata(intersects[0].object.userData)
         console.log(intersects[0])
-        control.controls.target.set(
-          intersects[0].object.position.x,
-          intersects[0].object.position.y,
-          intersects[0].object.position.z - 4000)
-        if(intersects[0].distance > 10)
-        {camera.translateZ(-intersects[0].distance)}
+        // control.controls.target.set(
+        //   intersects[0].object.position.x,
+        //   intersects[0].object.position.y,
+        //   intersects[0].object.position.z - 4000)
+        // if(intersects[0].distance > 10)
+        // {camera.translateZ(-intersects[0].distance)}
 
       } else {
         const name = intersects[0].object.userData.displayName
@@ -460,7 +469,7 @@ export default function MainScene(header, footer) {
       }
     }else{
       if (query.location !== 'home' && document.getElementById('s-metadata').clientWidth > 0) {
-        control.controls.reset()
+        // control.controls.reset()
         document.getElementById('s-metadata').style.opacity = '0';
 
         document.getElementById('s-metadata').style.width = '0vw';
@@ -513,7 +522,7 @@ export default function MainScene(header, footer) {
       camera.lookAt(0, 0, -4000);
       camera.updateProjectionMatrix()
       travel = 'backward';
-      planets[query.location + 'Points'].layers.disableAll();
+      // planets[query.location + 'Points'].layers.disableAll();
       planets[query.location + 'Points'].userData.disable();
 
       this.style.display = 'none';
@@ -548,7 +557,7 @@ export default function MainScene(header, footer) {
   function update() {
     requestAnimationFrame(update)
     if (!LOADED) {
-      console.log('loading')
+      // console.log('loading')
 
 
     } else {

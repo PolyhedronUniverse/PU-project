@@ -1,9 +1,15 @@
 import * as THREE from 'three';
 import hudtexture from '../../../assets/1024hud.jpg'
+// import bin from '../sceneAssets/other/bin.png'
+// import test from '../sceneAssets/other/test.png'
 
-export default function Hemispheres(scene, loadingManager, camera){
 
-  const texture = new THREE.TextureLoader(loadingManager).load(hudtexture);
+export default function Hemispheres(scene, loadingManager, camera) {
+
+  const loader = new THREE.TextureLoader(loadingManager)
+  const texture = loader.load(hudtexture);
+  // let texBin = loader.load(bin);
+  // const testTex = loader.load(test);
 
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
@@ -11,8 +17,8 @@ export default function Hemispheres(scene, loadingManager, camera){
   const shape = new THREE.Shape();
 
   shape.moveTo(-1.5, 1.5 * 0.5);
-  shape.lineTo( 1.5, 1.5 * 0.5);
-  shape.lineTo( 1.5, -1.5 * 0.5);
+  shape.lineTo(1.5, 1.5 * 0.5);
+  shape.lineTo(1.5, -1.5 * 0.5);
   shape.lineTo(-1.5, -1.5 * 0.5)
 
 
@@ -33,21 +39,33 @@ export default function Hemispheres(scene, loadingManager, camera){
   shape.holes.push(hole1);
 
   var hole2 = new THREE.Path();
-  hole2.arc(.45,0,.45,Math.PI*1.05,Math.PI*2.95)
+  hole2.arc(.45, 0, .45, Math.PI * 1.05, Math.PI * 2.95)
 
-  // const material = new THREE.MeshBasicMaterial({color: 'gray', wireframe: false})
-  const material = new THREE.MeshBasicMaterial( { map: texture} );
-  const geometry = new THREE.ShapeGeometry( shape );
+  const material = new THREE.MeshBasicMaterial({
+    // alphaMap: testTex,
+    map: texture,
+    // wireframe: false,
+    // transparent: true
+  });
+
+  const geometry = new THREE.ShapeGeometry(shape);
   const mesh = new THREE.Mesh(geometry, material);
-  mesh.position.z=camera.position.z-0.97
+  mesh.position.z = camera.position.z - 0.97
   // mesh.position.z=-0.97
 
   mesh.name = "MainHud"
   scene.add(mesh)
 
-  // let update = function(){
+  // const g = new THREE.PlaneBufferGeometry(1, 1, 1, 1)
+  // const m = new THREE.Mesh(g, material)
+  // m.position.z = camera.position.z - 2
+  // scene.add(m)
 
-  // }
 
+  const s = new THREE.SphereBufferGeometry(200,10,10)
+  const m = new THREE.MeshBasicMaterial({color: 'red', wireframe: true})
+  const sphere = new THREE.Mesh(s,m)
+  sphere.position.z = -4000
+  // scene.add(sphere)
   return mesh
 }

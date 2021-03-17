@@ -30,7 +30,7 @@ export default function Exp01Page() {
         <Header/>
         <Experience01 />
         <Footer/>
-        <LoadingScreen/>
+        {/* <LoadingScreen/> */}
       </div>
     )
   }
