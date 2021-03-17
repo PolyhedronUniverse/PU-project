@@ -45,7 +45,7 @@ export default function DatLoader() {
                 }
 
                 if((id+1) === parseInt(linesOrder['pyx'][i])){
-                    console.log(row)
+                    // console.log(row)
                     const v = new THREE.Vector3().setFromSphericalCoords(
                         180,
                         (90 - Number(row.slice(96, 102))) / 180 * Math.PI,

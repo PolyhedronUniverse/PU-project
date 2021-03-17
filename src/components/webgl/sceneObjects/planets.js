@@ -46,20 +46,32 @@ export default function Planets(scene, loadingManager) {
         void main() {
             int texIdx = int(vId);
 
-            vec4 c = vec4(1.,1.,1.,vOpacity);
+            vec4 c;
 
             if (texIdx == 0) {
-                gl_FragColor = texture2D(pointTexture[0], gl_PointCoord ) * c;
+                gl_FragColor = vec4(1., 0., 0., vOpacity);
+                // c = vec4(1., 0., 0., vOpacity);
+                // gl_FragColor = texture2D(pointTexture[0], gl_PointCoord ) * c;
             } else if(texIdx == 1) {
-                gl_FragColor = texture2D(pointTexture[1], gl_PointCoord ) * c;
+                gl_FragColor = vec4(1., 0., 0., vOpacity);
+                // c = vec4(1., 0., 0., vOpacity);
+                // gl_FragColor = texture2D(pointTexture[1], gl_PointCoord ) * c;
             } else if(texIdx == 2) {
-                gl_FragColor = texture2D(pointTexture[2], gl_PointCoord ) * c;
+                gl_FragColor = vec4(0., 1., 0., vOpacity);
+                // c = vec4(0., 1., 0., vOpacity);
+                // gl_FragColor = texture2D(pointTexture[2], gl_PointCoord ) * c;
             } else if(texIdx == 3) {
-                gl_FragColor = texture2D(pointTexture[3], gl_PointCoord ) * c;
+                gl_FragColor = vec4(0., 1., 0., vOpacity);
+                // c = vec4(0., 1., 0., vOpacity);
+                // gl_FragColor = texture2D(pointTexture[3], gl_PointCoord ) * c;
             } else if(texIdx == 4) {
-                gl_FragColor = texture2D(pointTexture[4], gl_PointCoord ) * c;
+                gl_FragColor = vec4(1., 0., 0., vOpacity);
+                // c = vec4(0., 0., 1., vOpacity);
+                // gl_FragColor = texture2D(pointTexture[4], gl_PointCoord ) * c;
             } else if(texIdx == 5) {
-                gl_FragColor = texture2D(pointTexture[5], gl_PointCoord ) * c;
+                gl_FragColor = vec4(1., 0., 0., vOpacity);
+                // c = vec4(0., 0., 1., vOpacity);
+                // gl_FragColor = texture2D(pointTexture[5], gl_PointCoord ) * c;
             }
 
             // * vec4(1., ., 0., opacity)

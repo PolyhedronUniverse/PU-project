@@ -14,8 +14,8 @@ import Nebulas from '../../sceneObjects/nebulas'
 import OldWonder from '../../sceneObjects/oldWonder'
 import Wormhole from '../../sceneObjects/wormhole'
 import Stars from '../../sceneObjects/stars'
-// import Planets from '../../sceneObjects/planets'
-import OldPlanets from '../../sceneObjects/oldPlanets'
+import Planets from '../../sceneObjects/planets'
+// import OldPlanets from '../../sceneObjects/oldPlanets'
 
 // import Wonder from '../../sceneObjects/wonder'
 // import WonderSystem from '../../sceneObjects/wonderSystem'
@@ -246,7 +246,7 @@ export default function MainScene(header, footer) {
   objects.push(addObject(new Stars(scene, loadingManager)));
   // todo: contine testing shaders - objects.push(addObject(new WonderSystem(scene, loadingManager)))
   // objects.push(addObject(new oldPlanets(scene, loadingManager)));
-  const planets = OldPlanets(scene, loadingManager);
+  const planets = Planets(scene, loadingManager);
   
   
   // # END ADD OBJECTS TO THE SCENE #
@@ -291,7 +291,7 @@ export default function MainScene(header, footer) {
         control = myOrbitControls(camera, renderer);
         scene.background = nebulas[query.location + 'Texture'];
         planets[query.location + 'Points'].layers.enable(0)
-        planets[query.location + 'Points'].userData.enable()
+        // planets[query.location + 'Points'].userData.enable()
         document.getElementById('back').style.display = ''
 
       }else{
@@ -346,10 +346,10 @@ export default function MainScene(header, footer) {
     raycaster.setFromCamera(mouse, camera);
     raycaster.params.Points.threshold = 5;
     
-    // let att;
+    let att;
     if (query.location !== 'home') {
       intersects = raycaster.intersectObjects([planets[query.location + 'Points']], true)
-      // att = planets[query.location + 'Points'].geometry.attributes;
+      att = planets[query.location + 'Points'].geometry.attributes;
     } else{
       intersects = raycaster.intersectObjects(objects[0].nebulas, true)
     }
@@ -358,15 +358,12 @@ export default function MainScene(header, footer) {
     if (intersects.length > 0 && event.target.id === 'mainCanvas') {
       if (query.location !== 'home') {
         // console.log('on planet')
-        INTERSECTED = intersects[0].object // for OldPlanets
-        INTERSECTED.material.opacity = 1 // for OldPlanets
+        // INTERSECTED = intersects[0].object // for OldPlanets
+        // INTERSECTED.material.opacity = 1 // for OldPlanets
 
-        // INTERSECTED = intersects[0].index
-        // console.log(intersects[0].index)
-        // att.a_opacity.array[intersects[0].index] = 1
-        
-        // att.a_opacity.needsUpdate = true
-        // console.log(att.a_opacity)
+        INTERSECTED = intersects[0].index
+        att.a_opacity.array[intersects[0].index] = 1
+        att.a_opacity.needsUpdate = true
 
       } else{
         document.getElementById('nebula').style.padding = '0.5em';
@@ -380,10 +377,10 @@ export default function MainScene(header, footer) {
     } else {
   
       if (INTERSECTED != null && query.location !== 'home') {
-        INTERSECTED.material.opacity = 0.5 // for OldPlanets
+        // INTERSECTED.material.opacity = 0.5 // for OldPlanets
 
-        // att.a_opacity.array[INTERSECTED] = 0.5
-        // att.a_opacity.needsUpdate = true
+        att.a_opacity.array[INTERSECTED] = 0.5
+        att.a_opacity.needsUpdate = true
         INTERSECTED = null;
       }
 
@@ -429,11 +426,11 @@ export default function MainScene(header, footer) {
 
     raycaster.setFromCamera(mouse, camera);
 
-    // let att;
+    let att;
     if (query.location !== 'home') {
       // console.log(query.location)
       intersects = raycaster.intersectObjects([planets[query.location + 'Points']], true)
-      // att = planets[query.location + 'Points'].geometry.attributes;
+      att = planets[query.location + 'Points'].geometry.attributes;
     } else {
       intersects = raycaster.intersectObjects(objects[0].nebulas, true)
     }
@@ -460,7 +457,7 @@ export default function MainScene(header, footer) {
         travel = 'forward';
         target = intersects[0].object.parent.position;
         planets[query.location + 'Points'].layers.enable(0)
-        planets[query.location + 'Points'].userData.enable()
+        // planets[query.location + 'Points'].userData.enable()
         sounds.onSound.play();
         // document.getElementById('info').style.display = 'none'
 
