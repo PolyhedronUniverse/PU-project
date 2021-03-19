@@ -122,7 +122,7 @@ export default function MainScene(header, footer) {
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 0, -4000)
-    controls.maxDistance = 200;
+    controls.maxDistance = 10;
     controls.enablePan = false;
     controls.enableDamping = true;
     controls.dampingFactor = 0.1;
@@ -344,7 +344,7 @@ export default function MainScene(header, footer) {
     mouse.y = (pos.y / renderer.domElement.height) * -2 + 1;
 
     raycaster.setFromCamera(mouse, camera);
-    raycaster.params.Points.threshold = 5;
+    // raycaster.params.Points.threshold = 2;
     
     let att;
     if (query.location !== 'home') {
@@ -440,8 +440,8 @@ export default function MainScene(header, footer) {
 
       if (query.location !== 'home') {
         
-        starMetadata(intersects[0].object.userData)
-        console.log(intersects[0])
+        starMetadata(intersects[0].object.userData[att.index.array[intersects[0].index]])
+        console.log(att.index.array[intersects[0].index])
         // control.controls.target.set(
         //   intersects[0].object.position.x,
         //   intersects[0].object.position.y,
@@ -519,8 +519,8 @@ export default function MainScene(header, footer) {
       camera.lookAt(0, 0, -4000);
       camera.updateProjectionMatrix()
       travel = 'backward';
-      // planets[query.location + 'Points'].layers.disableAll();
-      planets[query.location + 'Points'].userData.disable();
+      planets[query.location + 'Points'].layers.disableAll();
+      // planets[query.location + 'Points'].userData.disable();
 
       this.style.display = 'none';
       camera.children[0].position.z = 10;

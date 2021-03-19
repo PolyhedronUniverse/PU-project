@@ -35,29 +35,32 @@ export default function DatLoader() {
                 // console.log()
                 // console.log(id)
                 if(row.slice(4, 14).trim() !== ""){
+                    const v = new THREE.Vector3().setFromSphericalCoords(
+                        100,
+                        (90 - Number(row.slice(96, 102))) / 180 * Math.PI,
+                        Number(row.slice(90, 96)) / 180 * Math.PI);
+                    
+                    // v.z = Math.abs(v.z)
                     positions[parseInt(row.slice(0,4))] = {
                         name: row.slice(4, 14).trim(),
-                        coords: new THREE.Vector3().setFromSphericalCoords(
-                            180,
-                            (90 - Number(row.slice(96, 102))) / 180 * Math.PI,
-                            Number(row.slice(90, 96)) / 180 * Math.PI),
+                        coords: v,
                     }
                 }
 
-                if((id+1) === parseInt(linesOrder['pyx'][i])){
-                    // console.log(row)
-                    const v = new THREE.Vector3().setFromSphericalCoords(
-                        180,
-                        (90 - Number(row.slice(96, 102))) / 180 * Math.PI,
-                        Number(row.slice(90, 96)) / 180 * Math.PI)
-                    console.log('match')
-                    pos.push(v.x, v.y, v.z)
-                    i++
-                }
+                // if((id+1) === parseInt(linesOrder['pyx'][i])){
+                //     // console.log(row)
+                //     const v = new THREE.Vector3().setFromSphericalCoords(
+                //         180,
+                //         (90 - Number(row.slice(96, 102))) / 180 * Math.PI,
+                //         Number(row.slice(90, 96)) / 180 * Math.PI)
+                //     console.log('match')
+                //     pos.push(v.x, v.y, v.z)
+                //     i++
+                // }
             })
         }
     }
     bsc5dat.send()
     // console.log(pos)
-    return {linesOrder,positions,pos}
+    return {linesOrder,positions}
 }
