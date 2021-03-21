@@ -20,43 +20,25 @@ export default function DatLoader() {
         }
     }
     constellationLinesDat.send()
-    // console.log(linesOrder['pyx'])
 
     let positions = {}
-    let pos = []
-    let i = 0;
     const bsc5dat = new XMLHttpRequest()
     bsc5dat.open('GET', dat, false)
     bsc5dat.onreadystatechange = function () {
         if (bsc5dat.readyState === 4) {
             const starData = bsc5dat.responseText.split("\n")
             starData.forEach(function(row, id) {
-                // const id = Number(row.slice(0, 4))
-                // console.log()
-                // console.log(id)
                 if(row.slice(4, 14).trim() !== ""){
                     const v = new THREE.Vector3().setFromSphericalCoords(
                         100,
                         (90 - Number(row.slice(96, 102))) / 180 * Math.PI,
                         Number(row.slice(90, 96)) / 180 * Math.PI);
                     
-                    // v.z = Math.abs(v.z)
                     positions[parseInt(row.slice(0,4))] = {
                         name: row.slice(4, 14).trim(),
                         coords: v,
                     }
                 }
-
-                // if((id+1) === parseInt(linesOrder['pyx'][i])){
-                //     // console.log(row)
-                //     const v = new THREE.Vector3().setFromSphericalCoords(
-                //         180,
-                //         (90 - Number(row.slice(96, 102))) / 180 * Math.PI,
-                //         Number(row.slice(90, 96)) / 180 * Math.PI)
-                //     console.log('match')
-                //     pos.push(v.x, v.y, v.z)
-                //     i++
-                // }
             })
         }
     }

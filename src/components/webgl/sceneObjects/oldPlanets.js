@@ -32,7 +32,6 @@ export default function OldPlanets(scene, loadingManager) {
                         break;
                     default: break;
                 }
-                // const rand = Math.random() * 100 - 50;
                 const sprite = new THREE.Sprite(material);
                 sprite.scale.set(5, 5)
                 sprite.position.set(Math.random() * 100 - 50, Math.random() * 100 - 50, Math.random() * 100 - 50);

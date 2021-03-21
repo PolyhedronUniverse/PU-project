@@ -106,7 +106,7 @@ export default function SceneManager(header, footer){
   /* 5. Add scene objects */
   function addObject(object){
 
-    let newObj = [];
+    // let newObj = [];
     console.log(object)
     return object;
   }

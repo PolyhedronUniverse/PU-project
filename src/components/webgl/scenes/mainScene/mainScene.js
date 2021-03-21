@@ -122,7 +122,7 @@ export default function MainScene(header, footer) {
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 0, -4000)
-    controls.maxDistance = 10;
+    // controls.maxDistance = 101;
     controls.enablePan = false;
     controls.enableDamping = true;
     controls.dampingFactor = 0.1;
@@ -291,6 +291,8 @@ export default function MainScene(header, footer) {
         control = myOrbitControls(camera, renderer);
         scene.background = nebulas[query.location + 'Texture'];
         planets[query.location + 'Points'].layers.enable(0)
+        planets[query.location + 'Points'].children[0].layers.enable(0)
+
         // planets[query.location + 'Points'].userData.enable()
         document.getElementById('back').style.display = ''
 
@@ -348,7 +350,7 @@ export default function MainScene(header, footer) {
     
     let att;
     if (query.location !== 'home') {
-      intersects = raycaster.intersectObjects([planets[query.location + 'Points']], true)
+      intersects = raycaster.intersectObjects([planets[query.location + 'Points']], false)
       att = planets[query.location + 'Points'].geometry.attributes;
     } else{
       intersects = raycaster.intersectObjects(objects[0].nebulas, true)
@@ -356,19 +358,20 @@ export default function MainScene(header, footer) {
 
 
     if (intersects.length > 0 && event.target.id === 'mainCanvas') {
+      INTERSECTED = intersects[0];
+      
       if (query.location !== 'home') {
         // console.log('on planet')
         // INTERSECTED = intersects[0].object // for OldPlanets
         // INTERSECTED.material.opacity = 1 // for OldPlanets
 
-        INTERSECTED = intersects[0].index
-        att.a_opacity.array[intersects[0].index] = 1
+        att.a_opacity.array[INTERSECTED.index] = 1
         att.a_opacity.needsUpdate = true
-
+        INTERSECTED.object.children[0].material.uniforms.opacity.value = 1;
       } else{
         document.getElementById('nebula').style.padding = '0.5em';
     
-        displayNebula(intersects[0].object.userData.displayName, event.clientX, event.clientY)
+        displayNebula(INTERSECTED.object.userData.displayName, event.clientX, event.clientY)
         document.getElementById('nebula').style.height = 'auto';
         document.getElementById('nebula').style.width = 'auto';
       }
@@ -376,11 +379,15 @@ export default function MainScene(header, footer) {
       document.getElementById('canvas-area').style.cursor = 'pointer';
     } else {
   
-      if (INTERSECTED != null && query.location !== 'home') {
+      if (query.location !== 'home' && INTERSECTED !== null) {
         // INTERSECTED.material.opacity = 0.5 // for OldPlanets
 
-        att.a_opacity.array[INTERSECTED] = 0.5
-        att.a_opacity.needsUpdate = true
+        att.a_opacity.array[INTERSECTED.index] = 0.5
+        att.a_opacity.needsUpdate = true;
+        INTERSECTED.object.children[0].material.uniforms.opacity.value = 0.5;
+      }
+      
+      if(INTERSECTED !== null){
         INTERSECTED = null;
       }
 
@@ -391,8 +398,6 @@ export default function MainScene(header, footer) {
       
       document.getElementById('canvas-area').style.cursor = 'default';
     }
-
-    // console.log(INTERSECTED)
   }
 
   //* 4. OnMouseDown
@@ -428,8 +433,7 @@ export default function MainScene(header, footer) {
 
     let att;
     if (query.location !== 'home') {
-      // console.log(query.location)
-      intersects = raycaster.intersectObjects([planets[query.location + 'Points']], true)
+      intersects = raycaster.intersectObjects([planets[query.location + 'Points']], false)
       att = planets[query.location + 'Points'].geometry.attributes;
     } else {
       intersects = raycaster.intersectObjects(objects[0].nebulas, true)
@@ -441,7 +445,10 @@ export default function MainScene(header, footer) {
       if (query.location !== 'home') {
         
         starMetadata(intersects[0].object.userData[att.index.array[intersects[0].index]])
-        console.log(att.index.array[intersects[0].index])
+        console.log(intersects[0])
+        // camera.lookAt(intersects[0].point)
+        // camera.updateProjectionMatrix();
+        // control.controls.update()
         // control.controls.target.set(
         //   intersects[0].object.position.x,
         //   intersects[0].object.position.y,
@@ -457,12 +464,15 @@ export default function MainScene(header, footer) {
         travel = 'forward';
         target = intersects[0].object.parent.position;
         planets[query.location + 'Points'].layers.enable(0)
+        planets[query.location + 'Points'].children[0].layers.enable(0)
+
         // planets[query.location + 'Points'].userData.enable()
         sounds.onSound.play();
         // document.getElementById('info').style.display = 'none'
 
         camera.lookAt(intersects[0].object.parent.position)
         camera.updateProjectionMatrix();
+        INTERSECTED = null
       }
     }else{
       if (query.location !== 'home' && document.getElementById('s-metadata').clientWidth > 0) {
@@ -478,33 +488,7 @@ export default function MainScene(header, footer) {
 
   //* 5. OnKeyDown
   function onKeyDown(event) {
-    if (event.which === 82) {
-      if (query.location !== 'home') {
-        if (control) {
-          console.log(control)
-          control.controls.reset()
-          control.controls.dispose()
-          control.controls.update()
-          console.log(control)
-          control = null;
-        }
-        camera.position.set(0, 0, -3900);
-        camera.lookAt(0, 0, -4000);
-        camera.updateProjectionMatrix()
-        travel = 'backward';
-        objects[4][query.location + 'Points'].layers.disableAll();
-        // this.style.display = 'none';
-        camera.children[0].position.z = 10;
-        camera.children[0].material.uniforms.a.value = 1;
-        sounds.onSound.play();
-        InsertParameter('location', 'home');
-        query.location = 'home';
-        // starMetadata()
-      }
-
-
-    }
-    // console.log(event.which)
+    console.log(event.which)
   }
 
   //* 6. Back button
@@ -520,7 +504,7 @@ export default function MainScene(header, footer) {
       camera.updateProjectionMatrix()
       travel = 'backward';
       planets[query.location + 'Points'].layers.disableAll();
-      // planets[query.location + 'Points'].userData.disable();
+      planets[query.location + 'Points'].children[0].layers.disableAll();
 
       this.style.display = 'none';
       camera.children[0].position.z = 10;
@@ -541,13 +525,13 @@ export default function MainScene(header, footer) {
   window.addEventListener('load', onLoad, false)
   // window.addEventListener('pointermove', onMouseMove, false)
   // window.addEventListener('pointerdown', onMouseDown, false)
-  // ? window.addEventListener('keydown', onKeyDown, false)
+  window.addEventListener('keydown', onKeyDown, false)
   document.getElementById('back').addEventListener('pointerup', backOnPointerDown, false)
 
   // # END ATTACH EVENTLISTENERS #
 
 
-
+  console.log(renderer.getContext());
 
   update()
 
