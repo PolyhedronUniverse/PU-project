@@ -531,7 +531,7 @@ export default function MainScene(header, footer) {
   // # END ATTACH EVENTLISTENERS #
 
 
-  console.log(renderer.getContext());
+  console.log(renderer.info);
 
   update()
 

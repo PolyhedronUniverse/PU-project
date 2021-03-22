@@ -39,17 +39,19 @@ export default function Planets(scene, loadingManager) {
             vec4 c = vec4(1.0, 1.0, 1.0, vOpacity);
             vec4 tex;
 
-            if(vId == 0.0){
+            float id = vId;
+
+            if(id == 0.0){
                 tex = texture2D(points[0], gl_PointCoord);
-            }else if(vId == 1.0){
+            }else if(id == 1.0){
                 tex = texture2D(points[1], gl_PointCoord);
-            }else if(vId == 2.0){
+            }else if(id == 2.0){
                 tex = texture2D(points[2], gl_PointCoord);
-            }else if(vId == 3.0){
+            }else if(id == 3.0){
                 tex = texture2D(points[3], gl_PointCoord);
-            }else if(vId == 4.0){
+            }else if(id == 4.0){
                 tex = texture2D(points[4], gl_PointCoord);
-            }else if(vId == 5.0){
+            }else if(id == 5.0){
                 tex = texture2D(points[5], gl_PointCoord);
             }
 
@@ -63,7 +65,7 @@ export default function Planets(scene, loadingManager) {
         // blending: THREE.AdditiveBlending,
         // depthTest: false,
         // depthWrite: false,
-        transparent: true,
+        // transparent: true,
         // vertexColors: true,
         // glslVersion: THREE.GLSL3,
     })
@@ -101,7 +103,13 @@ export default function Planets(scene, loadingManager) {
         fragmentShader:`
         precision mediump float;
 
-        uniform sampler2D points[6];
+        uniform sampler2D points1;
+        uniform sampler2D points2;
+        uniform sampler2D points3;
+        uniform sampler2D points4;
+        uniform sampler2D points5;
+        uniform sampler2D points6;
+
         varying vec3 vColor;
         varying float vId;
         varying float vOpacity;
@@ -111,27 +119,35 @@ export default function Planets(scene, loadingManager) {
             vec4 tex;
 
             if(vId == 0.0){
-                tex = texture2D(points[0], gl_PointCoord);
+                tex = texture2D(points1, gl_PointCoord);
             }else if(vId == 1.0){
-                tex = texture2D(points[1], gl_PointCoord);
+                tex = texture2D(points2, gl_PointCoord);
             }else if(vId == 2.0){
-                tex = texture2D(points[2], gl_PointCoord);
+                tex = texture2D(points3, gl_PointCoord);
             }else if(vId == 3.0){
-                tex = texture2D(points[3], gl_PointCoord);
+                tex = texture2D(points4, gl_PointCoord);
             }else if(vId == 4.0){
-                tex = texture2D(points[4], gl_PointCoord);
+                tex = texture2D(points5, gl_PointCoord);
             }else if(vId == 5.0){
-                tex = texture2D(points[5], gl_PointCoord);
+                tex = texture2D(points6, gl_PointCoord);
             }
 
             gl_FragColor = tex * c;
         }
         `,
         uniforms: {
-            points: { type: 't', value: iconsT },
+            points1: {value: iconsT[0] },
+            points2: {value: iconsT[1] },
+            points3: {value: iconsT[2] },
+            points4: {value: iconsT[3] },
+            points5: {value: iconsT[4] },
+            points6: {value: iconsT[5] },
+
             // opacity: { type: 'f', value: 0.5 }
         },
-        transparent: true
+        transparent: true,
+        // depthTest: false,
+        // depthWrite: false,
     })
     // const material = new THREE.LineBasicMaterial({
     //     color: 0xff0000,
@@ -226,7 +242,7 @@ export default function Planets(scene, loadingManager) {
     }
 
     let angerGeo = createCluster(metadata.anger)
-    const angerPoints = new THREE.Points(angerGeo.pointsGeo, shaderPoints);
+    const angerPoints = new THREE.Points(angerGeo.pointsGeo, shaderPoints2);
     angerPoints.userData = metadata.anger;
     angerPoints.position.z = -4000;
     angerPoints.layers.disableAll();
@@ -236,7 +252,7 @@ export default function Planets(scene, loadingManager) {
     scene.add(angerPoints);
 
     let sadnessGeo = createCluster(metadata.sadness)
-    const sadnessPoints = new THREE.Points(sadnessGeo.pointsGeo, shaderPoints);
+    const sadnessPoints = new THREE.Points(sadnessGeo.pointsGeo, shaderPoints2);
     sadnessPoints.userData = metadata.sadness;
     sadnessPoints.position.z = -4000;
     sadnessPoints.layers.disableAll();
@@ -246,7 +262,7 @@ export default function Planets(scene, loadingManager) {
     scene.add(sadnessPoints);
 
     let joyGeo = createCluster(metadata.joy)
-    const joyPoints = new THREE.Points(joyGeo.pointsGeo, shaderPoints);
+    const joyPoints = new THREE.Points(joyGeo.pointsGeo, shaderPoints2);
     joyPoints.userData = metadata.joy;
     joyPoints.position.z = -4000;
     joyPoints.layers.disableAll();
@@ -257,7 +273,7 @@ export default function Planets(scene, loadingManager) {
     scene.add(joyPoints);
 
     let loveGeo = createCluster(metadata.love)
-    const lovePoints = new THREE.Points(loveGeo.pointsGeo, shaderPoints);
+    const lovePoints = new THREE.Points(loveGeo.pointsGeo, shaderPoints2);
     lovePoints.userData = metadata.love;
     lovePoints.position.z = -4000;
     lovePoints.layers.disableAll();
@@ -277,7 +293,7 @@ export default function Planets(scene, loadingManager) {
     scene.add(empowermentPoints);
 
     let wonderGeo = createCluster(metadata.wonder)
-    const wonderPoints = new THREE.Points(wonderGeo.pointsGeo, shaderPoints);
+    const wonderPoints = new THREE.Points(wonderGeo.pointsGeo, shaderPoints2);
     wonderPoints.userData = metadata.wonder;
     wonderPoints.position.z = -4000;
     wonderPoints.layers.disableAll();
