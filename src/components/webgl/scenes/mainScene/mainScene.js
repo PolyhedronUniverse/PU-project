@@ -64,6 +64,8 @@ export default function MainScene(header, footer) {
     const scene = new THREE.Scene();
     scene.name = "MainScene";
     scene.background = texture;
+    window.scene = scene;
+    window.THREE = THREE
     return scene;
   }
 
@@ -122,7 +124,7 @@ export default function MainScene(header, footer) {
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 0, -4000)
-    // controls.maxDistance = 101;
+    controls.maxDistance = 101;
     controls.enablePan = false;
     controls.enableDamping = true;
     controls.dampingFactor = 0.1;
@@ -223,6 +225,7 @@ export default function MainScene(header, footer) {
   const scene = buildScene(nebulas.mainTexture); // * Call the scene builder and store it in scene.
   const renderer = buildRender(); // * Call the renderer builder and store it.
   const camera = buildCamera(scene); // * Call the camera builder and pass the scene variable.
+  // renderer.compile(scene, camera)
 
   // * por si las moscas - control = myOrbitControls(camera, renderer)
 
@@ -365,8 +368,8 @@ export default function MainScene(header, footer) {
         // INTERSECTED = intersects[0].object // for OldPlanets
         // INTERSECTED.material.opacity = 1 // for OldPlanets
 
-        att.a_opacity.array[INTERSECTED.index] = 1
-        att.a_opacity.needsUpdate = true
+        att.opacity.array[INTERSECTED.index] = 1
+        att.opacity.needsUpdate = true
         INTERSECTED.object.children[0].material.uniforms.opacity.value = 1;
       } else{
         document.getElementById('nebula').style.padding = '0.5em';
@@ -382,8 +385,8 @@ export default function MainScene(header, footer) {
       if (query.location !== 'home' && INTERSECTED !== null) {
         // INTERSECTED.material.opacity = 0.5 // for OldPlanets
 
-        att.a_opacity.array[INTERSECTED.index] = 0.5
-        att.a_opacity.needsUpdate = true;
+        att.opacity.array[INTERSECTED.index] = 0.5
+        att.opacity.needsUpdate = true;
         INTERSECTED.object.children[0].material.uniforms.opacity.value = 0.5;
       }
       
@@ -487,9 +490,9 @@ export default function MainScene(header, footer) {
   }
 
   //* 5. OnKeyDown
-  function onKeyDown(event) {
-    console.log(event.which)
-  }
+  // function onKeyDown(event) {
+  //   // console.log(event.which)
+  // }
 
   //* 6. Back button
   function backOnPointerDown(event) {
@@ -525,13 +528,19 @@ export default function MainScene(header, footer) {
   window.addEventListener('load', onLoad, false)
   // window.addEventListener('pointermove', onMouseMove, false)
   // window.addEventListener('pointerdown', onMouseDown, false)
-  window.addEventListener('keydown', onKeyDown, false)
+  // window.addEventListener('keydown', onKeyDown, false)
   document.getElementById('back').addEventListener('pointerup', backOnPointerDown, false)
 
   // # END ATTACH EVENTLISTENERS #
 
-
-  console.log(renderer.info);
+  const gl = renderer;
+  // gl.getParameter(gl.SHADING_LANGUAGE_VERSION);
+  // // console.log(  gl.getParameter(gl.SHADING_LANGUAGE_VERSION)  );
+  // gl.createProgram(renderer.info.programs[0])
+  // console.log(renderer.info.programs)
+  // // const wbgl = WebGLProgram();
+  // // const help = gl.getProgramInfoLog() 
+  console.log(gl)
 
   update()
 

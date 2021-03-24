@@ -12,14 +12,14 @@ export default function Planets(scene, loadingManager) {
         varying float vId;
         varying float vOpacity;
 
-        attribute float a_ti;
-        attribute float a_opacity;
+        attribute float textureIndex;
+        attribute float opacity;
 
         void main() {
 
             vColor = position;
-            vId = a_ti;
-            vOpacity = a_opacity;
+            vId = textureIndex;
+            vOpacity = opacity;
 
             vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
 
@@ -41,18 +41,21 @@ export default function Planets(scene, loadingManager) {
 
             float id = vId;
 
+            vec2 uv = gl_PointCoord;
+            uv.y = 1.0 - uv.y;
+
             if(id == 0.0){
-                tex = texture2D(points[0], gl_PointCoord);
+                tex = texture2D(points[0], uv);
             }else if(id == 1.0){
-                tex = texture2D(points[1], gl_PointCoord);
+                tex = texture2D(points[1], uv);
             }else if(id == 2.0){
-                tex = texture2D(points[2], gl_PointCoord);
+                tex = texture2D(points[2], uv);
             }else if(id == 3.0){
-                tex = texture2D(points[3], gl_PointCoord);
+                tex = texture2D(points[3], uv);
             }else if(id == 4.0){
-                tex = texture2D(points[4], gl_PointCoord);
+                tex = texture2D(points[4], uv);
             }else if(id == 5.0){
-                tex = texture2D(points[5], gl_PointCoord);
+                tex = texture2D(points[5], uv);
             }
 
             gl_FragColor = tex * c;
@@ -70,11 +73,14 @@ export default function Planets(scene, loadingManager) {
         // glslVersion: THREE.GLSL3,
     })
 
-    console.log(shaderPoints)
+    // console.log(shaderPoints)
+    shaderPoints.needsUpdate = true
 
 
     let shaderPoints2 = new THREE.RawShaderMaterial({
         vertexShader:`
+        precision highp float;
+
         uniform mat4 projectionMatrix;
         uniform mat4 viewMatrix;
         uniform mat4 modelMatrix;
@@ -84,14 +90,14 @@ export default function Planets(scene, loadingManager) {
         varying float vOpacity;
 
         attribute vec3 position;
-        attribute float a_ti;
-        attribute float a_opacity;
+        attribute float textureIndex;
+        attribute float opacity;
 
         void main() {
 
             vColor = position;
-            vId = a_ti;
-            vOpacity = a_opacity;
+            vId = textureIndex;
+            vOpacity = opacity;
 
             vec4 mvPosition = viewMatrix * modelMatrix * vec4( position, 1.0 );
 
@@ -101,7 +107,7 @@ export default function Planets(scene, loadingManager) {
         }
         `,
         fragmentShader:`
-        precision mediump float;
+        precision highp float;
 
         uniform sampler2D points1;
         uniform sampler2D points2;
@@ -118,18 +124,29 @@ export default function Planets(scene, loadingManager) {
             vec4 c = vec4(1.0, 1.0, 1.0, vOpacity);
             vec4 tex;
 
-            if(vId == 0.0){
-                tex = texture2D(points1, gl_PointCoord);
-            }else if(vId == 1.0){
-                tex = texture2D(points2, gl_PointCoord);
-            }else if(vId == 2.0){
-                tex = texture2D(points3, gl_PointCoord);
-            }else if(vId == 3.0){
-                tex = texture2D(points4, gl_PointCoord);
-            }else if(vId == 4.0){
-                tex = texture2D(points5, gl_PointCoord);
-            }else if(vId == 5.0){
-                tex = texture2D(points6, gl_PointCoord);
+            // if(mod(vId, 2.0) == 0.0){
+            //     tex = texture2D(points1, gl_PointCoord);
+            // }else{
+            //     tex = texture2D(points2, gl_PointCoord);
+            // }
+
+            vec2 uv = gl_PointCoord;
+            uv.y = 1.0 - uv.y;
+
+            float id = floor(vId);
+
+            if(id == 0.0){
+                tex = texture2D(points1, uv);
+            }else if(id == 1.0){
+                tex = texture2D(points2, uv);
+            }else if(id == 2.0){
+                tex = texture2D(points3, uv);
+            }else if(id == 3.0){
+                tex = texture2D(points4, uv);
+            }else if(id == 4.0){
+                tex = texture2D(points5, uv);
+            }else if(id == 5.0){
+                tex = texture2D(points6, uv);
             }
 
             gl_FragColor = tex * c;
@@ -146,13 +163,16 @@ export default function Planets(scene, loadingManager) {
             // opacity: { type: 'f', value: 0.5 }
         },
         transparent: true,
-        // depthTest: false,
-        // depthWrite: false,
+        depthTest: false,
+        depthWrite: false,
     })
+    shaderPoints2.needsUpdate = true
     // const material = new THREE.LineBasicMaterial({
     //     color: 0xff0000,
     //     linewidth: 10,
     // });
+
+    // console.log(shaderPoints2);
 
     const material = new THREE.ShaderMaterial({
         vertexShader: `
@@ -207,22 +227,22 @@ export default function Planets(scene, loadingManager) {
                 index.push(json[key].id);
                 switch (json[key].artist) {
                     case 'Dron-Z':
-                        textures.push(0);
+                        textures.push(0.0);
                         break;
                     case 'Ehy-X':
-                        textures.push(1);
+                        textures.push(1.0);
                         break;
                     case 'Lop-Y':
-                        textures.push(2);
+                        textures.push(2.0);
                         break;
                     case 'Nord-Z':
-                        textures.push(3);
+                        textures.push(3.0);
                         break;
                     case 'Pol-Y':
-                        textures.push(4);
+                        textures.push(4.0);
                         break;
                     case 'Yhe-X':
-                        textures.push(5);
+                        textures.push(5.0);
                         break;
                     default:
                         console.error('error en:' + json[key].artist)
@@ -234,8 +254,8 @@ export default function Planets(scene, loadingManager) {
         const pointsGeo = new THREE.BufferGeometry();
         pointsGeo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
         pointsGeo.setAttribute('index', new THREE.Float32BufferAttribute(index, 1));
-        pointsGeo.setAttribute('a_ti', new THREE.Float32BufferAttribute(textures, 1));
-        pointsGeo.setAttribute('a_opacity', new THREE.Float32BufferAttribute(opacity, 1));
+        pointsGeo.setAttribute('textureIndex', new THREE.Float32BufferAttribute(textures, 1));
+        pointsGeo.setAttribute('opacity', new THREE.Float32BufferAttribute(opacity, 1));
         const linesGeo = new THREE.BufferGeometry().setFromPoints(points)
         
         return { pointsGeo, linesGeo };
@@ -266,11 +286,12 @@ export default function Planets(scene, loadingManager) {
     joyPoints.userData = metadata.joy;
     joyPoints.position.z = -4000;
     joyPoints.layers.disableAll();
-    console.log(joyPoints.geometry)
+    // console.log(joyPoints.geometry)
     const line3 = new THREE.Line(joyGeo.linesGeo, material);
     line3.layers.disableAll();
     joyPoints.add(line3)
     scene.add(joyPoints);
+    // console.log(joyGeo.pointsGeo)
 
     let loveGeo = createCluster(metadata.love)
     const lovePoints = new THREE.Points(loveGeo.pointsGeo, shaderPoints2);

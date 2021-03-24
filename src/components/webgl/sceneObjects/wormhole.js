@@ -28,7 +28,7 @@ export default function Womhole(scene, loadingManager) {
       vec4 col1 = texture2D(texture1, vUv + time);
       vec4 col2 = texture2D(texture2, vUv);
       
-      gl_FragColor = vec4(col1.rgb * col2.rgb, 1. - pow(vUv.y,a));
+      gl_FragColor = vec4(col1.rgb * col2.rgb, 1. - pow(abs(vUv.y),a));
   }
   `;
 

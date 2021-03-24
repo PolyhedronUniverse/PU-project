@@ -30,7 +30,7 @@ export default function DatLoader() {
             starData.forEach(function(row, id) {
                 if(row.slice(4, 14).trim() !== ""){
                     const v = new THREE.Vector3().setFromSphericalCoords(
-                        100,
+                        50,
                         (90 - Number(row.slice(96, 102))) / 180 * Math.PI,
                         Number(row.slice(90, 96)) / 180 * Math.PI);
                     

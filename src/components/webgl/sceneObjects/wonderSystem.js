@@ -66,7 +66,7 @@ export default function WonderSystem(scene, loadingManager){
 
       float s = fbm( displacement * 5.0 + pos * 4.0, t * 1.32);
       float d = length( vUv - (0.5 ));
-      float ratioElevation = pow( (1.0 - d), 5.0);
+      float ratioElevation = pow( abs(1.0 - d), 5.0);
       // vElevation = s + .2 + ratioElevation * .1;
       vElevation = s + 0.02;
       // vElevation *= 1. - smoothstep(0.0, 0.5, length(uv - .5));
@@ -133,7 +133,7 @@ export default function WonderSystem(scene, loadingManager){
       float hue = 100./360.;
       float saturation = vElevation;
       float darkborders = sin(vUv.x * 3.14) * sin(vUv.y * 3.14);
-      float brightness = pow( darkborders * 0.2  + vElevation,6.5);
+      float brightness = pow( abs(darkborders * 0.2  + vElevation),6.5);
 
       vec3 col = hsl2rgb(hue, saturation, brightness);
 

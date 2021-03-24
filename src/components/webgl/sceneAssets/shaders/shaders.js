@@ -70,7 +70,7 @@ export default function Shaders() {
   
       float d = length( vUv - (0.5));
   
-      float ratioElevation = pow( (1.0 - d), 5.0);
+      float ratioElevation = pow( abs(1.0 - d), 5.0);
   
       vElevation = s + .2 + ratioElevation * .2;
   
@@ -142,7 +142,7 @@ export default function Shaders() {
 
         float saturation = vElevation * 1.1; //BOTH
         float darkborders = sin(vUv.x * 3.14) * sin(vUv.y * 3.14); //BOTH
-        float brightness = pow( darkborders * a + vElevation, 4.5); //BOTH
+        float brightness = pow( abs(darkborders * a + vElevation), 4.5); //BOTH
         // brightness *= .5 + smoothstep(.6, 1.0, vElevation) * .5; //similar Old
 
         // brightness += highlight * .2; //similar Old
@@ -233,7 +233,7 @@ export default function Shaders() {
 
         float d = length( vUv - (0.5));
 
-        float ratioElevation = pow( (1.0 - d), 5.0);
+        float ratioElevation = pow( abs(1.0 - d), 5.0);
 
         // vElevation = s + .2 + ratioElevation * .2;
         vElevation = s + .1 + ratioElevation * .2;
@@ -308,7 +308,7 @@ export default function Shaders() {
 
         float saturation = vElevation * 1.1;
         float darkborders = sin(vUv.x * 3.14) * sin(vUv.y * 3.14);
-        float brightness = pow( darkborders * a + vElevation, 3.5);
+        float brightness = pow( abs(darkborders * a + vElevation), 3.5);
         brightness *= .5 + smoothstep(.6, 1.0, vElevation) * .5;
 
         brightness += highlight * .2;
