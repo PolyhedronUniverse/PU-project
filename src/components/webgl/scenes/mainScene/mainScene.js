@@ -124,7 +124,7 @@ export default function MainScene(header, footer) {
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 0, -4000)
-    controls.maxDistance = 101;
+    controls.maxDistance = 10;
     controls.enablePan = false;
     controls.enableDamping = true;
     controls.dampingFactor = 0.1;
@@ -448,7 +448,7 @@ export default function MainScene(header, footer) {
       if (query.location !== 'home') {
         
         starMetadata(intersects[0].object.userData[att.index.array[intersects[0].index]])
-        console.log(intersects[0])
+        // console.log(intersects[0])
         // camera.lookAt(intersects[0].point)
         // camera.updateProjectionMatrix();
         // control.controls.update()

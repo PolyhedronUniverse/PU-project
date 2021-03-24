@@ -9,12 +9,12 @@ import yhe from '../sceneAssets/artist_icons/star_yhe-x_90.png'
 export default function IconsTexture(loadingManager){
   let loader = new THREE.TextureLoader(loadingManager);
 
-  let textureDron = loader.load(dron)
-  let textureEhy = loader.load(ehy)
-  let textureLop = loader.load(lop)
-  let textureNord = loader.load(nord)
-  let texturePol = loader.load(pol)
-  let textureYhe = loader.load(yhe)
+  let textureDron = loader.load(dron) //0
+  let textureEhy = loader.load(ehy) //1
+  let textureLop = loader.load(lop) //2
+  let textureNord = loader.load(nord) //3
+  let texturePol = loader.load(pol) //4
+  let textureYhe = loader.load(yhe) //5
 
   return [textureDron, textureEhy, textureLop, textureNord, texturePol, textureYhe] 
 }

@@ -45,17 +45,17 @@ export default function Planets(scene, loadingManager) {
             uv.y = 1.0 - uv.y;
 
             if(id == 0.0){
-                tex = texture2D(points[0], uv);
+                tex = texture2D(points[0], uv); //dron
             }else if(id == 1.0){
-                tex = texture2D(points[1], uv);
+                tex = texture2D(points[1], uv); //ehy
             }else if(id == 2.0){
-                tex = texture2D(points[2], uv);
+                tex = texture2D(points[2], uv); //lop
             }else if(id == 3.0){
-                tex = texture2D(points[3], uv);
+                tex = texture2D(points[3], uv); //nord
             }else if(id == 4.0){
-                tex = texture2D(points[4], uv);
+                tex = texture2D(points[4], uv); //pol
             }else if(id == 5.0){
-                tex = texture2D(points[5], uv);
+                tex = texture2D(points[5], uv); //yhe
             }
 
             gl_FragColor = tex * c;
@@ -102,6 +102,8 @@ export default function Planets(scene, loadingManager) {
             vec4 mvPosition = viewMatrix * modelMatrix * vec4( position, 1.0 );
 
             gl_PointSize = 20. * ( 100.0 / -mvPosition.z );
+            // gl_PointSize = 20.0 * ( 100.0 / length( mvPosition.xyz ) );
+            // gl_PointSize = 0.0 ;
 
             gl_Position = projectionMatrix * mvPosition;
         }
@@ -109,12 +111,12 @@ export default function Planets(scene, loadingManager) {
         fragmentShader:`
         precision highp float;
 
-        uniform sampler2D points1;
-        uniform sampler2D points2;
-        uniform sampler2D points3;
-        uniform sampler2D points4;
-        uniform sampler2D points5;
-        uniform sampler2D points6;
+        uniform sampler2D dron;
+        uniform sampler2D ehy;
+        uniform sampler2D lop;
+        uniform sampler2D nord;
+        uniform sampler2D pol;
+        uniform sampler2D yhe;
 
         varying vec3 vColor;
         varying float vId;
@@ -133,32 +135,46 @@ export default function Planets(scene, loadingManager) {
             vec2 uv = gl_PointCoord;
             uv.y = 1.0 - uv.y;
 
-            float id = floor(vId);
+            float id = vId;
 
-            if(id == 0.0){
-                tex = texture2D(points1, uv);
-            }else if(id == 1.0){
-                tex = texture2D(points2, uv);
-            }else if(id == 2.0){
-                tex = texture2D(points3, uv);
-            }else if(id == 3.0){
-                tex = texture2D(points4, uv);
-            }else if(id == 4.0){
-                tex = texture2D(points5, uv);
-            }else if(id == 5.0){
-                tex = texture2D(points6, uv);
+            // if(id == 0.0){
+            //     tex = texture2D(dron, uv);//dron
+            // }else if(id == 1.0){
+            //     tex = texture2D(ehy, uv);//ehy
+            // }else if(id == 2.0){
+            //     tex = texture2D(lop, uv);//lop
+            // }else if(id == 3.0){
+            //     tex = texture2D(nord, uv);//nord
+            // }else if(id == 4.0){
+            //     tex = texture2D(pol, uv);//pol
+            // }else if(id >= 5.0){
+            //     tex = texture2D(yhe, uv);//yhe
+            // }
+
+            if( id > 4.0){
+                tex = texture2D(yhe, uv);
+            }else if( id > 3.0){
+                tex = texture2D(pol, uv);
+            }else if( id > 2.0 ){
+                tex = texture2D(nord, uv);
+            }else if( id > 1.0){
+                tex = texture2D(lop, uv);
+            }else if( id > 0.0 ){
+                tex = texture2D(ehy, uv);
+            }else if( id == 0.0){
+                tex = texture2D(dron, uv);
             }
 
             gl_FragColor = tex * c;
         }
         `,
         uniforms: {
-            points1: {value: iconsT[0] },
-            points2: {value: iconsT[1] },
-            points3: {value: iconsT[2] },
-            points4: {value: iconsT[3] },
-            points5: {value: iconsT[4] },
-            points6: {value: iconsT[5] },
+            dron: {value: iconsT[0] },
+            ehy: {value: iconsT[1] },
+            lop: {value: iconsT[2] },
+            nord: {value: iconsT[3] },
+            pol: {value: iconsT[4] },
+            yhe: {value: iconsT[5] },
 
             // opacity: { type: 'f', value: 0.5 }
         },
