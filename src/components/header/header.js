@@ -9,7 +9,7 @@ export default function Header(){
   const title2 = 'U N I V E R S E';
 
   return(
-    <div className='header'>
+    <div className='header' id='header'>
       <div className='title'>
         <div className='text'> 
           <p>{title1}</p>

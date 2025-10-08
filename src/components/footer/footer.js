@@ -45,7 +45,7 @@ export default function Footer() {
 
   return (
     <>
-      <div id='footer'>
+      <div id='footer' className='footer'>
         <SocialIcons
           social='https://www.linkedin.com/company/polyhedronuniverse/'
           white={linkedin_w}
@@ -106,8 +106,8 @@ export default function Footer() {
             />
           </button>
         </div>
+        <SpotifyMenu />
       </div>
-      <SpotifyMenu />
     </>
   )
 }
