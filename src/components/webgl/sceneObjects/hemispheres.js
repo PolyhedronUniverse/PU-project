@@ -62,7 +62,7 @@ export default function Hemispheres(scene, loadingManager, camera) {
   // scene.add(m)
 
 
-  const s = new THREE.SphereBufferGeometry(200,10,10)
+  const s = new THREE.SphereGeometry(200,10,10)
   const m = new THREE.MeshBasicMaterial({color: 'red', wireframe: true})
   const sphere = new THREE.Mesh(s,m)
   sphere.position.z = -4000

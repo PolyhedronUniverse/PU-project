@@ -510,7 +510,7 @@ export default function Particles(scene, renderer, camera) {
 		// scene.add( box );
 
 
-		const geo = new THREE.SphereBufferGeometry(10, 10, 10);
+		const geo = new THREE.SphereGeometry(10, 10, 10);
 		const mat = new THREE.MeshBasicMaterial({ color: 'red' });
 
 		target = new THREE.Mesh(geo, mat);

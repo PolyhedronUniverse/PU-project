@@ -184,9 +184,9 @@ export default function OldNebulas(scene, loadingManager) {
   `;
 
 
-  const geometry = new THREE.PlaneBufferGeometry(250, 250, 80, 80);
+  const geometry = new THREE.PlaneGeometry(250, 250, 80, 80);
   // const areaG = new THREE.PlaneBufferGeometry(100,100,2,2);
-  const areaG = new THREE.CircleBufferGeometry(80, 10);
+  const areaG = new THREE.CircleGeometry(80, 10);
 
   function createNebula(geometry, areaGeo, color, position, lookAt, name, speed) {
     const material = new THREE.ShaderMaterial({

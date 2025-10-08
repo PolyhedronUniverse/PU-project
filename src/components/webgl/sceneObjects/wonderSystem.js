@@ -163,7 +163,7 @@ export default function WonderSystem(scene, loadingManager){
   //   map: loader.load(wonder1), 
   //   transparent: true,  
   // })
-  const swirlGeo = new THREE.PlaneBufferGeometry(2000,2000,50,50);
+  const swirlGeo = new THREE.PlaneGeometry(2000,2000,50,50);
   const swirl = new THREE.Mesh(swirlGeo, shaderSwirl);
   // swirl.position.z = 1;
 
@@ -203,7 +203,7 @@ export default function WonderSystem(scene, loadingManager){
   //   map: loader.load(wonder2), 
   //   transparent: true,
   //  })
-  const curveWonder = new THREE.PlaneBufferGeometry(2000,1000,50,50);
+  const curveWonder = new THREE.PlaneGeometry(2000,1000,50,50);
 
   // curveMaterialIzq.map.wrapS = THREE.RepeatWrapping;
   // curveMaterialIzq.map.repeat.x = - 1;

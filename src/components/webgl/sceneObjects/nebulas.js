@@ -69,11 +69,11 @@ export default function Nebulas(scene, loadingManager) {
   }
   let geometry;
   if(isMobile){
-    geometry = new THREE.PlaneBufferGeometry(250, 250, 30, 30);
+    geometry = new THREE.PlaneGeometry(250, 250, 30, 30);
   }else{
-    geometry = new THREE.PlaneBufferGeometry(280, 280, 110, 110);
+    geometry = new THREE.PlaneGeometry(280, 280, 110, 110);
   }
-  const areaG = new THREE.CircleBufferGeometry(120, 32);
+  const areaG = new THREE.CircleGeometry(120, 32);
 
 
   // const anger1 = createNebula(
@@ -173,7 +173,7 @@ export default function Nebulas(scene, loadingManager) {
   )
   scene.add(wonder.group)
 
-  const g = new THREE.PlaneBufferGeometry(250, 50, 10, 10)
+  const g = new THREE.PlaneGeometry(250, 50, 10, 10)
   const m = new THREE.MeshBasicMaterial({color: "green", wireframe: false, transparent:true, opacity: 0.5})
   const cloud = new THREE.Mesh(g,m)
   // cloud.rotation.x = Math.PI * 0.7

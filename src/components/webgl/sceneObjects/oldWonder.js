@@ -9,7 +9,7 @@ export default function OldWonder(scene, loadingManager) {
   const loader = new THREE.TextureLoader(loadingManager)
 
   let moveNebula = 0;
-  const g = new THREE.PlaneBufferGeometry(4000, 800, 10, 10)
+  const g = new THREE.PlaneGeometry(4000, 800, 10, 10)
   const m = new THREE.MeshBasicMaterial({color: "green", wireframe: false, transparent:true, opacity: 0.5})
   const cloud = new THREE.Mesh(g,m)
   // cloud.position.z = origen.z * 5
@@ -24,7 +24,7 @@ export default function OldWonder(scene, loadingManager) {
     map: loader.load(wonder1), 
     transparent: true,  
   })
-  let backWonder = new THREE.PlaneBufferGeometry(2000,2000,10,10);
+  let backWonder = new THREE.PlaneGeometry(2000,2000,10,10);
   let meshWonder = new THREE.Mesh(backWonder, backMaterial);
   
   meshWonder.position.z = 100;
@@ -41,7 +41,7 @@ export default function OldWonder(scene, loadingManager) {
     map: loader.load(wonder2), 
     transparent: true, 
   })
-  let curveWonder = new THREE.PlaneBufferGeometry(2000,1000,10,10);
+  let curveWonder = new THREE.PlaneGeometry(2000,1000,10,10);
 
   curveMaterialIzq.map.wrapS = THREE.RepeatWrapping;
   curveMaterialIzq.map.repeat.x = - 1;

@@ -341,7 +341,7 @@ export default function Planets(scene, loadingManager) {
     
     
     
-    const geometry = new THREE.SphereBufferGeometry(100, 10, 10);
+    const geometry = new THREE.SphereGeometry(100, 10, 10);
     const mat = new THREE.MeshBasicMaterial({
         color: 'red',
         wireframe: true

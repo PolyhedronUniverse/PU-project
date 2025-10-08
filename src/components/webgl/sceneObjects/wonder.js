@@ -160,7 +160,7 @@ export default function Wonder(scene, loadingManager){
         // depthWrite: false,
     })
 
-    const plane = new THREE.PlaneBufferGeometry(2000, 2000, 100, 100);
+    const plane = new THREE.PlaneGeometry(2000, 2000, 100, 100);
     
     const mesh1 = new THREE.Mesh(plane, shader)
     mesh1.position.set(0,0,-950)

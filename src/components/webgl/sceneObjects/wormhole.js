@@ -32,7 +32,7 @@ export default function Womhole(scene, loadingManager) {
   }
   `;
 
-  const geometry = new THREE.CylinderBufferGeometry(5, 0.5, 20, 100, 5, true)
+  const geometry = new THREE.CylinderGeometry(5, 0.5, 20, 100, 5, true)
   const material = new THREE.ShaderMaterial({
     vertexShader: vs,
     fragmentShader: fs,
