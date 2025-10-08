@@ -1,11 +1,9 @@
 import React from 'react';
-// import splash from '../../assets/1024hud.jpg'
 import './loadingScreen.css'
 import pulogo from '../../assets/PU_Logo.png'
 
 export default function LoadingScreen(){
   function enterPu(e){
-    // console.log(e.target);
     document.getElementById('load-overlay').style.display = 'none';
   }
 

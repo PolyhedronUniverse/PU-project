@@ -1,6 +1,5 @@
 import React from 'react';
 import MainScene from './mainScene'
-// import Gui from '../gui/gui'
 import Labels from '../../../labels/labels'
 import Info from '../../../info/info'
 
@@ -9,11 +8,9 @@ class CanvasWebgl extends React.Component {
   componentDidMount(){
     let scene = MainScene(this.props.header*0.15, this.props.footer*0.075)
     this.mount.appendChild(scene.renderer.domElement);
-    // console.log(scene.renderer.domElement.id)
     scene.renderer.domElement.id = 'mainCanvas'
     this.name = scene.name;
 
-    // console.log('main')
 
     window.addEventListener('resize', scene.onResize, false)
   }
