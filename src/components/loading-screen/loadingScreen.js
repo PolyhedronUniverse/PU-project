@@ -1,31 +1,40 @@
-import React from 'react';
-import './loadingScreen.css'
-import pulogo from '../../assets/PU_Logo.png'
+import React from "react";
+import "./loadingScreen.css";
+import pulogo from "../../assets/PU_Logo.png";
+import SceneManager from "../webgl-v2/sceneManager";
 
-export default function LoadingScreen(){
-  function enterPu(e){
-    document.getElementById('load-overlay').style.display = 'none';
-  }
+export default function LoadingScreen() {
+  return (
+    <>
+      <div id="load-overlay">
+        {/* // todo: ask ken for a new background image */}
+        <div id="load-logo" className="overlay-content loading">
+          <img src={pulogo} alt="pu-logo" />
+        </div>
+        <div id="load-message" className="overlay-content">
+          <p>WELCOME TO POLYHEDRON UNIVERSE</p>
+          <p>We recommend the use of headphones for the best experience</p>
+          <br />
+          <p>-</p>
+          <br />
+          <p>BIENVENIDOS A POLYHEDRON UNIVERSE</p>
+          <p>Te recomendamos el uso de audífonos para la mejor experiencia</p>
+        </div>
+        <div id="enter-button" className="overlay-content">
+          <button
+            id="splash-button"
+            className="loading-button"
+            onClick={(e) => enterPu(e)}
+          >
+            Loading
+          </button>
+        </div>
+      </div>
+      <SceneManager />
+    </>
+  );
+}
 
-
-  return(
-    <div id='load-overlay'>
-      {/* // todo: ask ken for a new background image */}
-      <div id='load-logo' className='overlay-content loading'>
-        <img src={pulogo} alt='pu-logo'/>
-      </div>
-      <div id='load-message' className='overlay-content'>
-        <p>WELCOME TO POLYHEDRON UNIVERSE</p>
-        <p>We recommend the use of headphones for the best experience</p>
-        <br/>
-        <p>-</p>
-        <br/>
-        <p>BIENVENIDOS A POLYHEDRON UNIVERSE</p>
-        <p>Te recomendamos el uso de audífonos para la mejor experiencia</p>
-      </div>
-      <div id='enter-button' className='overlay-content'>
-        <button id='splash-button' className='loading-button' onClick={e=>enterPu(e)}>Loading</button>
-      </div>
-    </div>
-  )
+function enterPu(e) {
+  document.getElementById("load-overlay").style.display = "none";
 }

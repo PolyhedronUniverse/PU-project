@@ -16,6 +16,10 @@ html, body, #root{
   height: 100vh;
 }
 
+.webgl{
+  height: 77.5vh;
+}
+
 #root{
   display: flex;
   flex-direction: column;
