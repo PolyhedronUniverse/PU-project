@@ -1,7 +1,6 @@
 import React from "react";
 import "./loadingScreen.css";
 import pulogo from "../../assets/PU_Logo.png";
-import SceneManager from "../webgl-v2/sceneManager";
 
 export default function LoadingScreen() {
   return (
@@ -30,7 +29,6 @@ export default function LoadingScreen() {
           </button>
         </div>
       </div>
-      <SceneManager />
     </>
   );
 }

@@ -4,16 +4,34 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import MyStats from "../webgl/other/stats";
 import Nebulas from "../webgl/sceneObjects/nebulas";
 import NebulasTextures from "../webgl/other/nebulasTextures";
+import Hemispheres from "../webgl/sceneObjects/hemispheres";
+import OldWonder from "../webgl/sceneObjects/oldWonder";
+import Stars from "../webgl/sceneObjects/stars";
+import Wormhole from '../webgl/sceneObjects/wormhole'
 
-let renderer, scene, camera;
+let renderer, scene, camera, textures, control;
+let objects = []
 const stats = new MyStats()
+const loadingManager = myLoadingManager();
+const ratio = 1000; //* Ratio for computation of bigger numbers.
+
+
+function buildCamera() {
+
+    const fieldOfView = 50;
+    const aspectRatio = window.innerWidth / (window.innerHeight*2);
+    const nearPlane = 0.1;
+    const farPlane = ratio * 1.9;
+    camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
+    //camera = new THREE.PerspectiveCamera();
+
+    camera.name = "MainCamera"
+    camera.position.z = 350;
+    // camera.focus = 1000;
+    scene.add(camera);
+}
 
 function myOrbitControls() {
-  /**
-   * * This function will ganerate the OrbitControls and set the
-   * * needed configuration. It should recive the main camera
-   * * and the canvas element.
-   */
 
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.target.set(0, 0, -4000);
@@ -31,39 +49,62 @@ function myOrbitControls() {
 function myLoadingManager() {
   const loadingManager = new THREE.LoadingManager();
 
-  loadingManager.onStart = function(url, itemsLoaded, itemsTotal) {
+  loadingManager.onStart = (url, itemsLoaded, itemsTotal) => {
     console.log("start");
     console.log(url, itemsLoaded, itemsTotal)
   }
 
-  loadingManager.onProgress = function (url, itemsLoaded, itemsTotal ) {
-      console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+  loadingManager.onProgress = (url, itemsLoaded, itemsTotal ) => {
+    console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
   };
 
-
-  loadingManager.onError = function( url ){
+  loadingManager.onError = ( url ) => {
 	  console.log( 'There was an error loading ' + url );
+  };
+
+  loadingManager.onLoad = () => {
+    console.log("load");
+    scene.background = textures.mainTexture;
+
+    setTimeout(() => {
+      const butt = document.getElementById('splash-button')
+    // butt.disabled = false;
+    // todo: check the disabling thing
+      butt.className += ' enter-button'
+      butt.textContent = 'Enter'
+    }, 2000);
   };
 
   return loadingManager;
 }
 
 function init() {
-  camera = new THREE.PerspectiveCamera(
-    75,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
-  );
-  camera.position.z = 1;
 
   scene = new THREE.Scene();
-  renderer = new THREE.WebGLRenderer({});
+  buildCamera();
 
+  //load textures
+  textures = NebulasTextures(loadingManager);
+  Hemispheres(scene, loadingManager, camera);
+  objects.push(new Nebulas(scene, loadingManager));
+  objects.push(new Wormhole(camera, loadingManager));
+  objects.push(new OldWonder(scene, loadingManager));
+  // objects.push(addObject(new WonderSystem(scene, loadingManager)));
+  objects.push(new Stars(scene, loadingManager));
+  
+  
+  renderer = new THREE.WebGLRenderer({});
+  renderer.setPixelRatio(1);
+  renderer.setSize(window.innerWidth, window.innerHeight);
 
   renderer.setAnimationLoop(update);
 
-  const neb = NebulasTextures(myLoadingManager());
+  let query = Object.fromEntries(new URLSearchParams(window.location.search).entries());
+
+  if(query.location && query.location !== 'home'){
+    control = myOrbitControls();
+
+  }
 }
 
 function update() {
@@ -72,6 +113,15 @@ function update() {
   stats.update();
 
   renderer.render(scene, camera);
+
+  if (control) {
+    control.controls.update()
+  }
+
+  objects.forEach((item, i) => {
+        item.update()
+  });
+  //requestAnimationFrame(update)
 }
 
 function resize() {
@@ -80,20 +130,20 @@ function resize() {
 
   if (container) {
     const width = container.offsetWidth;
-	const height = container.offsetHeight;
+	  const height = container.offsetHeight;
 
-	renderer.setSize( window.innerWidth, height );
-
-	camera.aspect = width / height;
-	camera.updateProjectionMatrix();
+    
+	  camera.aspect = (width / height);
+	  camera.updateProjectionMatrix();
+	  renderer.setSize( width, height);
   }
 }
 
 window.addEventListener("resize", resize);
 
 export default function Scene(props) {
+  
   init();
-
 
   const containerRef = useCallback((container) => {
     if (container) {
