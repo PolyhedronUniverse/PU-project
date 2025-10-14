@@ -11,18 +11,17 @@ export default function Header(){
   return(
     <div className='header' id='header'>
       <div className='title'>
-        <div className='text'> 
-          <p>{title1}</p>
-          <img className='logo' alt='pu-logo' src={pulogo}/>
+        <div className='text'>
+            <p>{title1}</p>
+        </div>
+        <img className='logo' alt='pu-logo' src={pulogo}/>
+        <div className='text'>
           <p>{title2}</p>
         </div>
       </div>
-
-
       <div className='button'>
         <a href = 'https://www.patreon.com/polyhedronuniverse' rel='noopener noreferrer' target='_blank'>P A T R E O N</a>
       </div> 
-
     </div>
   )
 }
